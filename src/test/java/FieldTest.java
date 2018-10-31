@@ -1,5 +1,5 @@
 import Game.Field;
-import Game.GameUnit;
+import Units.GameUnit;
 import Game.Hive;
 import Units.QueenBee;
 import org.junit.Test;

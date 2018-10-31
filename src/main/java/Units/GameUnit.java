@@ -1,4 +1,4 @@
-package Game;
+package Units;
 
 public interface GameUnit {
 }

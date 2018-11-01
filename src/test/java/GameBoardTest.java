@@ -1,10 +1,10 @@
 import Game.Field;
 import Game.GameBoard;
+import Game.Pair;
 import Game.Hive;
 import Units.GameUnit;
 import Units.GrassHopper;
 import Units.QueenBee;
-import javafx.util.Pair;
 import org.junit.Test;
 
 import java.util.HashMap;

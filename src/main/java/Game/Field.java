@@ -3,6 +3,7 @@ package Game;
 import Units.GameUnit;
 
 import java.util.Stack;
+import java.util.stream.Collectors;
 
 public class Field {
     private int q;
@@ -38,12 +39,12 @@ public class Field {
         if (((Field) o).r != this.r) return false;
         if (((Field) o).getUnits().size() != this.getUnits().size()) return false;
         if (this.getUnits().size() < 1) return true;
-        return ((Field) o).getUnits().peek() == this.getUnits().peek();
+        return ((Field) o).getUnits().peek().equals(this.getUnits().peek());
     }
 
     @Override
     public String toString() {
-        String unitsStr = "unfinished";
-        return "q: " + q + ", r: " + r + ", units: [ " + unitsStr + " ]";
+        String unitsStr = units.stream().map(Object::toString).collect(Collectors.joining(","));
+        return "q: " + q + ", r: " + r + ", units: [ " + unitsStr + " ], size: " + units.size();
     }
 }

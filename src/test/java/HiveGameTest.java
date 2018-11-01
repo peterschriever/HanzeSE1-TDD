@@ -52,10 +52,7 @@ public class HiveGameTest {
         assertThat("playLog should have 1 entry", game.getPlayLog().size(), is(1));
         Field fieldWithUnit = new Field(0, 0);
         fieldWithUnit.acceptUnit(new QueenBee(Hive.Player.WHITE));
-        System.out.println(game.getBoard().getRootField());
-        System.out.println(fieldWithUnit);
         assertEquals("Board root field should be the same", game.getBoard().getRootField(), fieldWithUnit);
-
     }
 
 }

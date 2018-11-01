@@ -2,8 +2,9 @@ package Units;
 
 import Game.Hive;
 
-public class QueenBee implements GameUnit {
-    public QueenBee(Hive.Player player) {
+public class GrassHopper implements GameUnit {
+
+    public GrassHopper(Hive.Player player) {
 
     }
 
@@ -11,4 +12,5 @@ public class QueenBee implements GameUnit {
     public boolean equals(Object o) {
         return o.getClass() == this.getClass();
     }
+
 }

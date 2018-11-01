@@ -1,11 +1,9 @@
-package Units;
+package Actions;
 
 import Game.Hive;
 
-public class QueenBee implements GameUnit {
-    public QueenBee(Hive.Player player) {
-
-    }
+public abstract class Action {
+    public Hive.Player player;
 
     @Override
     public boolean equals(Object o) {

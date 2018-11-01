@@ -30,4 +30,20 @@ public class Field {
     public Stack<GameUnit> getUnits() {
         return units;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o.getClass() != this.getClass()) return false;
+        if (((Field) o).q != this.q) return false;
+        if (((Field) o).r != this.r) return false;
+        if (((Field) o).getUnits().size() != this.getUnits().size()) return false;
+        if (this.getUnits().size() < 1) return true;
+        return ((Field) o).getUnits().peek() == this.getUnits().peek();
+    }
+
+    @Override
+    public String toString() {
+        String unitsStr = "unfinished";
+        return "q: " + q + ", r: " + r + ", units: [ " + unitsStr + " ]";
+    }
 }

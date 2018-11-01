@@ -1,6 +1,7 @@
 import Game.Field;
 import Units.GameUnit;
 import Game.Hive;
+import Units.GrassHopper;
 import Units.QueenBee;
 import org.junit.Test;
 
@@ -23,6 +24,27 @@ public class FieldTest {
         GameUnit unit = new QueenBee(Hive.Player.WHITE);
         field.acceptUnit(unit);
         assertThat(field.getUnits(), hasItem(unit));
+    }
+
+    @Test public void fieldEqualsShouldTestProps() {
+        Field fieldA = new Field(0, 0);
+        Field fieldB = new Field(0, 0);
+        assertEquals("Fields should be equals", fieldA, fieldB);
+
+        fieldB = new Field(0, 1);
+        assertNotEquals("Fields should not be equals", fieldA, fieldB);
+
+        fieldB = new Field(0, 0);
+        fieldB.acceptUnit(new QueenBee(Hive.Player.WHITE));
+        assertNotEquals("Fields should not be equals", fieldA, fieldB);
+
+        GameUnit grassHopper = new GrassHopper(Hive.Player.WHITE);
+        fieldA.acceptUnit(grassHopper);
+        assertNotEquals("Fields should not be equals", fieldA, fieldB);
+
+        fieldB = new Field(0, 0);
+        fieldB.acceptUnit(grassHopper);
+        assertEquals("Fields should be equals", fieldA, fieldB);
     }
 
 }

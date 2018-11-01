@@ -3,9 +3,10 @@ package Units;
 import Game.Hive;
 
 public class GrassHopper implements GameUnit {
+    private Hive.Player player;
 
     public GrassHopper(Hive.Player player) {
-
+        this.player = player;
     }
 
     @Override

@@ -10,7 +10,7 @@ public class GameBoard {
     private HashMap<Pair<Integer, Integer>, Field> board = new HashMap<>();
 
     public void applyAction(Action action) {
-        root.acceptUnit(new QueenBee(action.player));
+        root.acceptUnit(action.getUnit());
     }
 
     public Field getRootField() {

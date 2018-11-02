@@ -10,6 +10,9 @@ plugins {
     // Apply the java plugin to add support for Java
     id 'java'
 
+    // JaCoCo test coverage plugin
+    id "com.palantir.jacoco-coverage" version "0.4.0"
+
     // Apply the application plugin to add support for building an application
     id 'application'
 }

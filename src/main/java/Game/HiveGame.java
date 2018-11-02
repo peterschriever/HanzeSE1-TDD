@@ -16,6 +16,12 @@ public class HiveGame implements Hive {
         playerAIs.put(Player.BLACK, playerBlack);
     }
 
+    public HiveGame() {}
+
+    public void setPlayerAI(Player colour, PlayerAI player) {
+        playerAIs.put(colour, player);
+    }
+
     @Override
     public void play(Tile tile, int q, int r) throws IllegalMove {
 

@@ -31,7 +31,6 @@ public class GameBoardTest {
     @Test
     public void testNeighbours() {
         GameBoard gb = new GameBoard();
-        Field root = gb.addNewField(0, 0);
         Field neighbour1 = gb.addNewField(1, 0);
         Field neighbour2 = gb.addNewField(0, 1);
         HashMap<Pair<Integer, Integer>, Field> neighbours = gb.getNeighboursForField(0, 0);

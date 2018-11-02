@@ -55,6 +55,16 @@ public class GameBoard {
         return f;
     }
 
+    public ArrayList<Field> getFieldsWithUnits() {
+        ArrayList<Field> values = new ArrayList<>();
+        for(Field f : this.board.values()) {
+            if(f.getUnits().size() > 0) {
+                values.add(f);
+            }
+        }
+        return values;
+    }
+
     public boolean isSwarm() {
         int real_size = 0;
         Field first_field = null;

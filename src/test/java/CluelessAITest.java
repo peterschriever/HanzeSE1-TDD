@@ -13,7 +13,7 @@ import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.assertThat;
 
-public class CluelessAIAITest {
+public class CluelessAITest {
     private HiveGame game;
 
     @Before

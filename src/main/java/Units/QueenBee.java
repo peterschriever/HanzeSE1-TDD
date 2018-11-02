@@ -1,8 +1,11 @@
 package Units;
 
 import Game.Hive;
+import Game.Pair;
 
-public class QueenBee implements GameUnit {
+import java.util.List;
+
+public class QueenBee extends GameUnit {
     private Hive.Colour colour;
 
     public QueenBee(Hive.Colour colour) {
@@ -22,5 +25,10 @@ public class QueenBee implements GameUnit {
     @Override
     public Hive.Colour getColour() {
         return this.colour;
+    }
+
+    @Override
+    public List<Pair[]> generateValidPaths() {
+        return null;
     }
 }

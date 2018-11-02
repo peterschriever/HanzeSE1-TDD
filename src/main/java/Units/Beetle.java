@@ -1,8 +1,11 @@
 package Units;
 
 import Game.Hive;
+import Game.Pair;
 
-public class Beetle implements GameUnit {
+import java.util.List;
+
+public class Beetle extends GameUnit {
     private Hive.Colour colour;
 
     public Beetle(Hive.Colour colour) {
@@ -13,4 +16,11 @@ public class Beetle implements GameUnit {
     public Hive.Colour getColour() {
         return this.colour;
     }
+
+    @Override
+    public List<Pair[]> generateValidPaths() {
+        return null;
+    }
+
+
 }

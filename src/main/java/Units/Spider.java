@@ -1,8 +1,11 @@
 package Units;
 
 import Game.Hive;
+import Game.Pair;
 
-public class Spider implements GameUnit {
+import java.util.List;
+
+public class Spider extends GameUnit {
     private Hive.Colour colour;
 
     public Spider(Hive.Colour colour) {
@@ -12,5 +15,10 @@ public class Spider implements GameUnit {
     @Override
     public Hive.Colour getColour() {
         return this.colour;
+    }
+
+    @Override
+    public List<Pair[]> generateValidPaths() {
+        return null;
     }
 }

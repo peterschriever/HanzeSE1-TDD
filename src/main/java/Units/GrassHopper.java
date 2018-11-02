@@ -1,8 +1,11 @@
 package Units;
 
 import Game.Hive;
+import Game.Pair;
 
-public class GrassHopper implements GameUnit {
+import java.util.List;
+
+public class GrassHopper extends GameUnit {
     private Hive.Colour colour;
 
     public GrassHopper(Hive.Colour colour) {
@@ -17,5 +20,10 @@ public class GrassHopper implements GameUnit {
     @Override
     public Hive.Colour getColour() {
         return this.colour;
+    }
+
+    @Override
+    public List<Pair[]> generateValidPaths() {
+        return null;
     }
 }

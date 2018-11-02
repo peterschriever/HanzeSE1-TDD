@@ -1,7 +1,7 @@
 package Units;
 
+import Actions.MoveAction;
 import Game.Hive;
-import Game.Pair;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class Spider extends GameUnit {
     }
 
     @Override
-    public List<Pair[]> generateValidPaths() {
+    public List<MoveAction> generateValidPaths(int fromX, int toX) {
         return null;
     }
 }

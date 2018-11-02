@@ -5,10 +5,8 @@ import Game.Pair;
 import Units.Beetle;
 import Units.GrassHopper;
 import Units.QueenBee;
-import junit.framework.Assert;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import static org.junit.Assert.*;

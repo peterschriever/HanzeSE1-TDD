@@ -30,6 +30,7 @@ public class GameBoard {
 
     /**
      * Returns true if the player is forced to make the first move.
+     *
      * @return boolean
      */
     public boolean shouldMakeFirstMove() {
@@ -57,8 +58,8 @@ public class GameBoard {
 
     public ArrayList<Field> getFieldsWithUnits() {
         ArrayList<Field> values = new ArrayList<>();
-        for(Field f : this.board.values()) {
-            if(f.getUnits().size() > 0) {
+        for (Field f : this.board.values()) {
+            if (f.getUnits().size() > 0) {
                 values.add(f);
             }
         }
@@ -75,7 +76,7 @@ public class GameBoard {
             }
             real_size += next.getUnits().size();
         }
-        if(real_size == 0) {
+        if (real_size == 0 || first_field == null) {
             return true;
         }
 
@@ -85,16 +86,17 @@ public class GameBoard {
 
         return size == real_size;
     }
+
     private int sizeOfSubSwarm(Field test, ArrayList<Field> visited) {
-        if(test.getUnits().size() == 0) {
+        if (test.getUnits().size() == 0) {
             return 0;
         }
         int size = test.getUnits().size();
-        for(Field n : this.getNeighboursForField(test.getQ(), test.getR()).values()) {
-            if(visited.contains(n)) {
+        for (Field n : this.getNeighboursForField(test.getQ(), test.getR()).values()) {
+            if (visited.contains(n)) {
                 continue;
             }
-            if(n.getUnits().size() > 0) {
+            if (n.getUnits().size() > 0) {
                 visited.add(n);
                 size = size + this.sizeOfSubSwarm(n, visited);
             }

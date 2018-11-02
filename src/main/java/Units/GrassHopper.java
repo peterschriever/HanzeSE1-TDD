@@ -1,5 +1,6 @@
 package Units;
 
+import Actions.MoveAction;
 import Game.Hive;
 import Game.Pair;
 
@@ -23,7 +24,7 @@ public class GrassHopper extends GameUnit {
     }
 
     @Override
-    public List<Pair[]> generateValidPaths() {
+    public List<MoveAction> generateValidPaths(int fromX, int toX) {
         return null;
     }
 }

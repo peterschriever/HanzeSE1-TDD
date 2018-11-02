@@ -1,7 +1,7 @@
 package Units;
 
+import Actions.MoveAction;
 import Game.Hive.Colour;
-import Game.Pair;
 
 import java.util.List;
 
@@ -9,6 +9,6 @@ public abstract class GameUnit {
 
     public abstract Colour getColour();
 
-    public abstract List<Pair[]> generateValidPaths();
+    public abstract List<MoveAction> generateValidPaths(int fromX, int toX);
 
 }

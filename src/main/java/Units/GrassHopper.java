@@ -14,4 +14,8 @@ public class GrassHopper implements GameUnit {
         return o.getClass() == this.getClass();
     }
 
+    @Override
+    public Hive.Player getPlayer() {
+        return this.player;
+    }
 }

@@ -9,4 +9,8 @@ public class SoldierAnt implements GameUnit {
         this.player = player;
     }
 
+    @Override
+    public Hive.Player getPlayer() {
+        return this.player;
+    }
 }

@@ -18,4 +18,9 @@ public class QueenBee implements GameUnit {
     public String toString() {
         return "QueenBee (" + player + ")";
     }
+
+    @Override
+    public Hive.Player getPlayer() {
+        return this.player;
+    }
 }

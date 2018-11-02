@@ -4,9 +4,9 @@ import Game.Pair;
 import Units.GameUnit;
 
 public class SpawnAction extends Action {
-    private Pair spawnCoords;
+    private Pair<Integer, Integer> spawnCoords;
 
-    public SpawnAction(GameUnit unit, Pair spawnCoords) {
+    public SpawnAction(GameUnit unit, Pair<Integer, Integer> spawnCoords) {
         this.unit = unit;
         this.spawnCoords = spawnCoords;
     }
@@ -16,7 +16,7 @@ public class SpawnAction extends Action {
         return unit;
     }
 
-    public Pair getSpawnCoords() {
+    public Pair<Integer, Integer> getSpawnCoords() {
         return spawnCoords;
     }
 }

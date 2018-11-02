@@ -1,5 +1,5 @@
-import AI.CluelessAI;
-import AI.PlayerAI;
+import Player.CluelessAI;
+import Player.Player;
 import Game.*;
 import Game.Hive.Colour;
 import Units.QueenBee;
@@ -14,15 +14,15 @@ public class HiveGameTest {
 
     @Before
     public void setupGame() {
-        PlayerAI playerWhite = new CluelessAI();
-        PlayerAI playerBlack = new CluelessAI();
+        Player playerWhite = new CluelessAI();
+        Player playerBlack = new CluelessAI();
         this.game = new HiveGame(playerWhite, playerBlack);
     }
 
     @Test
     public void gameShouldUsePlayerAI() {
-        PlayerAI playerWhite = new CluelessAI();
-        PlayerAI playerBlack = new CluelessAI();
+        Player playerWhite = new CluelessAI();
+        Player playerBlack = new CluelessAI();
         HiveGame game = new HiveGame(playerWhite, playerBlack);
         assertThat("Colour AI for white should be playerWhite", game.getPlayerAI(Colour.WHITE), is(playerWhite));
         assertThat("Colour AI for black should be playerBlack", game.getPlayerAI(Hive.Colour.BLACK), is(playerBlack));

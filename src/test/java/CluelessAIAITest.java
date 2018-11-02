@@ -1,5 +1,5 @@
-import AI.CluelessAI;
-import AI.PlayerAI;
+import Player.CluelessAI;
+import Player.Player;
 import Actions.Action;
 import Actions.ActionFactory;
 import Game.Hive;
@@ -13,13 +13,13 @@ import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.assertThat;
 
-public class CluelessAITest {
+public class CluelessAIAITest {
     private HiveGame game;
 
     @Before
     public void setupGame() {
-        PlayerAI playerWhite = new CluelessAI();
-        PlayerAI playerBlack = new CluelessAI();
+        Player playerWhite = new CluelessAI();
+        Player playerBlack = new CluelessAI();
         this.game = new HiveGame(playerWhite, playerBlack);
     }
 

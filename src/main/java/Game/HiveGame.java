@@ -1,24 +1,24 @@
 package Game;
 
-import AI.PlayerAI;
+import Player.Player;
 import Actions.Action;
 
 import java.util.HashMap;
 
 public class HiveGame implements Hive {
-    private final HashMap<Colour, PlayerAI> playerAIs = new HashMap<>();
+    private final HashMap<Colour, Player> playerAIs = new HashMap<>();
     private final GameBoard board = new GameBoard();
     private final PlayLog playLog = new PlayLog();
     private Colour turn = Colour.WHITE;
 
-    public HiveGame(PlayerAI playerWhite, PlayerAI playerBlack) {
+    public HiveGame(Player playerWhite, Player playerBlack) {
         playerAIs.put(Colour.WHITE, playerWhite);
         playerAIs.put(Colour.BLACK, playerBlack);
     }
 
     public HiveGame() {}
 
-    public void setPlayerAI(Colour colour, PlayerAI player) {
+    public void setPlayerAI(Colour colour, Player player) {
         playerAIs.put(colour, player);
     }
 
@@ -51,20 +51,20 @@ public class HiveGame implements Hive {
         return turn;
     }
 
-    public PlayerAI getPlayerAI(Colour colour) {
+    public Player getPlayerAI(Colour colour) {
         return playerAIs.get(colour);
     }
 
     public void playTurn() {
-        PlayerAI playerAI;
+        Player player;
         if (turn == Colour.WHITE) {
             turn = Colour.BLACK; // turn changes prematurely
-            playerAI = playerAIs.get(Colour.WHITE);
+            player = playerAIs.get(Colour.WHITE);
         } else {
             turn = Colour.WHITE; // turn changes prematurely
-            playerAI = playerAIs.get(Colour.BLACK);
+            player = playerAIs.get(Colour.BLACK);
         }
-        Action action = playerAI.chooseAction();
+        Action action = player.chooseAction();
         playLog.writeLog(action);
         board.applyAction(action);
     }

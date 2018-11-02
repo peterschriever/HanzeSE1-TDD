@@ -1,7 +1,7 @@
-package AI;
+package Player;
 
 import Actions.Action;
 
-public interface PlayerAI {
+public interface Player {
     Action chooseAction();
 }

@@ -1,4 +1,4 @@
-package AI;
+package Player;
 
 import Actions.Action;
 import Actions.ActionFactory;
@@ -7,7 +7,7 @@ import Game.Hive;
 import java.util.List;
 import java.util.Random;
 
-public class CluelessAI implements PlayerAI {
+public class CluelessAI implements Player {
     @Override
     public Action chooseAction() {
         List<Action> validActions = ActionFactory.generateValidActions(Hive.Colour.WHITE);

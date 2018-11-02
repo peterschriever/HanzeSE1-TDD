@@ -8,10 +8,7 @@ import org.junit.Test;
 
 import java.util.HashMap;
 
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertTrue;
-import static junit.framework.TestCase.assertEquals;
-
+import static org.junit.Assert.*;
 
 public class GameBoardTest {
     @Test

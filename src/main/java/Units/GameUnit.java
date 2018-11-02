@@ -1,7 +1,14 @@
 package Units;
 
-import Game.Hive;
+import Game.Hive.Colour;
+import Game.Pair;
 
-public interface GameUnit {
-    Hive.Colour getColour();
+import java.util.List;
+
+public abstract class GameUnit {
+
+    public abstract Colour getColour();
+
+    public abstract List<Pair[]> generateValidPaths();
+
 }

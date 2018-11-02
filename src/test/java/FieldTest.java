@@ -10,7 +10,8 @@ import static org.junit.Assert.*;
 
 public class FieldTest {
 
-    @Test public void fieldHasQandR() {
+    @Test
+    public void fieldHasQandR() {
         Field field = new Field(0, 0);
         assertEquals("field should have a q value of 0", 0, field.getQ());
         assertEquals("field should have a r value of 0", 0, field.getR());
@@ -19,14 +20,16 @@ public class FieldTest {
         assertEquals("field should have a r value of 5", 5, field.getR());
     }
 
-    @Test public void fieldShouldAcceptFirstUnit() {
+    @Test
+    public void fieldShouldAcceptFirstUnit() {
         Field field = new Field(0, 0);
         GameUnit unit = new QueenBee(Hive.Player.WHITE);
         field.acceptUnit(unit);
         assertThat(field.getUnits(), hasItem(unit));
     }
 
-    @Test public void fieldEqualsShouldTestProps() {
+    @Test
+    public void fieldEqualsShouldTestProps() {
         Field fieldA = new Field(0, 0);
         Field fieldB = new Field(0, 0);
         assertEquals("Fields should be equals", fieldA, fieldB);

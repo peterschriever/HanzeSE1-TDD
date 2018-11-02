@@ -25,7 +25,7 @@ public class GameBoard {
     public HashMap<Pair<Integer, Integer>, Field> getNeighboursForField(int q, int r) {
         HashMap<Pair<Integer, Integer>, Field> neighbours = new HashMap<>();
         int[][] adjustments = {{0, 1}, {0, -1}, {-1, 0}, {-1, 1}, {1, 0}, {1, -1}};
-        for(int[] a: adjustments) {
+        for (int[] a : adjustments) {
             int new_q = q + a[0];
             int new_r = r + a[1];
             neighbours.put(new Pair<>(new_q, new_r), this.get(new_q, new_r));
@@ -35,7 +35,7 @@ public class GameBoard {
 
     public Field get(int q, int r) {
         Field f = this.board.get(new Pair<>(q, r));
-        if(f == null) {
+        if (f == null) {
             f = this.addNewField(q, r);
         }
         return f;

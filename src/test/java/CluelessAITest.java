@@ -23,7 +23,8 @@ public class CluelessAITest {
         this.game = new HiveGame(playerWhite, playerBlack);
     }
 
-    @Test public void aiShouldChooseValidMove() {
+    @Test
+    public void aiShouldChooseValidMove() {
         // chooseAction() uses RNG for its decision making, so we test it 100 times
         for (int i = 0; i < 100; i++) {
             Action action = game.getPlayerAI(Hive.Player.WHITE).chooseAction();

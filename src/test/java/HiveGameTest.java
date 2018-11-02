@@ -11,13 +11,15 @@ import static org.junit.Assert.*;
 public class HiveGameTest {
     private HiveGame game;
 
-    @Before public void setupGame() {
+    @Before
+    public void setupGame() {
         PlayerAI playerWhite = new CluelessAI();
         PlayerAI playerBlack = new CluelessAI();
         this.game = new HiveGame(playerWhite, playerBlack);
     }
 
-    @Test public void gameShouldUsePlayerAI() {
+    @Test
+    public void gameShouldUsePlayerAI() {
         PlayerAI playerWhite = new CluelessAI();
         PlayerAI playerBlack = new CluelessAI();
         HiveGame game = new HiveGame(playerWhite, playerBlack);
@@ -25,7 +27,8 @@ public class HiveGameTest {
         assertThat("Player AI for black should be playerBlack", game.getPlayerAI(Hive.Player.BLACK), is(playerBlack));
     }
 
-    @Test public void gameShouldKeepTrackOfTurn() {
+    @Test
+    public void gameShouldKeepTrackOfTurn() {
         assertThat("White should start", game.getTurn(), is(Hive.Player.WHITE));
         game.playTurn();
         assertThat("Black should go second", game.getTurn(), is(Hive.Player.BLACK));
@@ -33,15 +36,18 @@ public class HiveGameTest {
         assertThat("White should start", game.getTurn(), is(Hive.Player.WHITE));
     }
 
-    @Test public void gameShouldHaveABoard() {
+    @Test
+    public void gameShouldHaveABoard() {
         assertThat("The game has a board based on the GameBoard class", game.getBoard(), instanceOf(GameBoard.class));
     }
 
-    @Test public void gameShouldKeepAPlayLog() {
+    @Test
+    public void gameShouldKeepAPlayLog() {
         assertThat("Game has a PlayLog object", game.getPlayLog(), instanceOf(PlayLog.class));
     }
 
-    @Test public void gameShouldPlayATurn() {
+    @Test
+    public void gameShouldPlayATurn() {
         assertThat("White should start", game.getTurn(), is(Hive.Player.WHITE));
         assertThat("playLog should be empty", game.getPlayLog().size(), is(0));
         assertThat("board is empty", game.getBoard().getRootField(), is(new Field(0, 0)));

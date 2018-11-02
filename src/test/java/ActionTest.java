@@ -23,7 +23,8 @@ public class ActionTest {
 //        assertEquals("action has player black", action.getPlayer(), Hive.Player.BLACK);
 //    }
 
-    @Test public void spawnActionShouldHaveUnit() {
+    @Test
+    public void spawnActionShouldHaveUnit() {
         Hive.Player player = Hive.Player.WHITE;
         GameUnit grassHopper = new GrassHopper(player);
         GameUnit queenBee = new QueenBee(player);

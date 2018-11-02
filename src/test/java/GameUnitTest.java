@@ -22,8 +22,8 @@ public class GameUnitTest {
     @Before
     public void setupGame() {
         this.game = HiveGameFactory.getInstance();
-        game.setPlayerAI(Colour.WHITE, new CluelessAI());
-        game.setPlayerAI(Colour.BLACK, new CluelessAI());
+        game.setPlayerAI(Colour.WHITE, new CluelessAI(Colour.WHITE));
+        game.setPlayerAI(Colour.BLACK, new CluelessAI(Colour.BLACK));
 
         GameUnit beetle = new Beetle(Colour.WHITE);
         Action spawnBeetle = new SpawnAction(beetle, new Pair<>(0, 0));

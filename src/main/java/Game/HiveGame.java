@@ -6,19 +6,19 @@ import Actions.Action;
 import java.util.HashMap;
 
 public class HiveGame implements Hive {
-    private final HashMap<Player, PlayerAI> playerAIs = new HashMap<>();
+    private final HashMap<Colour, PlayerAI> playerAIs = new HashMap<>();
     private final GameBoard board = new GameBoard();
     private final PlayLog playLog = new PlayLog();
-    private Player turn = Player.WHITE;
+    private Colour turn = Colour.WHITE;
 
     public HiveGame(PlayerAI playerWhite, PlayerAI playerBlack) {
-        playerAIs.put(Player.WHITE, playerWhite);
-        playerAIs.put(Player.BLACK, playerBlack);
+        playerAIs.put(Colour.WHITE, playerWhite);
+        playerAIs.put(Colour.BLACK, playerBlack);
     }
 
     public HiveGame() {}
 
-    public void setPlayerAI(Player colour, PlayerAI player) {
+    public void setPlayerAI(Colour colour, PlayerAI player) {
         playerAIs.put(colour, player);
     }
 
@@ -38,7 +38,7 @@ public class HiveGame implements Hive {
     }
 
     @Override
-    public boolean isWinner(Player player) {
+    public boolean isWinner(Colour colour) {
         return false;
     }
 
@@ -47,22 +47,22 @@ public class HiveGame implements Hive {
         return false;
     }
 
-    public Player getTurn() {
+    public Colour getTurn() {
         return turn;
     }
 
-    public PlayerAI getPlayerAI(Player player) {
-        return playerAIs.get(player);
+    public PlayerAI getPlayerAI(Colour colour) {
+        return playerAIs.get(colour);
     }
 
     public void playTurn() {
         PlayerAI playerAI;
-        if (turn == Player.WHITE) {
-            turn = Player.BLACK; // turn changes prematurely
-            playerAI = playerAIs.get(Player.WHITE);
+        if (turn == Colour.WHITE) {
+            turn = Colour.BLACK; // turn changes prematurely
+            playerAI = playerAIs.get(Colour.WHITE);
         } else {
-            turn = Player.WHITE; // turn changes prematurely
-            playerAI = playerAIs.get(Player.BLACK);
+            turn = Colour.WHITE; // turn changes prematurely
+            playerAI = playerAIs.get(Colour.BLACK);
         }
         Action action = playerAI.chooseAction();
         playLog.writeLog(action);

@@ -30,11 +30,11 @@ public interface Hive {
     void pass() throws IllegalMove;
 
     /**
-     * Check whether the given player is the winner.
-     * @param player Player to check
+     * Check whether the given colour is the winner.
+     * @param colour Colour to check
      * @return Boolean
      */
-    boolean isWinner(Player player);
+    boolean isWinner(Colour colour);
 
     /**
      * Check whether the game is a draw.
@@ -58,5 +58,5 @@ public interface Hive {
     /**
      * Players.
      */
-    enum Player { WHITE, BLACK }
+    enum Colour { WHITE, BLACK }
 }

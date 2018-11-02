@@ -27,10 +27,10 @@ public class CluelessAITest {
     public void aiShouldChooseValidMove() {
         // chooseAction() uses RNG for its decision making, so we test it 100 times
         for (int i = 0; i < 100; i++) {
-            Action action = game.getPlayerAI(Hive.Player.WHITE).chooseAction();
+            Action action = game.getPlayerAI(Hive.Colour.WHITE).chooseAction();
 
             assertThat("AI Should return an Action.class", action, instanceOf(Action.class));
-            List<Action> validActions = ActionFactory.generateValidActions(Hive.Player.WHITE);
+            List<Action> validActions = ActionFactory.generateValidActions(Hive.Colour.WHITE);
             assertThat("Chosen action should be in validActions", validActions, hasItem(action));
         }
     }

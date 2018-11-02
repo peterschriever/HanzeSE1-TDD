@@ -3,14 +3,14 @@ package Units;
 import Game.Hive;
 
 public class Spider implements GameUnit {
-    private Hive.Player player;
+    private Hive.Colour colour;
 
-    public Spider(Hive.Player player) {
-        this.player = player;
+    public Spider(Hive.Colour colour) {
+        this.colour = colour;
     }
 
     @Override
-    public Hive.Player getPlayer() {
-        return this.player;
+    public Hive.Colour getColour() {
+        return this.colour;
     }
 }

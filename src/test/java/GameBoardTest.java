@@ -41,12 +41,12 @@ public class GameBoardTest {
     @Test
     public void playerShouldMakeFirstMove() {
         GameBoard gb = new GameBoard();
-        gb.get(0,0).acceptUnit(new QueenBee(Hive.Player.BLACK));
-        gb.get(0,1).acceptUnit(new QueenBee(Hive.Player.WHITE));
+        gb.get(0,0).acceptUnit(new QueenBee(Hive.Colour.BLACK));
+        gb.get(0,1).acceptUnit(new QueenBee(Hive.Colour.WHITE));
         assertTrue("Hive should be a swarm", gb.isSwarm());
-        gb.get(2,1).acceptUnit(new GrassHopper(Hive.Player.BLACK));
+        gb.get(2,1).acceptUnit(new GrassHopper(Hive.Colour.BLACK));
         assertFalse("Hive isn't a swarm", gb.isSwarm());
-        gb.get(1,1).acceptUnit(new GrassHopper(Hive.Player.WHITE));
+        gb.get(1,1).acceptUnit(new GrassHopper(Hive.Colour.WHITE));
         assertTrue("Hive should be a swarm", gb.isSwarm());
     }
     @Test

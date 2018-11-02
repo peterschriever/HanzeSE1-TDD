@@ -23,7 +23,7 @@ public class FieldTest {
     @Test
     public void fieldShouldAcceptFirstUnit() {
         Field field = new Field(0, 0);
-        GameUnit unit = new QueenBee(Hive.Player.WHITE);
+        GameUnit unit = new QueenBee(Hive.Colour.WHITE);
         field.acceptUnit(unit);
         assertThat(field.getUnits(), hasItem(unit));
     }
@@ -38,10 +38,10 @@ public class FieldTest {
         assertNotEquals("Fields should not be equals", fieldA, fieldB);
 
         fieldB = new Field(0, 0);
-        fieldB.acceptUnit(new QueenBee(Hive.Player.WHITE));
+        fieldB.acceptUnit(new QueenBee(Hive.Colour.WHITE));
         assertNotEquals("Fields should not be equals", fieldA, fieldB);
 
-        GameUnit grassHopper = new GrassHopper(Hive.Player.WHITE);
+        GameUnit grassHopper = new GrassHopper(Hive.Colour.WHITE);
         fieldA.acceptUnit(grassHopper);
         assertNotEquals("Fields should not be equals", fieldA, fieldB);
 

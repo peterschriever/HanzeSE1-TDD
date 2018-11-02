@@ -3,10 +3,10 @@ package Units;
 import Game.Hive;
 
 public class QueenBee implements GameUnit {
-    private Hive.Player player;
+    private Hive.Colour colour;
 
-    public QueenBee(Hive.Player player) {
-        this.player = player;
+    public QueenBee(Hive.Colour colour) {
+        this.colour = colour;
     }
 
     @Override
@@ -16,11 +16,11 @@ public class QueenBee implements GameUnit {
 
     @Override
     public String toString() {
-        return "QueenBee (" + player + ")";
+        return "QueenBee (" + colour + ")";
     }
 
     @Override
-    public Hive.Player getPlayer() {
-        return this.player;
+    public Hive.Colour getColour() {
+        return this.colour;
     }
 }

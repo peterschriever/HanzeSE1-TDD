@@ -1,5 +1,5 @@
 
-import Game.Hive.Player;
+import Game.Hive;
 import Units.GameUnit;
 import Units.QueenBee;
 import org.junit.Test;
@@ -11,9 +11,9 @@ public class GameUnitTest {
 
     @Test
     public void GameUnitShouldPersistPlayer() {
-        Player player = Player.BLACK;
-        GameUnit qb = new QueenBee(player);
-        assertEquals("QueenBee player should be black", qb.getPlayer(), Player.BLACK);
+        Hive.Colour colour = Hive.Colour.BLACK;
+        GameUnit qb = new QueenBee(colour);
+        assertEquals("QueenBee colour should be black", qb.getColour(), Hive.Colour.BLACK);
     }
 
 }

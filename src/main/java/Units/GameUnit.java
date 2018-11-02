@@ -11,4 +11,11 @@ public abstract class GameUnit {
 
     public abstract List<MoveAction> generateValidPaths(int fromX, int toX);
 
+    @Override
+    public boolean equals(Object obj) {
+        if(!this.getClass().equals(obj.getClass()))
+            return false;
+        GameUnit o = (GameUnit) obj;
+        return this.getColour().equals(o.getColour());
+    }
 }

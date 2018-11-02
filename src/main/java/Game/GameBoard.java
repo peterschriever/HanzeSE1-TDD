@@ -5,15 +5,15 @@ import Actions.Action;
 import java.util.HashMap;
 
 public class GameBoard {
-    private final Field root = new Field(0, 0);
     private HashMap<Pair<Integer, Integer>, Field> board = new HashMap<>();
 
-    public void applyAction(Action action) {
-        root.acceptUnit(action.getUnit());
+    public GameBoard() {
+        this.board.put(new Pair<>(0, 0), new Field(0, 0));
     }
 
-    public Field getRootField() {
-        return root;
+    public void applyAction(Action action) {
+        Field root = board.get(new Pair<>(0, 0));
+        root.acceptUnit(action.getUnit());
     }
 
     public Field addNewField(int q, int r) {

@@ -15,11 +15,13 @@ import static org.junit.Assert.assertThat;
 
 public class CluelessAITest {
     private HiveGame game;
+    private Player playerWhite;
+    private Player playerBlack;
 
     @Before
     public void setupGame() {
-        Player playerWhite = new CluelessAI();
-        Player playerBlack = new CluelessAI();
+        playerWhite = new CluelessAI(Hive.Colour.WHITE);
+        playerBlack = new CluelessAI(Hive.Colour.BLACK);
         this.game = new HiveGame(playerWhite, playerBlack);
     }
 
@@ -30,7 +32,7 @@ public class CluelessAITest {
             Action action = game.getPlayerAI(Hive.Colour.WHITE).chooseAction();
 
             assertThat("AI Should return an Action.class", action, instanceOf(Action.class));
-            List<Action> validActions = ActionFactory.generateValidActions(Hive.Colour.WHITE);
+            List<Action> validActions = ActionFactory.generateValidActions(playerWhite);
             assertThat("Chosen action should be in validActions", validActions, hasItem(action));
         }
     }

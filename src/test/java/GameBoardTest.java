@@ -2,10 +2,13 @@ import Game.Field;
 import Game.GameBoard;
 import Game.Hive;
 import Game.Pair;
+import Units.Beetle;
 import Units.GrassHopper;
 import Units.QueenBee;
+import junit.framework.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import static junit.framework.Assert.assertFalse;
@@ -50,7 +53,12 @@ public class GameBoardTest {
         assertTrue("Hive should be a swarm", gb.isSwarm());
     }
     @Test
-    public void boardShouldRestrictMoves() {
-
+    public void boardShouldReturnOccupiedFields() {
+        GameBoard gb = new GameBoard();
+        assertEquals("Size of board units should be zero", 0, gb.getFieldsWithUnits().size());
+        gb.get(0,0).acceptUnit(new QueenBee(Hive.Colour.BLACK));
+        assertEquals("Size of board units should be one", 1, gb.getFieldsWithUnits().size());
+        gb.get(0,0).acceptUnit(new Beetle(Hive.Colour.WHITE));
+        assertEquals("Size of board units should be one", 1, gb.getFieldsWithUnits().size());
     }
 }

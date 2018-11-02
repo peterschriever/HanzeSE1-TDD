@@ -1,11 +1,10 @@
 package Game;
 
 import Actions.Action;
+import Actions.SpawnAction;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 
 public class GameBoard {
     private HashMap<Pair<Integer, Integer>, Field> board = new HashMap<>();
@@ -15,8 +14,12 @@ public class GameBoard {
     }
 
     public void applyAction(Action action) {
-        Field root = board.get(new Pair<>(0, 0));
-        root.acceptUnit(action.getUnit());
+        if (action.getClass() == SpawnAction.class) {
+            SpawnAction spawnAction = ((SpawnAction) action);
+            Pair<Integer, Integer> spawnCoords = spawnAction.getSpawnCoords();
+            Field field = this.get(spawnCoords.x, spawnCoords.y);
+            field.acceptUnit(spawnAction.getUnit());
+        }
     }
 
     public Field addNewField(int q, int r) {

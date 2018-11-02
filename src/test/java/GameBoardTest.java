@@ -1,10 +1,15 @@
 import Game.Field;
 import Game.GameBoard;
+import Game.Hive;
 import Game.Pair;
+import Units.GrassHopper;
+import Units.QueenBee;
 import org.junit.Test;
 
 import java.util.HashMap;
 
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertTrue;
 import static junit.framework.TestCase.assertEquals;
 
 
@@ -34,6 +39,17 @@ public class GameBoardTest {
         assertEquals("Neighbour2 should equal neighbours.get(0, 1)", neighbour2, neighbours.get(new Pair<>(0, 1)));
     }
 
+    @Test
+    public void playerShouldMakeFirstMove() {
+        GameBoard gb = new GameBoard();
+        gb.get(0,0).acceptUnit(new QueenBee(Hive.Player.BLACK));
+        gb.get(0,1).acceptUnit(new QueenBee(Hive.Player.WHITE));
+        assertTrue("Hive should be a swarm", gb.isSwarm());
+        gb.get(2,1).acceptUnit(new GrassHopper(Hive.Player.BLACK));
+        assertFalse("Hive isn't a swarm", gb.isSwarm());
+        gb.get(1,1).acceptUnit(new GrassHopper(Hive.Player.WHITE));
+        assertTrue("Hive should be a swarm", gb.isSwarm());
+    }
     @Test
     public void boardShouldRestrictMoves() {
 

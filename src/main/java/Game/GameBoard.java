@@ -2,7 +2,10 @@ package Game;
 
 import Actions.Action;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class GameBoard {
     private final Field root = new Field(0, 0);
@@ -22,6 +25,14 @@ public class GameBoard {
         return f;
     }
 
+    /**
+     * Returns true if the player is forced to make the first move.
+     * @return boolean
+     */
+    public boolean shouldMakeFirstMove() {
+        return this.size() == 0;
+    }
+
     public HashMap<Pair<Integer, Integer>, Field> getNeighboursForField(int q, int r) {
         HashMap<Pair<Integer, Integer>, Field> neighbours = new HashMap<>();
         int[][] adjustments = {{0, 1}, {0, -1}, {-1, 0}, {-1, 1}, {1, 0}, {1, -1}};
@@ -39,6 +50,43 @@ public class GameBoard {
             f = this.addNewField(q, r);
         }
         return f;
+    }
+
+    public boolean isSwarm() {
+        int real_size = 0;
+        Field first_field = null;
+
+        for (Field next : this.board.values()) {
+            if (first_field == null && next.getUnits().size() > 0) {
+                first_field = next;
+            }
+            real_size += next.getUnits().size();
+        }
+        if(real_size == 0) {
+            return true;
+        }
+
+        ArrayList<Field> visited = new ArrayList<>();
+        visited.add(first_field);
+        int size = this.sizeOfSubSwarm(first_field, visited);
+
+        return size == real_size;
+    }
+    private int sizeOfSubSwarm(Field test, ArrayList<Field> visited) {
+        if(test.getUnits().size() == 0) {
+            return 0;
+        }
+        int size = test.getUnits().size();
+        for(Field n : this.getNeighboursForField(test.getQ(), test.getR()).values()) {
+            if(visited.contains(n)) {
+                continue;
+            }
+            if(n.getUnits().size() > 0) {
+                visited.add(n);
+                size = size + this.sizeOfSubSwarm(n, visited);
+            }
+        }
+        return size;
     }
 
     public int size() {

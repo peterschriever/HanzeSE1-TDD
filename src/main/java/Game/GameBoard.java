@@ -5,7 +5,6 @@ import Actions.SpawnAction;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 public class GameBoard {
     private HashMap<Coord, Field> board = new HashMap<>();
@@ -15,14 +14,6 @@ public class GameBoard {
         this.board.put(new Coord(0, 0), new Field(0, 0));
     }
 
-    public void applyAction(Action action) {
-        if (action.getClass() == SpawnAction.class) {
-            SpawnAction spawnAction = ((SpawnAction) action);
-            Coord spawnCoords = spawnAction.getSpawnCoord();
-            Field field = this.get(spawnCoords.q, spawnCoords.r);
-            field.acceptUnit(spawnAction.getUnit());
-        }
-    }
 
     public Field addNewField(int q, int r) {
         Field f = new Field(q, r);

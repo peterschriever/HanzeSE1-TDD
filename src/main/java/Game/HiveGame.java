@@ -1,5 +1,7 @@
 package Game;
 
+import Actions.MoveAction;
+import Actions.SpawnAction;
 import Player.Player;
 import Actions.Action;
 import Units.GameUnit;
@@ -26,18 +28,29 @@ public class HiveGame implements Hive {
         playerAIs.put(colour, player);
     }
 
+    public void applyAction(Action action) {
+        if (action instanceof SpawnAction) {
+            SpawnAction spawnAction = ((SpawnAction) action);
+            play(spawnAction.getUnit(), spawnAction.getSpawnCoord().q, spawnAction.getSpawnCoord().r);
+        }
+        if (action instanceof MoveAction) {
+            
+        }
+    }
+
     @Override
-    public void play(Tile tile, int q, int r) throws IllegalMove {
+    public void play(GameUnit unit, int q, int r) {
+        Field field = this.board.get(q, r);
+        field.acceptUnit(unit);
+    }
+
+    @Override
+    public void move(int fromQ, int fromR, int toQ, int toR) {
 
     }
 
     @Override
-    public void move(int fromQ, int fromR, int toQ, int toR) throws IllegalMove {
-
-    }
-
-    @Override
-    public void pass() throws IllegalMove {
+    public void pass() {
 
     }
 
@@ -93,7 +106,7 @@ public class HiveGame implements Hive {
         }
         Action action = player.chooseAction();
         playLog.writeLog(action);
-        board.applyAction(action);
+        applyAction(action);
     }
 
     public GameBoard getBoard() {

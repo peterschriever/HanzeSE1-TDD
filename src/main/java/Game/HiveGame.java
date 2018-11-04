@@ -50,9 +50,7 @@ public class HiveGame implements Hive {
             for(GameUnit u : units) {
                 if(u instanceof QueenBee && u.getColour() == enemy){
                     int surrounding = this.getCountOfSurroundingUnits(fieldWithUnit.getQ(), fieldWithUnit.getR());
-                    if(surrounding == 6)
-                        return true;
-                    return false;
+                    return surrounding == 6;
                 }
             }
         }

@@ -11,7 +11,6 @@ public class ActionFactory {
     private ActionFactory() {
     }
 
-    // TODO: Write test!!!
     public static List<Action> generateValidActions(Player player) {
         // Get board, look at fields
         List<Action> actions = new LinkedList<>();
@@ -30,8 +29,10 @@ public class ActionFactory {
         for (int i = 0; i < fieldsWithUnits.size(); i++) {
             for (int j = 0; j < fieldsWithUnits.get(i).getUnits().size(); j++) {
                 GameUnit unit = fieldsWithUnits.get(i).getUnits().get(j);
-                unitsMoves = unit.generateValidMoves(new Coord(fieldsWithUnits.get(i)));
-                if (unitsMoves != null) moveActions.addAll(unitsMoves);
+                if(unit.getColour() == player.colour) {
+                    unitsMoves = unit.generateValidMoves(new Coord(fieldsWithUnits.get(i)));
+                    if (unitsMoves != null) moveActions.addAll(unitsMoves);
+                }
             }
         }
 

@@ -67,7 +67,7 @@ public class GameUnitTest {
         String str = moves.stream().map(Object::toString).collect(Collectors.joining(", "));
         assertNotNull("moves should not be null", moves);
         assertEquals("moves should be size of 5", 5, moves.size());
-        assertEquals("moves should be as expected", str, "action{Beetle(WHITE), Coord{1, 0}, Coord{2, -1}}, action{Beetle(WHITE), Coord{1, 0}, Coord{1, -1}}, action{Beetle(WHITE), Coord{1, 0}, Coord{2, 0}}, action{Beetle(WHITE), Coord{1, 0}, Coord{0, 0}}, action{Beetle(WHITE), Coord{1, 0}, Coord{0, 1}}");
+        assertEquals("moves should be as expected", str, "Move Beetle(WHITE), from: Coord{1, 0}, to: Coord{2, -1}}, Move Beetle(WHITE), from: Coord{1, 0}, to: Coord{1, -1}}, Move Beetle(WHITE), from: Coord{1, 0}, to: Coord{2, 0}}, Move Beetle(WHITE), from: Coord{1, 0}, to: Coord{0, 0}}, Move Beetle(WHITE), from: Coord{1, 0}, to: Coord{0, 1}}");
     }
 
     @Test
@@ -79,7 +79,7 @@ public class GameUnitTest {
         String str = moves.stream().map(Object::toString).collect(Collectors.joining(", "));
         assertNotNull("moves should not be null", moves);
         assertEquals("moves should be size of 2", 2, moves.size());
-        assertEquals("moves should be as expected", str, "action{GrassHopper(WHITE), Coord{2, 0}, Coord{2, -2}}, action{GrassHopper(WHITE), Coord{2, 0}, Coord{-4, 0}}");
+        assertEquals("moves should be as expected", str, "Move GrassHopper(WHITE), from: Coord{2, 0}, to: Coord{2, -2}}, Move GrassHopper(WHITE), from: Coord{2, 0}, to: Coord{-4, 0}}");
     }
 
     @Test
@@ -91,7 +91,7 @@ public class GameUnitTest {
         String str = moves.stream().map(Object::toString).collect(Collectors.joining(", "));
         assertNotNull("moves should not be null", moves);
         assertEquals("moves should be size of 2", 2, moves.size());
-        assertEquals("moves should be as expected", str, "action{QueenBee(WHITE), Coord{1, 0}, Coord{1, -1}}, action{QueenBee(WHITE), Coord{1, 0}, Coord{0, 1}}");
+        assertEquals("moves should be as expected", str, "Move QueenBee(WHITE), from: Coord{1, 0}, to: Coord{1, -1}}, Move QueenBee(WHITE), from: Coord{1, 0}, to: Coord{0, 1}}");
     }
 
     @Test
@@ -104,7 +104,7 @@ public class GameUnitTest {
         String str = moves.stream().map(Object::toString).collect(Collectors.joining(", "));
         assertNotNull("moves should not be null", moves);
         assertEquals("moves should be size of X", 17, moves.size());
-        assertEquals("moves should be as expected", str, "action{SoldierAnt(WHITE), Coord{0, 1}, Coord{1, 1}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{2, 1}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{3, 0}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{3, -1}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{3, -2}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{2, -2}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{1, -2}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{0, -2}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{0, -1}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{-1, -2}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{-2, -2}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{-3, -1}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{-4, 0}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{-4, 1}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{-3, 1}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{-2, 1}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{-1, 1}}");
+        assertEquals("moves should be as expected", str, "Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{1, 1}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{2, 1}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{3, 0}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{3, -1}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{3, -2}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{2, -2}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{1, -2}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{0, -2}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{0, -1}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{-1, -2}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{-2, -2}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{-3, -1}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{-4, 0}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{-4, 1}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{-3, 1}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{-2, 1}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{-1, 1}}");
     }
     @Test
     public void spiderShouldGenerateValidMoves() {

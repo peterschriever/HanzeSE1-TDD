@@ -4,7 +4,6 @@ import Actions.MoveAction;
 import Game.Coord;
 import Game.Field;
 import Game.GameBoard;
-import Game.Hive;
 import Game.Hive.Colour;
 import Game.HiveGameFactory;
 

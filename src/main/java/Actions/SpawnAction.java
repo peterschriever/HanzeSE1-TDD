@@ -22,7 +22,7 @@ public class SpawnAction extends Action {
 
     @Override
     public String toString() {
-        return this.getClass() + "@" + this.hashCode() + ":" + this.getUnit().toString() + "[" + this.spawnCoord.q + "," + this.spawnCoord.r + "]";
+        return "Spawn " + unit + " at " + spawnCoord.toString();
     }
 
     @Override

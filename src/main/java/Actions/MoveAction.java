@@ -28,6 +28,6 @@ public class MoveAction extends Action {
 
     @Override
     public String toString() {
-        return "action{" + unit + ", " + from + ", " + to + "}";
+        return "Move " + unit + ", from: " + from + ", to: " + to + "}";
     }
 }

@@ -71,6 +71,18 @@ public class GameUnitTest {
     }
 
     @Test
+    public void grassHopperShouldGenerateValidMoves() {
+        allUnitsExceptQueenCanMove(); // sets up the board with specific units placed down
+
+        GameUnit grassHopper = game.getBoard().get(2, 0).getUnits().peek();
+        List<MoveAction> moves = grassHopper.generateValidMoves(new Coord(2, 0));
+        String str = moves.stream().map(Object::toString).collect(Collectors.joining(", "));
+        assertNotNull("moves should not be null", moves);
+        assertEquals("moves should be size of 1", 1, moves.size());
+        assertEquals("moves should be as expected", str, "TODO:replaceMe");
+    }
+
+    @Test
     public void queenShouldGenerateValidMoves() {
         queenCanMove(); // sets up the board with specific units placed down
 
@@ -133,15 +145,15 @@ public class GameUnitTest {
     }
 
     @Test
-    public void canMoveFromAtoBTest(){
+    public void canMoveFromAtoBTest() {
         GameBoard gb = HiveGameFactory.getNew().getBoard();
         GameUnit a = new Beetle(Colour.BLACK);
-        gb.get(0,0).acceptUnit(a);
-        assertThat("Unit a can move one place", a.canMoveFromAToB(0,0,0,1), is(true));
-        gb.get(1,0).acceptUnit(new Beetle(Colour.WHITE));
-        assertThat("Unit a can move one place", a.canMoveFromAToB(0,0,0,1), is(true));
-        gb.get(-1,+1).acceptUnit(new Beetle(Colour.WHITE));
-        assertThat("Unit a can not move one place", a.canMoveFromAToB(0,0,0,1), is(false));
+        gb.get(0, 0).acceptUnit(a);
+        assertThat("Unit a can move one place", a.canMoveFromAToB(0, 0, 0, 1), is(true));
+        gb.get(1, 0).acceptUnit(new Beetle(Colour.WHITE));
+        assertThat("Unit a can move one place", a.canMoveFromAToB(0, 0, 0, 1), is(true));
+        gb.get(-1, +1).acceptUnit(new Beetle(Colour.WHITE));
+        assertThat("Unit a can not move one place", a.canMoveFromAToB(0, 0, 0, 1), is(false));
     }
 
 }

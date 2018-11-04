@@ -28,13 +28,29 @@ public class ActionFactory {
         HiveGame game = HiveGameFactory.getInstance();
         ArrayList<Field> unit_fields = game.getBoard().getFieldsWithUnits();
         List<Action> actions = new LinkedList<>();
-        if (unit_fields.isEmpty()) {
+        boolean are_we_represented = false;
+        for(Field f: unit_fields) {
+            if(f.getUnits().peek() != null) {
+                if(f.getUnits().peek().getColour() == player.colour) {
+                    are_we_represented = true;
+                }
+            }
+        }
+        if (unit_fields.isEmpty() || !are_we_represented) {
+            int[] coord = new int[2];
+            if(unit_fields.isEmpty()) {
+                coord[0] = 0;
+                coord[1] = 0;
+            } else {
+                coord[0] = 0;
+                coord[1] = -1;
+            }
             // Spawn action on 0,0
-            actions.add(new SpawnAction(new QueenBee(player.colour), new Coord(0, 0)));
-            actions.add(new SpawnAction(new Beetle(player.colour), new Coord(0, 0)));
-            actions.add(new SpawnAction(new GrassHopper(player.colour), new Coord(0, 0)));
-            actions.add(new SpawnAction(new SoldierAnt(player.colour), new Coord(0, 0)));
-            actions.add(new SpawnAction(new Spider(player.colour), new Coord(0, 0)));
+            actions.add(new SpawnAction(new QueenBee(player.colour), new Coord(coord[0], coord[1])));
+            actions.add(new SpawnAction(new Beetle(player.colour), new Coord(coord[0], coord[1])));
+            actions.add(new SpawnAction(new GrassHopper(player.colour), new Coord(coord[0], coord[1])));
+            actions.add(new SpawnAction(new SoldierAnt(player.colour), new Coord(coord[0], coord[1])));
+            actions.add(new SpawnAction(new Spider(player.colour), new Coord(coord[0], coord[1])));
         } else {
             ArrayList<Field> available_fields = ActionFactory.getSpawnFields(player);
             if (ActionFactory.shouldPlayQueen(player)) {

@@ -16,6 +16,8 @@ public abstract class GameUnit {
 
     public abstract Colour getColour();
 
+    public abstract char getCharacter();
+
     public abstract List<MoveAction> generateValidMoves(Coord fromCoord);
 
     public boolean canMoveFromAToB(Coord fromCoord, Coord toCoord) {

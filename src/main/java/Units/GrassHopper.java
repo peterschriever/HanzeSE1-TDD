@@ -29,6 +29,9 @@ public class GrassHopper extends GameUnit {
     }
 
     @Override
+    public char getCharacter() { return 'G'; }
+
+    @Override
     public String toString() {
         return "GrassHopper(" + colour + ")";
     }

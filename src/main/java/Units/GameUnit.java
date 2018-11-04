@@ -18,6 +18,10 @@ public abstract class GameUnit {
 
     public abstract List<MoveAction> generateValidMoves(Coord fromCoord);
 
+    public boolean canMoveFromAToB(Coord fromCoord, Coord toCoord) {
+        return canMoveFromAToB(fromCoord.q, fromCoord.r, toCoord.q, toCoord.r);
+    }
+
     public boolean canMoveFromAToB(int fromQ, int fromR, int toQ, int toR) {
         GameBoard gb = HiveGameFactory.getInstance().getBoard();
         Field a = gb.get(fromQ, fromR);

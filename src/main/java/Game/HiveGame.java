@@ -2,8 +2,12 @@ package Game;
 
 import Player.Player;
 import Actions.Action;
+import Units.GameUnit;
+import Units.QueenBee;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class HiveGame implements Hive {
     private final HashMap<Colour, Player> playerAIs = new HashMap<>();
@@ -39,13 +43,38 @@ public class HiveGame implements Hive {
 
     @Override
     public boolean isWinner(Colour colour) {
+        Colour enemy = (Colour.BLACK == colour) ? Colour.WHITE : Colour.BLACK;
+
+        for (Field fieldWithUnit : this.board.getFieldsWithUnits()) {
+            ArrayList<GameUnit> units = new ArrayList<>(fieldWithUnit.getUnits());
+            for(GameUnit u : units) {
+                if(u instanceof QueenBee && u.getColour() == enemy){
+                    int surrounding = this.getCountOfSurroundingUnits(fieldWithUnit.getQ(), fieldWithUnit.getR());
+                    if(surrounding == 6)
+                        return true;
+                    return false;
+                }
+            }
+        }
         return false;
     }
-
     @Override
     public boolean isDraw() {
-        return false;
+        return isWinner(Colour.BLACK) && isWinner(Colour.WHITE);
     }
+
+    public int getCountOfSurroundingUnits(int q, int r) {
+        Field f = this.board.get(q, r);
+        int count = 0;
+        for(Field n : this.board.getNeighboursForField(f).values()) {
+            if(n.getUnits().size() > 0) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+
 
     public Colour getTurn() {
         return turn;

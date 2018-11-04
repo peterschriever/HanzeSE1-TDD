@@ -2,6 +2,7 @@ import Player.CluelessAI;
 import Player.Player;
 import Game.*;
 import Game.Hive.Colour;
+import Units.Beetle;
 import Units.QueenBee;
 import org.junit.Before;
 import org.junit.Test;
@@ -63,6 +64,42 @@ public class HiveGameTest {
         Field fieldWithUnit = new Field(0, 0);
         fieldWithUnit.acceptUnit(new QueenBee(Colour.WHITE));
 //        assertEquals("Board root field should be the same", game.getBoard().get(0,0), fieldWithUnit);
+    }
+
+    @Test
+    public void testCountOfSurroundingUnits() {
+        HiveGame g = HiveGameFactory.getShadow();
+        g.getBoard().get(0, 0).acceptUnit(new QueenBee(Colour.BLACK));
+        g.getBoard().get(0,1).acceptUnit(new Beetle(Colour.BLACK));
+        g.getBoard().get(1, 0).acceptUnit(new QueenBee(Colour.WHITE));
+        g.getBoard().get(-1,0).acceptUnit(new Beetle(Colour.WHITE));
+        assertThat("Surrounding unit count of 0,0 should be 3", g.getCountOfSurroundingUnits(0, 0), is(3));
+    }
+
+    @Test
+    public void gameShouldDetermineWinners() {
+        HiveGame g = HiveGameFactory.getShadow();
+        g.getBoard().get(0, 0).acceptUnit(new QueenBee(Colour.BLACK));
+        g.getBoard().get(0,1).acceptUnit(new Beetle(Colour.BLACK));
+        assertThat("White is not a winner", g.isWinner(Hive.Colour.WHITE), is(false));
+        assertThat("Black is not a winner", g.isWinner(Hive.Colour.BLACK), is(false));
+        assertThat("It's not a draw", g.isDraw(), is(false));
+        int[][] locations = {{0, -1}, {0, 1}, {1, -1}, {1, 0}, {-1, 0}, {-1, 1}};
+        for(int[] loc : locations) {
+            g.getBoard().get(loc[0], loc[1]).acceptUnit(new Beetle(Colour.BLACK));
+        }
+        assertThat("White is a winner", g.isWinner(Hive.Colour.WHITE), is(true));
+        assertThat("Black is not a winner", g.isWinner(Hive.Colour.BLACK), is(false));
+        assertThat("It's not a draw", g.isDraw(), is(false));
+        int start_q = 5;
+        int start_r = 5;
+        g.getBoard().get(0, 0).acceptUnit(new QueenBee(Colour.WHITE));
+        for(int[] loc : locations) {
+            g.getBoard().get(start_q + loc[0], start_r + loc[1]).acceptUnit(new Beetle(Colour.BLACK));
+        }
+        assertThat("Black is a winner", g.isWinner(Hive.Colour.BLACK), is(true));
+        assertThat("White is a winner", g.isWinner(Hive.Colour.WHITE), is(true));
+        assertThat("It's a draw", g.isDraw(), is(true));
     }
 
 }

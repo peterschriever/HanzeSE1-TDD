@@ -1,11 +1,10 @@
 package Units;
 
 import Actions.MoveAction;
-import Game.Coord;
-import Game.GameBoard;
-import Game.Hive;
-import Game.HiveGameFactory;
+import Game.*;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class GrassHopper extends GameUnit {
@@ -36,14 +35,40 @@ public class GrassHopper extends GameUnit {
     }
 
     private List<MoveAction> checkNeighboursForValidMoves(Coord fromCoord, GameBoard gb) {
-        int[][] directions = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+        LinkedList<MoveAction> validMoves = new LinkedList<>();
+        int[][] directions = {{0, 1}, {0, -1}, {-1, 0}, {-1, 1}, {1, 0}, {1, -1}};
+        int Q = fromCoord.q;
+        int R = fromCoord.r;
+        for (int[] D : directions) {
+            MoveAction result = recursiveHopDirections(Q, R, D, gb, new ArrayList<>(16), fromCoord);
+            if (result == null) continue;
+            validMoves.add(result);
+        }
 
+        return validMoves;
+    }
 
-        return null;
+    private MoveAction recursiveHopDirections(int Q, int R, int[] D, GameBoard gb, List<Field> visited, Coord fromCoord) {
+        // get the neighbour field from (Q, R), in direction D
+        Field f = gb.get(Q + D[0], R + D[1]);
+        // if it has units; keep a visited list
+        if (f.getUnits().size() != 0) {
+            visited.add(f);
+            return recursiveHopDirections(f.getQ(), f.getR(), D, gb, visited, fromCoord);
+        } else {
+            // it did not have units;
+            if (visited.size() == 0) return null; // stop checking this direction
+            // clear the visited list
+            visited.clear();
+            // return a valid MoveAction
+            return new MoveAction(this, fromCoord, new Coord(f));
+        }
     }
 
     @Override
-    public char getCharacter() { return 'G'; }
+    public char getCharacter() {
+        return 'G';
+    }
 
     @Override
     public String toString() {

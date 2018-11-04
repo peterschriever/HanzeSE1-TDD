@@ -19,7 +19,8 @@ public class CluelessAI extends Player {
 
         Random rand = new Random();
         int randomInt = rand.nextInt(validActions.size());
-
-        return validActions.get(randomInt);
+        Action a = validActions.get(randomInt);
+        System.out.println("Player decided to play " + a);
+        return a;
     }
 }

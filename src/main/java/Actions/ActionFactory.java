@@ -16,7 +16,9 @@ public class ActionFactory {
         // Get board, look at fields
         List<Action> actions = new LinkedList<>();
         actions.addAll(ActionFactory.getSpawnActions(player));
-        actions.addAll(ActionFactory.getMoveActions(player));
+        if(canMoveUnits(player)) {
+            actions.addAll(ActionFactory.getMoveActions(player));
+        }
         return actions;
     }
 

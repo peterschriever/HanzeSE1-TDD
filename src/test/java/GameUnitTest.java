@@ -119,6 +119,7 @@ public class GameUnitTest {
         assertEquals("moves should be size of X", 2, moves.size());
         assertEquals("moves should be as expected", str, "action{Spider(WHITE), Coord{1, -1}, Coord{3, -1}}, action{Spider(WHITE), Coord{1, -1}, Coord{-1, -2}}");
     }
+
     @Test
     public void toStringShouldBeOfValidFormat() {
         String correct = "Beetle(WHITE)";

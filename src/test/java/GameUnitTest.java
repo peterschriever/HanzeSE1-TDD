@@ -20,27 +20,31 @@ import static org.junit.Assert.*;
 public class GameUnitTest {
     private HiveGame game;
 
+    private void setupUnit(GameUnit unit, Coord coord) {
+        Action spawnUnit = new SpawnAction(unit, coord);
+        game.getBoard().applyAction(spawnUnit);
+    }
+
+    private void allUnitsExceptQueenCanMove() {
+        setupUnit(new QueenBee(Colour.WHITE), new Coord(0, 0));
+        setupUnit(new Beetle(Colour.WHITE), new Coord(1, 0));
+        setupUnit(new SoldierAnt(Colour.WHITE), new Coord(0, 1));
+        setupUnit(new Spider(Colour.WHITE), new Coord(1, -1));
+        setupUnit(new SoldierAnt(Colour.WHITE), new Coord(2, -1));
+        setupUnit(new GrassHopper(Colour.WHITE), new Coord(2, 0));
+
+        setupUnit(new QueenBee(Colour.BLACK), new Coord(-1, 0));
+        setupUnit(new Beetle(Colour.BLACK), new Coord(-2, 0));
+        setupUnit(new GrassHopper(Colour.BLACK), new Coord(-3, 0));
+        setupUnit(new SoldierAnt(Colour.BLACK), new Coord(-2, -1));
+        setupUnit(new Spider(Colour.BLACK), new Coord(-1, -1));
+    }
+
     @Before
     public void setupGame() {
         this.game = HiveGameFactory.getInstance();
         game.setPlayerAI(Colour.WHITE, new CluelessAI(Colour.WHITE));
         game.setPlayerAI(Colour.BLACK, new CluelessAI(Colour.BLACK));
-
-        GameUnit queenBee = new QueenBee(Colour.WHITE);
-        Action spawnBee = new SpawnAction(queenBee, new Coord(0, 0));
-        game.getBoard().applyAction(spawnBee);
-
-        GameUnit ant = new SoldierAnt(Colour.BLACK);
-        Action spawnAnt = new SpawnAction(ant, new Coord(-1, 0));
-        game.getBoard().applyAction(spawnAnt);
-
-        GameUnit beetle = new Beetle(Colour.WHITE);
-        Action spawnBeetle = new SpawnAction(beetle, new Coord(0, 1));
-        game.getBoard().applyAction(spawnBeetle);
-
-        GameUnit ant2 = new SoldierAnt(Colour.BLACK);
-        Action spawnAnt2 = new SpawnAction(ant2, new Coord(-1, -1));
-        game.getBoard().applyAction(spawnAnt2);
     }
 
     @Test
@@ -52,12 +56,15 @@ public class GameUnitTest {
 
     @Test
     public void beetleShouldGenerateValidMoves() {
-        // 0, 1 is the q, r Coord that ActionFactory would normally apply to the method
-        GameUnit beetle = game.getBoard().get(0, 1).getUnits().peek();
-        List<MoveAction> moves = beetle.generateValidMoves(new Coord(0, 1));
+        allUnitsExceptQueenCanMove(); // sets up the board with specific units placed down
+
+        GameUnit beetle = game.getBoard().get(1, 0).getUnits().peek();
+        List<MoveAction> moves = beetle.generateValidMoves(new Coord(1, 0));
         String str = moves.stream().map(Object::toString).collect(Collectors.joining(", "));
-        assertEquals("moves should be size of 3", moves.size(), 3);
-        assertEquals("moves should be as expected", str, "action{Beetle(WHITE), Coord{0, 1}, Coord{1, 0}}, action{Beetle(WHITE), Coord{0, 1}, Coord{0, 0}}, action{Beetle(WHITE), Coord{0, 1}, Coord{-1, 1}}");
+//        System.out.println(moves.size());
+//        System.out.println(str);
+        assertEquals("moves should be size of 5", moves.size(), 5);
+        assertEquals("moves should be as expected", str, "action{Beetle(WHITE), Coord{1, 0}, Coord{2, -1}}, action{Beetle(WHITE), Coord{1, 0}, Coord{1, -1}}, action{Beetle(WHITE), Coord{1, 0}, Coord{2, 0}}, action{Beetle(WHITE), Coord{1, 0}, Coord{0, 0}}, action{Beetle(WHITE), Coord{1, 0}, Coord{0, 1}}");
     }
 
     @Test

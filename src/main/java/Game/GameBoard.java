@@ -18,7 +18,7 @@ public class GameBoard {
         if (action.getClass() == SpawnAction.class) {
             SpawnAction spawnAction = ((SpawnAction) action);
             Coord spawnCoords = spawnAction.getSpawnCoord();
-            Field field = this.get(spawnCoords.x, spawnCoords.y);
+            Field field = this.get(spawnCoords.q, spawnCoords.r);
             field.acceptUnit(spawnAction.getUnit());
         }
     }

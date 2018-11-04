@@ -25,7 +25,13 @@ public class Field {
     }
 
     public void acceptUnit(GameUnit unit) {
+        unit.setField(this);
         units.push(unit);
+    }
+
+    public GameUnit removeUnit(GameUnit unit) throws Hive.IllegalMove {
+        if (unit != units.pop()) throw new Hive.IllegalMove("You may only move the top-most unit of the field");
+        return unit;
     }
 
     public Stack<GameUnit> getUnits() {

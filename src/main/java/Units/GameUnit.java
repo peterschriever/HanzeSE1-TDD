@@ -1,11 +1,13 @@
 package Units;
 
 import Actions.MoveAction;
+import Game.Field;
 import Game.Hive.Colour;
 
 import java.util.List;
 
 public abstract class GameUnit {
+    protected Field field;
 
     public abstract Colour getColour();
 
@@ -17,5 +19,9 @@ public abstract class GameUnit {
             return false;
         GameUnit o = (GameUnit) obj;
         return this.getColour().equals(o.getColour());
+    }
+
+    public void setField(Field field) {
+        this.field = field;
     }
 }

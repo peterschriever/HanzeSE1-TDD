@@ -1,19 +1,24 @@
 package Game;
 
 public class Coord {
-    public Integer x;
-    public Integer y;
+    public Integer q;
+    public Integer r;
 
-    public Coord (int x, int y) {
-        this.x = x;
-        this.y = y;
+    public Coord(int q, int r) {
+        this.q = q;
+        this.r = r;
+    }
+
+    public Coord(Field field) {
+        this.q = field.getQ();
+        this.r = field.getR();
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 31 * hash + (this.x != null ? this.x.hashCode() : 0);
-        hash = 31 * hash + (this.y != null ? this.y.hashCode() : 0);
+        hash = 31 * hash + (this.q != null ? this.q.hashCode() : 0);
+        hash = 31 * hash + (this.r != null ? this.r.hashCode() : 0);
         return hash;
     }
 
@@ -23,7 +28,7 @@ public class Coord {
         if (o.getClass() != this.getClass()) return false;
 
         Coord coord = ((Coord) o);
-        if (!this.x.equals(coord.x)) return false;
-        return this.y.equals(coord.y);
+        if (!this.q.equals(coord.q)) return false;
+        return this.r.equals(coord.r);
     }
 }

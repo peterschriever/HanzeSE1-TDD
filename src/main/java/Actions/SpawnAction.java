@@ -22,7 +22,7 @@ public class SpawnAction extends Action {
 
     @Override
     public String toString() {
-        return this.getClass() + "@" + this.hashCode() + ":" + this.getUnit().toString() + "[" + this.spawnCoord.x + "," + this.spawnCoord.y + "]";
+        return this.getClass() + "@" + this.hashCode() + ":" + this.getUnit().toString() + "[" + this.spawnCoord.q + "," + this.spawnCoord.r + "]";
     }
 
     @Override
@@ -30,9 +30,9 @@ public class SpawnAction extends Action {
         if(!o.getClass().equals(this.getClass()))
             return false;
         SpawnAction other = (SpawnAction) o;
-        if(!this.spawnCoord.x.equals(other.spawnCoord.x))
+        if(!this.spawnCoord.q.equals(other.spawnCoord.q))
             return false;
-        if(!this.spawnCoord.y.equals(other.spawnCoord.y))
+        if(!this.spawnCoord.r.equals(other.spawnCoord.r))
             return false;
         return this.getUnit().equals(other.getUnit());
     }

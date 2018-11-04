@@ -25,31 +25,44 @@ public class SoldierAnt extends GameUnit {
         // try to pick up this unit
         if (!this.canFloat(gb)) return null;
 
-        return checkNeighboursForValidMoves(fromCoord, fromCoord, gb, new LinkedList<>(), new LinkedList<>());
+        ArrayList<MoveAction> moves = new ArrayList<>();
+        ArrayList<Field> visited = new ArrayList<>();
+        Field fromField = gb.get(fromCoord.q, fromCoord.r);
+        return checkNeighboursForValidMoves(fromField, fromField, visited, moves);
     }
 
-    private List<MoveAction> checkNeighboursForValidMoves(Coord origFrom, Coord fromCoord, GameBoard gb, List<MoveAction> validMoves, LinkedList<Coord> visited) {
-        if (visited.contains(fromCoord)) return null;
-        Collection<Field> neighbours = gb.getNeighboursForField(fromCoord).values();
-        Coord nCoord;
-        for (Field N : neighbours) {
-            nCoord = new Coord(N);
-            if (!canMoveFromAToB(fromCoord, nCoord)) continue;
-            if (N.getUnits().size() > 0) continue;
-
-            // no unit in neighbouring field
-            Collection<Field> nOfN = gb.getNeighboursForField(N).values();
-            // also test neighbours of `N`, if there are no units we cannot move there
-            long count = nOfN.stream().filter(f -> f.getUnits().size() != 0).count();
-            if (count == 0) continue;
-
-            visited.add(fromCoord);
-            validMoves.add(new MoveAction(this, origFrom, nCoord));
-            List<MoveAction> moreMoves = checkNeighboursForValidMoves(origFrom, nCoord, gb, validMoves, visited);
-            if (moreMoves != null) validMoves.addAll(moreMoves);
+    private ArrayList<MoveAction> checkNeighboursForValidMoves(Field fromField, Field check, ArrayList<Field> visited, ArrayList<MoveAction> moves) {
+        GameBoard b = HiveGameFactory.getInstance().getBoard();
+        int fq = check.getQ();
+        int fr = check.getR();
+        for(Field neighbour: b.getNeighboursForField(check).values()) {
+            if(visited.contains(neighbour))
+                continue;
+            visited.add(neighbour);
+            int tq = neighbour.getQ();
+            int tr = neighbour.getR();
+            if(neighbour.getUnits().isEmpty()) {
+                boolean hasNeighbouringUnits = false;
+                for(Field n_of_n: b.getNeighboursForField(neighbour).values()) {
+                    if(!n_of_n.getUnits().isEmpty()) {
+                        if(this != n_of_n.getUnits().peek())
+                            hasNeighbouringUnits = true;
+                    }
+                }
+                // If this is true, candidate for moves
+                if(hasNeighbouringUnits) {
+                    if(canMoveFromAToB(fq, fr, tq, tr)) {
+                        MoveAction m = new MoveAction(this, new Coord(fromField.getQ(), fromField.getR()), new Coord(tq, tr));
+//                        if(!moves.contains(m))
+                        moves.add(m);
+                        checkNeighboursForValidMoves(fromField, neighbour, visited, moves);
+                    }
+                }
+            }
         }
-        return validMoves;
+        return moves;
     }
+
     @Override
     public char getCharacter() { return 'A'; }
 

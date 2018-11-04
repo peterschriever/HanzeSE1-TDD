@@ -17,6 +17,8 @@ public class Human extends Player {
     @Override
     public Action chooseAction() {
         List<Action> validActions = ActionFactory.generateValidActions(this);
+        if(validActions.size() == 0)
+            return null;
         int i = 0;
         System.out.println("Select an action between 1 and " + validActions.size() + "! Enter 0 to exit.");
         for(Action a: validActions) {

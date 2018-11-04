@@ -43,7 +43,8 @@ public class HiveGame implements Hive {
                 playerAIs.get(spawnAction.getUnit().getColour()).grasshopper--;
         }
         if (action instanceof MoveAction) {
-
+            MoveAction a = (MoveAction) action;
+            move(a.getFrom().q, a.getFrom().r, a.getTo().q, a.getTo().r);
         }
     }
 
@@ -55,12 +56,13 @@ public class HiveGame implements Hive {
 
     @Override
     public void move(int fromQ, int fromR, int toQ, int toR) {
-
+        GameUnit u = board.get(fromQ, fromR).getUnits().pop();
+        board.get(toQ, toR).getUnits().push(u);
     }
 
     @Override
     public void pass() {
-
+        System.out.println("Player had to pass!");
     }
 
     @Override
@@ -114,8 +116,12 @@ public class HiveGame implements Hive {
             player = playerAIs.get(Colour.BLACK);
         }
         Action action = player.chooseAction();
-        playLog.writeLog(action);
-        applyAction(action);
+        if(action == null){
+            pass();
+        } else {
+            playLog.writeLog(action);
+            applyAction(action);
+        }
     }
 
     public GameBoard getBoard() {

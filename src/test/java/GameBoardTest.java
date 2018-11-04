@@ -1,7 +1,7 @@
+import Game.Coord;
 import Game.Field;
 import Game.GameBoard;
 import Game.Hive;
-import Game.Pair;
 import Units.Beetle;
 import Units.GrassHopper;
 import Units.QueenBee;
@@ -31,9 +31,9 @@ public class GameBoardTest {
         GameBoard gb = new GameBoard();
         Field neighbour1 = gb.addNewField(1, 0);
         Field neighbour2 = gb.addNewField(0, 1);
-        HashMap<Pair<Integer, Integer>, Field> neighbours = gb.getNeighboursForField(0, 0);
-        assertEquals("Neighbour1 should equal neighbours.get(1, 0)", neighbour1, neighbours.get(new Pair<>(1, 0)));
-        assertEquals("Neighbour2 should equal neighbours.get(0, 1)", neighbour2, neighbours.get(new Pair<>(0, 1)));
+        HashMap<Coord, Field> neighbours = gb.getNeighboursForField(0, 0);
+        assertEquals("Neighbour1 should equal neighbours.get(1, 0)", neighbour1, neighbours.get(new Coord(1, 0)));
+        assertEquals("Neighbour2 should equal neighbours.get(0, 1)", neighbour2, neighbours.get(new Coord(0, 1)));
     }
 
     @Test

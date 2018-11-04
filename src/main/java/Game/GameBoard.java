@@ -7,16 +7,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GameBoard {
-    private HashMap<Pair<Integer, Integer>, Field> board = new HashMap<>();
+    private HashMap<Coord, Field> board = new HashMap<>();
+    private final int TOTAL_UNITS = 22;
 
     public GameBoard() {
-        this.board.put(new Pair<>(0, 0), new Field(0, 0));
+        this.board.put(new Coord(0, 0), new Field(0, 0));
     }
 
     public void applyAction(Action action) {
         if (action.getClass() == SpawnAction.class) {
             SpawnAction spawnAction = ((SpawnAction) action);
-            Pair<Integer, Integer> spawnCoords = spawnAction.getSpawnCoords();
+            Coord spawnCoords = spawnAction.getSpawnCoord();
             Field field = this.get(spawnCoords.x, spawnCoords.y);
             field.acceptUnit(spawnAction.getUnit());
         }
@@ -24,7 +25,7 @@ public class GameBoard {
 
     public Field addNewField(int q, int r) {
         Field f = new Field(q, r);
-        this.board.put(new Pair<>(q, r), f);
+        this.board.put(new Coord(q, r), f);
         return f;
     }
 
@@ -37,19 +38,19 @@ public class GameBoard {
         return this.size() == 0;
     }
 
-    public HashMap<Pair<Integer, Integer>, Field> getNeighboursForField(int q, int r) {
-        HashMap<Pair<Integer, Integer>, Field> neighbours = new HashMap<>();
+    public HashMap<Coord, Field> getNeighboursForField(int q, int r) {
+        HashMap<Coord, Field> neighbours = new HashMap<>();
         int[][] adjustments = {{0, 1}, {0, -1}, {-1, 0}, {-1, 1}, {1, 0}, {1, -1}};
         for (int[] a : adjustments) {
             int new_q = q + a[0];
             int new_r = r + a[1];
-            neighbours.put(new Pair<>(new_q, new_r), this.get(new_q, new_r));
+            neighbours.put(new Coord(new_q, new_r), this.get(new_q, new_r));
         }
         return neighbours;
     }
 
     public Field get(int q, int r) {
-        Field f = this.board.get(new Pair<>(q, r));
+        Field f = this.board.get(new Coord(q, r));
         if (f == null) {
             f = this.addNewField(q, r);
         }
@@ -57,7 +58,7 @@ public class GameBoard {
     }
 
     public ArrayList<Field> getFieldsWithUnits() {
-        ArrayList<Field> values = new ArrayList<>();
+        ArrayList<Field> values = new ArrayList<>(TOTAL_UNITS);
         for (Field f : this.board.values()) {
             if (f.getUnits().size() > 0) {
                 values.add(f);

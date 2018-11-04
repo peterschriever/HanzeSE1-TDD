@@ -1,10 +1,10 @@
 package Game;
 
-public class Pair <X, Y> {
-    public X x;
-    public Y y;
+public class Coord {
+    public Integer x;
+    public Integer y;
 
-    public Pair (X x, Y y) {
+    public Coord (int x, int y) {
         this.x = x;
         this.y = y;
     }
@@ -20,12 +20,10 @@ public class Pair <X, Y> {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o instanceof Pair) {
-            Pair pair = (Pair) o;
-            if (this.x != null ? !this.x.equals(pair.x) : pair.x != null) return false;
-            if (this.y != null ? !this.y.equals(pair.y) : pair.y != null) return false;
-            return true;
-        }
-        return false;
+        if (o.getClass() != this.getClass()) return false;
+
+        Coord coord = ((Coord) o);
+        if (!this.x.equals(coord.x)) return false;
+        return this.y.equals(coord.y);
     }
 }

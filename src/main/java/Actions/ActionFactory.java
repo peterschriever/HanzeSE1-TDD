@@ -4,9 +4,7 @@ import Game.*;
 import Player.Player;
 import Units.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class ActionFactory {
 
@@ -15,49 +13,50 @@ public class ActionFactory {
 
     // TODO: Write test!!!
     public static List<Action> generateValidActions(Player player) {
-        Hive.Colour c = player.colour;
-        List<Action> actions = new ArrayList<>();
         // Get board, look at fields
-        List<Action> spawnActions = ActionFactory.getSpawnActions(player);
-        for(Action a : spawnActions) {
-            actions.add(a);
-        }
+        List<Action> actions = new LinkedList<>();
+        actions.addAll(ActionFactory.getSpawnActions(player));
+        actions.addAll(ActionFactory.getMoveActions(player));
         return actions;
+    }
+
+    public static List<Action> getMoveActions(Player player) {
+        return new LinkedList<>();
     }
 
     public static List<Action> getSpawnActions(Player player) {
         HiveGame game = HiveGameFactory.getInstance();
         ArrayList<Field> unit_fields = game.getBoard().getFieldsWithUnits();
-        List<Action> actions = new ArrayList<>();
-        if(unit_fields.isEmpty()) {
+        List<Action> actions = new LinkedList<>();
+        if (unit_fields.isEmpty()) {
             // Spawn action on 0,0
-            actions.add(new SpawnAction(new QueenBee(player.colour), new Pair<>(0,0)));
-            actions.add(new SpawnAction(new Beetle(player.colour), new Pair<>(0,0)));
-            actions.add(new SpawnAction(new GrassHopper(player.colour), new Pair<>(0,0)));
-            actions.add(new SpawnAction(new SoldierAnt(player.colour), new Pair<>(0,0)));
-            actions.add(new SpawnAction(new Spider(player.colour), new Pair<>(0,0)));
+            actions.add(new SpawnAction(new QueenBee(player.colour), new Coord(0, 0)));
+            actions.add(new SpawnAction(new Beetle(player.colour), new Coord(0, 0)));
+            actions.add(new SpawnAction(new GrassHopper(player.colour), new Coord(0, 0)));
+            actions.add(new SpawnAction(new SoldierAnt(player.colour), new Coord(0, 0)));
+            actions.add(new SpawnAction(new Spider(player.colour), new Coord(0, 0)));
         } else {
             ArrayList<Field> available_fields = ActionFactory.getSpawnFields(player);
-            if(ActionFactory.shouldPlayQueen(player)) {
-                for(Field f: available_fields) {
-                    actions.add(new SpawnAction(new QueenBee(player.colour), new Pair<>(f.getQ(), f.getR())));
+            if (ActionFactory.shouldPlayQueen(player)) {
+                for (Field f : available_fields) {
+                    actions.add(new SpawnAction(new QueenBee(player.colour), new Coord(f.getQ(), f.getR())));
                 }
             } else {
-                for(Field f: available_fields) {
-                    if(player.queenbee > 0) {
-                        actions.add(new SpawnAction(new QueenBee(player.colour), new Pair<>(f.getQ(), f.getR())));
+                for (Field f : available_fields) {
+                    if (player.queenbee > 0) {
+                        actions.add(new SpawnAction(new QueenBee(player.colour), new Coord(f.getQ(), f.getR())));
                     }
-                    if(player.ant > 0) {
-                        actions.add(new SpawnAction(new SoldierAnt(player.colour), new Pair<>(f.getQ(), f.getR())));
+                    if (player.ant > 0) {
+                        actions.add(new SpawnAction(new SoldierAnt(player.colour), new Coord(f.getQ(), f.getR())));
                     }
-                    if(player.beetle > 0) {
-                        actions.add(new SpawnAction(new Beetle(player.colour), new Pair<>(f.getQ(), f.getR())));
+                    if (player.beetle > 0) {
+                        actions.add(new SpawnAction(new Beetle(player.colour), new Coord(f.getQ(), f.getR())));
                     }
-                    if(player.spider > 0) {
-                        actions.add(new SpawnAction(new Spider(player.colour), new Pair<>(f.getQ(), f.getR())));
+                    if (player.spider > 0) {
+                        actions.add(new SpawnAction(new Spider(player.colour), new Coord(f.getQ(), f.getR())));
                     }
-                    if(player.grasshopper > 0) {
-                        actions.add(new SpawnAction(new GrassHopper(player.colour), new Pair<>(f.getQ(), f.getR())));
+                    if (player.grasshopper > 0) {
+                        actions.add(new SpawnAction(new GrassHopper(player.colour), new Coord(f.getQ(), f.getR())));
                     }
                 }
             }
@@ -71,25 +70,22 @@ public class ActionFactory {
         ArrayList<Field> available_fields = new ArrayList<>();
         Hive.Colour us = player.colour;
         Hive.Colour them = (player.colour == Hive.Colour.BLACK) ? Hive.Colour.WHITE : Hive.Colour.BLACK;
-        for(Field f : unit_fields) {
-            HashMap<Pair<Integer, Integer>, Field> neighbours = game.getBoard().getNeighboursForField(f.getQ(), f.getR());
-            if(f.getUnits().peek().getColour() != us) {
-                continue;
-            }
-            for(Field n : neighbours.values()) {
+        for (Field f : unit_fields) {
+            if (f.getUnits().peek().getColour() != us) continue; // cannot place next to enemy
+
+            HashMap<Coord, Field> neighbours = game.getBoard().getNeighboursForField(f.getQ(), f.getR());
+            for (Field n : neighbours.values()) {
+                if (n.getUnits().size() > 0) continue;
                 boolean can_spawn = true;
-                if(n.getUnits().size() > 0) {
-                    continue;
-                }
-                HashMap<Pair<Integer, Integer>, Field> neighbours_of_neighbours = game.getBoard().getNeighboursForField(n.getQ(), n.getR());
-                for(Field n_of_n : neighbours_of_neighbours.values()) {
-                    if(n_of_n.getUnits().size() > 0) {
+                HashMap<Coord, Field> neighbours_of_neighbours = game.getBoard().getNeighboursForField(n.getQ(), n.getR());
+                for (Field n_of_n : neighbours_of_neighbours.values()) {
+                    if (n_of_n.getUnits().size() > 0) {
                         if (n_of_n.getUnits().peek().getColour() == them) {
                             can_spawn = false;
                         }
                     }
                 }
-                if(can_spawn) {
+                if (can_spawn) {
                     available_fields.add(n);
                 }
             }
@@ -98,8 +94,8 @@ public class ActionFactory {
     }
 
     private static boolean shouldPlayQueen(Player player) {
-        if(player.queenbee + player.ant + player.beetle + player.grasshopper + player.spider <= 11 - 3) {
-            if(player.queenbee > 0) {
+        if (player.queenbee + player.ant + player.beetle + player.grasshopper + player.spider <= 11 - 3) {
+            if (player.queenbee > 0) {
                 return true;
             }
         }

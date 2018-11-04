@@ -2,7 +2,7 @@ import Actions.Action;
 import Actions.MoveAction;
 import Actions.SpawnAction;
 import Game.Hive;
-import Game.Pair;
+import Game.Coord;
 import Units.*;
 import org.junit.Test;
 
@@ -13,7 +13,7 @@ public class ActionTest {
     @Test
     public void spawnActionShouldHaveUnit() {
         Hive.Colour colour = Hive.Colour.WHITE;
-        Pair rootCoords = new Pair<>(0, 0);
+        Coord rootCoords = new Coord(0, 0);
         GameUnit grassHopper = new GrassHopper(colour);
         GameUnit queenBee = new QueenBee(colour);
         GameUnit soldierAnt = new SoldierAnt(colour);
@@ -33,19 +33,19 @@ public class ActionTest {
     }
 
     @Test
-    public void spawnActionShouldHaveCoordPair() {
+    public void spawnActionShouldHaveCoordCoord() {
         GameUnit grassHopper = new GrassHopper(Hive.Colour.WHITE);
 
-        Pair coords = new Pair<>(0, 0);
+        Coord coords = new Coord(0, 0);
         SpawnAction action = new SpawnAction(grassHopper, coords);
-        assertEquals("spawnAction should have an x,y pair", action.getSpawnCoords(), coords);
+        assertEquals("spawnAction should have an x,y pair", action.getSpawnCoord(), coords);
     }
 
     @Test
     public void moveActionShouldHaveFromAndTo() {
         GameUnit soldierAnt = new SoldierAnt(Hive.Colour.WHITE);
-        Pair from = new Pair<>(0, 0);
-        Pair to = new Pair<>(1, 0);
+        Coord from = new Coord(0, 0);
+        Coord to = new Coord(1, 0);
 
         MoveAction action = new MoveAction(soldierAnt, from, to);
         assertEquals("moveAction has from x,y pair", action.getFrom(), from);

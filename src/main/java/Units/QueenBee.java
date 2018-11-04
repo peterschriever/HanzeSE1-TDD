@@ -2,7 +2,7 @@ package Units;
 
 import Actions.MoveAction;
 import Game.Hive;
-import Game.Pair;
+import Game.Coord;
 
 import java.util.List;
 

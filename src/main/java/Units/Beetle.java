@@ -22,7 +22,7 @@ public class Beetle extends GameUnit {
     public List<MoveAction> generateValidPaths(int fromX, int fromY) {
         // beetle may move 1 space, as long as it does not break the swarm
         GameBoard gb = HiveGameFactory.getInstance().getBoard();
-        HashMap<Pair<Integer, Integer>, Field> neighbours = gb.getNeighboursForField(fromX, fromY);
+        HashMap<Coord, Field> neighbours = gb.getNeighboursForField(fromX, fromY);
 
         return null;
     }

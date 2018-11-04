@@ -45,10 +45,10 @@ public class ActionFactoryTest {
         board.get(0, -1).acceptUnit(new SoldierAnt(black.colour));
         List<Action> checked_fields = ActionFactory.getSpawnActions(white);
         List<Action> test = new ArrayList<>();
-        test.add(new SpawnAction(new SoldierAnt(white.colour), new Pair<>(0, 1)));
-        test.add(new SpawnAction(new Beetle(white.colour), new Pair<>(0, 1)));
-        test.add(new SpawnAction(new Spider(white.colour), new Pair<>(0, 1)));
-        test.add(new SpawnAction(new GrassHopper(white.colour), new Pair<>(0, 1)));
+        test.add(new SpawnAction(new SoldierAnt(white.colour), new Coord(0, 1)));
+        test.add(new SpawnAction(new Beetle(white.colour), new Coord(0, 1)));
+        test.add(new SpawnAction(new Spider(white.colour), new Coord(0, 1)));
+        test.add(new SpawnAction(new GrassHopper(white.colour), new Coord(0, 1)));
         assertEquals("Available actions should equal test actions", test, checked_fields);
     }
 }

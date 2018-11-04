@@ -1,14 +1,14 @@
 package Actions;
 
-import Game.Pair;
+import Game.Coord;
 import Units.GameUnit;
 
 public class SpawnAction extends Action {
-    private Pair<Integer, Integer> spawnCoords;
+    private Coord spawnCoord;
 
-    public SpawnAction(GameUnit unit, Pair<Integer, Integer> spawnCoords) {
+    public SpawnAction(GameUnit unit, Coord spawnCoord) {
         this.unit = unit;
-        this.spawnCoords = spawnCoords;
+        this.spawnCoord = spawnCoord;
     }
 
     @Override
@@ -16,13 +16,13 @@ public class SpawnAction extends Action {
         return unit;
     }
 
-    public Pair<Integer, Integer> getSpawnCoords() {
-        return spawnCoords;
+    public Coord getSpawnCoord() {
+        return spawnCoord;
     }
 
     @Override
     public String toString() {
-        return this.getClass() + "@" + this.hashCode() + ":" + this.getUnit().toString() + "[" + this.spawnCoords.x + "," + this.spawnCoords.y + "]";
+        return this.getClass() + "@" + this.hashCode() + ":" + this.getUnit().toString() + "[" + this.spawnCoord.x + "," + this.spawnCoord.y + "]";
     }
 
     @Override
@@ -30,9 +30,9 @@ public class SpawnAction extends Action {
         if(!o.getClass().equals(this.getClass()))
             return false;
         SpawnAction other = (SpawnAction) o;
-        if(!this.spawnCoords.x.equals(other.spawnCoords.x))
+        if(!this.spawnCoord.x.equals(other.spawnCoord.x))
             return false;
-        if(!this.spawnCoords.y.equals(other.spawnCoords.y))
+        if(!this.spawnCoord.y.equals(other.spawnCoord.y))
             return false;
         return this.getUnit().equals(other.getUnit());
     }

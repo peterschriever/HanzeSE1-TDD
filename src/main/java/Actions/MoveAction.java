@@ -1,13 +1,13 @@
 package Actions;
 
-import Game.Pair;
+import Game.Coord;
 import Units.GameUnit;
 
 public class MoveAction extends Action {
-    private Pair from;
-    private Pair to;
+    private Coord from;
+    private Coord to;
 
-    public MoveAction(GameUnit unit, Pair from, Pair to) {
+    public MoveAction(GameUnit unit, Coord from, Coord to) {
         this.unit = unit;
         this.from = from;
         this.to = to;
@@ -18,11 +18,11 @@ public class MoveAction extends Action {
         return unit;
     }
 
-    public Pair getFrom() {
+    public Coord getFrom() {
         return this.from;
     }
 
-    public Pair getTo() {
+    public Coord getTo() {
         return this.to;
     }
 }

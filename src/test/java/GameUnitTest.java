@@ -2,10 +2,10 @@
 import Actions.Action;
 import Actions.MoveAction;
 import Actions.SpawnAction;
+import Game.Coord;
 import Game.Hive;
 import Game.HiveGame;
 import Game.HiveGameFactory;
-import Game.Pair;
 import Player.CluelessAI;
 import Units.Beetle;
 import Units.GameUnit;
@@ -30,19 +30,19 @@ public class GameUnitTest {
         game.setPlayerAI(Colour.BLACK, new CluelessAI(Colour.BLACK));
 
         GameUnit queenBee = new QueenBee(Colour.WHITE);
-        Action spawnBee = new SpawnAction(queenBee, new Pair<>(0, 0));
+        Action spawnBee = new SpawnAction(queenBee, new Coord(0, 0));
         game.getBoard().applyAction(spawnBee);
 
         GameUnit ant = new SoldierAnt(Colour.BLACK);
-        Action spawnAnt = new SpawnAction(ant, new Pair<>(-1, 0));
+        Action spawnAnt = new SpawnAction(ant, new Coord(-1, 0));
         game.getBoard().applyAction(spawnAnt);
 
         GameUnit beetle = new Beetle(Colour.WHITE);
-        Action spawnBeetle = new SpawnAction(beetle, new Pair<>(0, 1));
+        Action spawnBeetle = new SpawnAction(beetle, new Coord(0, 1));
         game.getBoard().applyAction(spawnBeetle);
 
         GameUnit ant2 = new SoldierAnt(Colour.BLACK);
-        Action spawnAnt2 = new SpawnAction(ant2, new Pair<>(-1, -1));
+        Action spawnAnt2 = new SpawnAction(ant2, new Coord(-1, -1));
         game.getBoard().applyAction(spawnAnt2);
     }
 

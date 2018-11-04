@@ -25,4 +25,9 @@ public class MoveAction extends Action {
     public Coord getTo() {
         return this.to;
     }
+
+    @Override
+    public String toString() {
+        return "action{" + unit + ", " + from + ", " + to + "}";
+    }
 }

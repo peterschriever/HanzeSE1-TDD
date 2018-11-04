@@ -5,6 +5,7 @@ import Actions.SpawnAction;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class GameBoard {
     private HashMap<Coord, Field> board = new HashMap<>();
@@ -36,6 +37,14 @@ public class GameBoard {
      */
     public boolean shouldMakeFirstMove() {
         return this.size() == 0;
+    }
+
+    public HashMap<Coord, Field> getNeighboursForField(Field f) {
+        return this.getNeighboursForField(f.getQ(), f.getR());
+    }
+
+    public HashMap<Coord, Field> getNeighboursForField(Coord coord) {
+        return this.getNeighboursForField(coord.q, coord.r);
     }
 
     public HashMap<Coord, Field> getNeighboursForField(int q, int r) {

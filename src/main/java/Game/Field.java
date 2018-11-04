@@ -30,8 +30,9 @@ public class Field {
     }
 
     public GameUnit removeUnit(GameUnit unit) throws Hive.IllegalMove {
-        if (unit != units.pop()) throw new Hive.IllegalMove("You may only move the top-most unit of the field");
-        return unit;
+        if (unit != units.peek()) throw new Hive.IllegalMove("You may only move the top-most unit of the field");
+        unit.setField(null);
+        return units.pop();
     }
 
     public Stack<GameUnit> getUnits() {

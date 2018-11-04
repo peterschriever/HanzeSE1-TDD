@@ -16,6 +16,7 @@ import org.junit.Test;
 import Game.Hive.Colour;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
@@ -58,7 +59,9 @@ public class GameUnitTest {
         // 0, 1 is the x, y Pair that ActionFactory would normally apply to the method
         GameUnit beetle = game.getBoard().get(0, 1).getUnits().peek();
         List<MoveAction> moves = beetle.generateValidMoves(0, 1);
-        assertNotNull("moves should not be null", moves);
+        String str = moves.stream().map(Object::toString).collect(Collectors.joining(", "));
+        assertEquals("moves should be size of 3", moves.size(), 3);
+        assertEquals("moves should be as expected", str, "action{Units.Beetle@5577140b, Coord{0, 1}, Coord{1, 0}}, action{Units.Beetle@5577140b, Coord{0, 1}, Coord{0, 0}}, action{Units.Beetle@5577140b, Coord{0, 1}, Coord{-1, 1}}");
     }
 
 }

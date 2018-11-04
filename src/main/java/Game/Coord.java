@@ -31,4 +31,9 @@ public class Coord {
         if (!this.q.equals(coord.q)) return false;
         return this.r.equals(coord.r);
     }
+
+    @Override
+    public String toString() {
+        return "Coord{" + q + ", " + r + "}";
+    }
 }

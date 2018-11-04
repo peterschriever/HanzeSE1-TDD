@@ -23,6 +23,11 @@ public class GameUnitTest {
         game.applyAction(spawnUnit);
     }
 
+    private void queenCanMove() {
+        setupUnit(new QueenBee(Colour.WHITE), new Coord(0, 0));
+        setupUnit(new QueenBee(Colour.BLACK), new Coord(-1, 0));
+    }
+
     private void allUnitsExceptQueenCanMove() {
         setupUnit(new QueenBee(Colour.WHITE), new Coord(0, 0));
         setupUnit(new Beetle(Colour.WHITE), new Coord(1, 0));
@@ -64,6 +69,18 @@ public class GameUnitTest {
         assertNotNull("moves should not be null", moves);
         assertEquals("moves should be size of 5", 5, moves.size());
         assertEquals("moves should be as expected", str, "action{Beetle(WHITE), Coord{1, 0}, Coord{2, -1}}, action{Beetle(WHITE), Coord{1, 0}, Coord{1, -1}}, action{Beetle(WHITE), Coord{1, 0}, Coord{2, 0}}, action{Beetle(WHITE), Coord{1, 0}, Coord{0, 0}}, action{Beetle(WHITE), Coord{1, 0}, Coord{0, 1}}");
+    }
+
+    @Test
+    public void queenShouldGenerateValidMoves() {
+        queenCanMove(); // sets up the board with specific units placed down
+
+        GameUnit queen = game.getBoard().get(0, 0).getUnits().peek();
+        List<MoveAction> moves = queen.generateValidMoves(new Coord(1, 0));
+        String str = moves.stream().map(Object::toString).collect(Collectors.joining(", "));
+        assertNotNull("moves should not be null", moves);
+        assertEquals("moves should be size of 2", 2, moves.size());
+        assertEquals("moves should be as expected", str, "action{QueenBee(WHITE), Coord{1, 0}, Coord{1, -1}}, action{QueenBee(WHITE), Coord{1, 0}, Coord{0, 1}}");
     }
 
     @Test

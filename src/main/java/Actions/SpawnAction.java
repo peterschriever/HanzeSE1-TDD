@@ -27,13 +27,10 @@ public class SpawnAction extends Action {
 
     @Override
     public boolean equals(Object o) {
-        if(!o.getClass().equals(this.getClass()))
-            return false;
+        if (!(o instanceof SpawnAction)) return false;
         SpawnAction other = (SpawnAction) o;
-        if(!this.spawnCoord.q.equals(other.spawnCoord.q))
-            return false;
-        if(!this.spawnCoord.r.equals(other.spawnCoord.r))
-            return false;
+        if (!this.spawnCoord.q.equals(other.spawnCoord.q)) return false;
+        if (!this.spawnCoord.r.equals(other.spawnCoord.r)) return false;
         return this.getUnit().equals(other.getUnit());
     }
 }

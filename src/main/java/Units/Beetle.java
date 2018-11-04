@@ -20,6 +20,9 @@ public class Beetle extends GameUnit {
     }
 
     @Override
+    public char getCharacter() { return 'B'; }
+
+    @Override
     public List<MoveAction> generateValidMoves(Coord fromCoord) {
         // beetle may move 1 space, as long as it does not break the swarm
         GameBoard gb = HiveGameFactory.getInstance().getBoard();

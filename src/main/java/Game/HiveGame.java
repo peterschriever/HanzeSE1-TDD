@@ -4,8 +4,7 @@ import Actions.MoveAction;
 import Actions.SpawnAction;
 import Player.Player;
 import Actions.Action;
-import Units.GameUnit;
-import Units.QueenBee;
+import Units.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,9 +31,19 @@ public class HiveGame implements Hive {
         if (action instanceof SpawnAction) {
             SpawnAction spawnAction = ((SpawnAction) action);
             play(spawnAction.getUnit(), spawnAction.getSpawnCoord().q, spawnAction.getSpawnCoord().r);
+            if(spawnAction.getUnit() instanceof QueenBee)
+                playerAIs.get(spawnAction.getUnit().getColour()).queenbee--;
+            if(spawnAction.getUnit() instanceof Beetle)
+                playerAIs.get(spawnAction.getUnit().getColour()).beetle--;
+            if(spawnAction.getUnit() instanceof SoldierAnt)
+                playerAIs.get(spawnAction.getUnit().getColour()).ant--;
+            if(spawnAction.getUnit() instanceof Spider)
+                playerAIs.get(spawnAction.getUnit().getColour()).spider--;
+            if(spawnAction.getUnit() instanceof GrassHopper)
+                playerAIs.get(spawnAction.getUnit().getColour()).grasshopper--;
         }
         if (action instanceof MoveAction) {
-            
+
         }
     }
 

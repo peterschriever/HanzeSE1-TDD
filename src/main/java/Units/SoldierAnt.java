@@ -50,6 +50,8 @@ public class SoldierAnt extends GameUnit {
         }
         return validMoves;
     }
+    @Override
+    public char getCharacter() { return 'A'; }
 
     @Override
     public String toString() {

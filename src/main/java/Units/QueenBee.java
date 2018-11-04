@@ -29,6 +29,9 @@ public class QueenBee extends GameUnit {
     }
 
     @Override
+    public char getCharacter() { return 'Q'; }
+
+    @Override
     public String toString() {
         return "QueenBee(" + colour + ")";
     }

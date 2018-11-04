@@ -13,6 +13,8 @@ public class Spider extends GameUnit {
         this.colour = colour;
     }
 
+    public char getCharacter() { return 'S'; }
+
     @Override
     public Hive.Colour getColour() {
         return this.colour;

@@ -56,12 +56,12 @@ public class GameUnitTest {
 
     @Test
     public void beetleShouldGenerateValidMoves() {
-        // 0, 1 is the x, y Pair that ActionFactory would normally apply to the method
+        // 0, 1 is the q, r Coord that ActionFactory would normally apply to the method
         GameUnit beetle = game.getBoard().get(0, 1).getUnits().peek();
-        List<MoveAction> moves = beetle.generateValidMoves(0, 1);
+        List<MoveAction> moves = beetle.generateValidMoves(new Coord(0, 1));
         String str = moves.stream().map(Object::toString).collect(Collectors.joining(", "));
         assertEquals("moves should be size of 3", moves.size(), 3);
-        assertEquals("moves should be as expected", str, "action{Units.Beetle@5577140b, Coord{0, 1}, Coord{1, 0}}, action{Units.Beetle@5577140b, Coord{0, 1}, Coord{0, 0}}, action{Units.Beetle@5577140b, Coord{0, 1}, Coord{-1, 1}}");
+        assertEquals("moves should be as expected", str, "action{Beetle(WHITE), Coord{0, 1}, Coord{1, 0}}, action{Beetle(WHITE), Coord{0, 1}, Coord{0, 0}}, action{Beetle(WHITE), Coord{0, 1}, Coord{-1, 1}}");
     }
 
 }

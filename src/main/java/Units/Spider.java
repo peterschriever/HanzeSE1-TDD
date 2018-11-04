@@ -1,6 +1,7 @@
 package Units;
 
 import Actions.MoveAction;
+import Game.Coord;
 import Game.Hive;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public class Spider extends GameUnit {
     }
 
     @Override
-    public List<MoveAction> generateValidMoves(int fromX, int toX) {
+    public List<MoveAction> generateValidMoves(Coord fromCoord) {
         return null;
     }
 }

@@ -1,6 +1,7 @@
 package Units;
 
 import Actions.MoveAction;
+import Game.Coord;
 import Game.Field;
 import Game.Hive.Colour;
 
@@ -11,7 +12,7 @@ public abstract class GameUnit {
 
     public abstract Colour getColour();
 
-    public abstract List<MoveAction> generateValidMoves(int fromX, int toX);
+    public abstract List<MoveAction> generateValidMoves(Coord fromCoord);
 
     @Override
     public boolean equals(Object obj) {

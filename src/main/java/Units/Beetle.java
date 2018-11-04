@@ -20,14 +20,12 @@ public class Beetle extends GameUnit {
     }
 
     @Override
-    public List<MoveAction> generateValidMoves(int fromX, int fromY) {
+    public List<MoveAction> generateValidMoves(Coord fromCoord) {
         // beetle may move 1 space, as long as it does not break the swarm
         GameBoard gb = HiveGameFactory.getInstance().getBoard();
         // try to pickup unit
         if (!this.unitCanFloat(gb)) return null;
         // find valid fields to move to
-        Coord fromCoord = new Coord(fromX, fromY);
-
         return checkNeighboursForValidMoves(fromCoord, gb);
     }
 
@@ -61,5 +59,8 @@ public class Beetle extends GameUnit {
         return true;
     }
 
-
+    @Override
+    public String toString() {
+        return "Beetle(" + colour + ")";
+    }
 }

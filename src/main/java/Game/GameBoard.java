@@ -2,6 +2,7 @@ package Game;
 
 import Actions.Action;
 import Actions.SpawnAction;
+import Units.GameUnit;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -67,28 +68,66 @@ public class GameBoard {
         return values;
     }
 
-    public boolean isSwarm() {
-        int real_size = 0;
-        Field first_field = null;
-
+    private Field getFirstField() {
         for (Field next : this.board.values()) {
-            if (first_field == null && next.getUnits().size() > 0) {
-                first_field = next;
+            if (next.getUnits().size() > 0) {
+                return next;
             }
+        }
+        return null;
+    }
+
+    private Field getFirstFieldWithout(GameUnit without) {
+        for (Field next : this.board.values()) {
+            int greater_than = 0;
+            if(without.equals(next.getUnits().peek()))
+                greater_than = 1;
+            if (next.getUnits().size() > greater_than) {
+                return next;
+            }
+        }
+        return null;
+    }
+
+    private int getRealSize() {
+        int real_size = 0;
+        for (Field next : this.board.values()) {
             real_size += next.getUnits().size();
         }
+        return real_size;
+    }
+
+    public boolean isSwarm() {
+        int real_size = getRealSize();
+        Field first_field = getFirstField();
+
         if (real_size == 0 || first_field == null) {
             return true;
         }
 
         ArrayList<Field> visited = new ArrayList<>();
         visited.add(first_field);
-        int size = this.sizeOfSubSwarm(first_field, visited);
+        int size = this.sizeOfSubSwarm(first_field, visited, null);
 
         return size == real_size;
     }
 
-    private int sizeOfSubSwarm(Field test, ArrayList<Field> visited) {
+    public boolean isSwarmWithout(GameUnit without) {
+        int real_size = getRealSize();
+        Field first_field = getFirstFieldWithout(without);
+
+        if (real_size == 0 || first_field == null) {
+            return true;
+        }
+
+        ArrayList<Field> visited = new ArrayList<>();
+        visited.add(first_field);
+        int size = this.sizeOfSubSwarm(first_field, visited, without);
+
+        return size == real_size;
+    }
+
+    private int sizeOfSubSwarm(Field test, ArrayList<Field> visited, GameUnit without) {
         if (test.getUnits().size() == 0) {
             return 0;
         }
@@ -97,9 +136,13 @@ public class GameBoard {
             if (visited.contains(n)) {
                 continue;
             }
+
             if (n.getUnits().size() > 0) {
+                if(n.getUnits().peek().equals(without))
+                    if (n.getUnits().size() == 1)
+                        continue;
                 visited.add(n);
-                size = size + this.sizeOfSubSwarm(n, visited);
+                size = size + this.sizeOfSubSwarm(n, visited, without);
             }
         }
         return size;

@@ -24,7 +24,7 @@ public class Beetle extends GameUnit {
         // beetle may move 1 space, as long as it does not break the swarm
         GameBoard gb = HiveGameFactory.getInstance().getBoard();
         // try to pickup unit
-        if (!this.unitCanFloat(gb)) return null;
+        if (!this.canFloat(gb)) return null;
         // find valid fields to move to
         return checkNeighboursForValidMoves(fromCoord, gb);
     }
@@ -43,20 +43,6 @@ public class Beetle extends GameUnit {
             validMoves.add(new MoveAction(this, fromCoord, new Coord(N)));
         }
         return validMoves;
-    }
-
-    private boolean unitCanFloat(GameBoard gb) {
-        try {
-            this.field.removeUnit(this); // unit is now floating (does not exist on board)
-            if (!gb.isSwarm()) {
-                this.field.acceptUnit(this); // put unit back in its original field
-                return false; // return empty, because moving would break the swarm
-            }
-        } catch (Hive.IllegalMove illegalMove) {
-            // this unit is not the top-most unit of the Field, we cannot move
-            return false;
-        }
-        return true;
     }
 
     @Override

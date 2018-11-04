@@ -3,6 +3,8 @@ package Units;
 import Actions.MoveAction;
 import Game.Coord;
 import Game.Field;
+import Game.GameBoard;
+import Game.Hive;
 import Game.Hive.Colour;
 
 import java.util.List;
@@ -24,6 +26,20 @@ public abstract class GameUnit {
 
     public void setField(Field field) {
         this.field = field;
+    }
+
+    protected boolean canFloat(GameBoard gb) {
+        try {
+            this.field.removeUnit(this); // unit is now floating (does not exist on board)
+            if (!gb.isSwarm()) {
+                this.field.acceptUnit(this); // put unit back in its original field
+                return false; // return empty, because moving would break the swarm
+            }
+        } catch (Hive.IllegalMove illegalMove) {
+            // this unit is not the top-most unit of the Field, we cannot move
+            return false;
+        }
+        return true;
     }
 
     @Override

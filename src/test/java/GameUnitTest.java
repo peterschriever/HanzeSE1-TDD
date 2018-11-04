@@ -63,8 +63,23 @@ public class GameUnitTest {
         String str = moves.stream().map(Object::toString).collect(Collectors.joining(", "));
 //        System.out.println(moves.size());
 //        System.out.println(str);
+        assertNotNull("moves should not be null", moves);
         assertEquals("moves should be size of 5", moves.size(), 5);
         assertEquals("moves should be as expected", str, "action{Beetle(WHITE), Coord{1, 0}, Coord{2, -1}}, action{Beetle(WHITE), Coord{1, 0}, Coord{1, -1}}, action{Beetle(WHITE), Coord{1, 0}, Coord{2, 0}}, action{Beetle(WHITE), Coord{1, 0}, Coord{0, 0}}, action{Beetle(WHITE), Coord{1, 0}, Coord{0, 1}}");
+    }
+
+    @Test
+    public void antShouldGenerateValidMoves() {
+        allUnitsExceptQueenCanMove(); // sets up the board with specific units placed down
+
+        GameUnit ant = game.getBoard().get(0, 1).getUnits().peek();
+        List<MoveAction> moves = ant.generateValidMoves(new Coord(0, 1));
+        String str = moves.stream().map(Object::toString).collect(Collectors.joining(", "));
+        System.out.println(moves.size());
+        System.out.println(str);
+        assertNotNull("moves should not be null", moves);
+        assertEquals("moves should be size of 5", moves.size(), 5);
+        assertEquals("moves should be as expected", str, "replaceString");
     }
 
     @Test

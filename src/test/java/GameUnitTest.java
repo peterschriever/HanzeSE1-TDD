@@ -7,10 +7,7 @@ import Game.Hive;
 import Game.HiveGame;
 import Game.HiveGameFactory;
 import Player.CluelessAI;
-import Units.Beetle;
-import Units.GameUnit;
-import Units.QueenBee;
-import Units.SoldierAnt;
+import Units.*;
 import org.junit.Before;
 import org.junit.Test;
 import Game.Hive.Colour;
@@ -18,8 +15,7 @@ import Game.Hive.Colour;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertNotNull;
+import static org.junit.Assert.*;
 
 public class GameUnitTest {
     private HiveGame game;
@@ -62,6 +58,31 @@ public class GameUnitTest {
         String str = moves.stream().map(Object::toString).collect(Collectors.joining(", "));
         assertEquals("moves should be size of 3", moves.size(), 3);
         assertEquals("moves should be as expected", str, "action{Beetle(WHITE), Coord{0, 1}, Coord{1, 0}}, action{Beetle(WHITE), Coord{0, 1}, Coord{0, 0}}, action{Beetle(WHITE), Coord{0, 1}, Coord{-1, 1}}");
+    }
+
+    @Test
+    public void toStringShouldBeOfValidFormat() {
+        String correct = "Beetle(WHITE)";
+        assertEquals("Beetle should have correct toString format", new Beetle(Colour.WHITE).toString(), correct);
+        correct = "QueenBee(WHITE)";
+        assertEquals("QueenBee should have correct toString format", new QueenBee(Colour.WHITE).toString(), correct);
+        correct = "SoldierAnt(WHITE)";
+        assertEquals("SoldierAnt should have correct toString format", new SoldierAnt(Colour.WHITE).toString(), correct);
+        correct = "Spider(WHITE)";
+        assertEquals("Spider should have correct toString format", new Spider(Colour.WHITE).toString(), correct);
+        correct = "GrassHopper(WHITE)";
+        assertEquals("GrassHopper should have correct toString format", new GrassHopper(Colour.WHITE).toString(), correct);
+
+        correct = "Beetle(BLACK)";
+        assertEquals("Beetle should have correct toString format", new Beetle(Colour.BLACK).toString(), correct);
+        correct = "QueenBee(BLACK)";
+        assertEquals("QueenBee should have correct toString format", new QueenBee(Colour.BLACK).toString(), correct);
+        correct = "SoldierAnt(BLACK)";
+        assertEquals("SoldierAnt should have correct toString format", new SoldierAnt(Colour.BLACK).toString(), correct);
+        correct = "Spider(BLACK)";
+        assertEquals("Spider should have correct toString format", new Spider(Colour.BLACK).toString(), correct);
+        correct = "GrassHopper(BLACK)";
+        assertEquals("GrassHopper should have correct toString format", new GrassHopper(Colour.BLACK).toString(), correct);
     }
 
 }

@@ -22,4 +22,9 @@ public class SoldierAnt extends GameUnit {
     public List<MoveAction> generateValidMoves(Coord fromCoord) {
         return null;
     }
+
+    @Override
+    public String toString() {
+        return "SoldierAnt(" + colour + ")";
+    }
 }

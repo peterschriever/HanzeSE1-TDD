@@ -19,11 +19,6 @@ public class QueenBee extends GameUnit {
     }
 
     @Override
-    public String toString() {
-        return "QueenBee (" + colour + ")";
-    }
-
-    @Override
     public Hive.Colour getColour() {
         return this.colour;
     }
@@ -31,5 +26,10 @@ public class QueenBee extends GameUnit {
     @Override
     public List<MoveAction> generateValidMoves(Coord fromCoord) {
         return null;
+    }
+
+    @Override
+    public String toString() {
+        return "QueenBee(" + colour + ")";
     }
 }

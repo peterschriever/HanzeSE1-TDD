@@ -25,4 +25,7 @@ public abstract class GameUnit {
     public void setField(Field field) {
         this.field = field;
     }
+
+    @Override
+    public abstract String toString();
 }

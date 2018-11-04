@@ -29,7 +29,7 @@ public class QueenBee extends GameUnit {
     }
 
     @Override
-    public List<MoveAction> generateValidPaths(int fromX, int toX) {
+    public List<MoveAction> generateValidMoves(int fromX, int toX) {
         return null;
     }
 }

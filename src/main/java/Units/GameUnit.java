@@ -9,7 +9,7 @@ public abstract class GameUnit {
 
     public abstract Colour getColour();
 
-    public abstract List<MoveAction> generateValidPaths(int fromX, int toX);
+    public abstract List<MoveAction> generateValidMoves(int fromX, int toX);
 
     @Override
     public boolean equals(Object obj) {

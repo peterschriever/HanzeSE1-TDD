@@ -19,7 +19,7 @@ public class Beetle extends GameUnit {
     }
 
     @Override
-    public List<MoveAction> generateValidPaths(int fromX, int fromY) {
+    public List<MoveAction> generateValidMoves(int fromX, int fromY) {
         // beetle may move 1 space, as long as it does not break the swarm
         GameBoard gb = HiveGameFactory.getInstance().getBoard();
         HashMap<Coord, Field> neighbours = gb.getNeighboursForField(fromX, fromY);

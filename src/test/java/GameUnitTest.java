@@ -54,10 +54,10 @@ public class GameUnitTest {
     }
 
     @Test
-    public void beetleShouldGenerateValidPaths() {
+    public void beetleShouldGenerateValidMoves() {
         // 0, 1 is the x, y Pair that ActionFactory would normally apply to the method
         GameUnit beetle = game.getBoard().get(0, 1).getUnits().peek();
-        List<MoveAction> paths = beetle.generateValidPaths(0, 1);
+        List<MoveAction> paths = beetle.generateValidMoves(0, 1);
         assertNotNull("paths should not be null", paths);
     }
 

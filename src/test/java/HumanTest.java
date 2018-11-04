@@ -7,7 +7,6 @@ public class HumanTest {
     public void testHumanUnitCount() {
         Human h = new Human(Hive.Colour.BLACK);
         h.chooseAction();
-        h.queenbee--;
         h.chooseAction();
     }
 

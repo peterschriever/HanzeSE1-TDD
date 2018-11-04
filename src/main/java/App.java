@@ -58,7 +58,9 @@ public class App {
         }
     }
 
-    private static void displayBoard(HiveGame game) {
+    public static void displayBoard(HiveGame game) {
+        App.colours.put(Hive.Colour.BLACK, colour_black);
+        App.colours.put(Hive.Colour.WHITE, colour_white);
         ArrayList<Field> fieldsWithUnits = game.getBoard().getFieldsWithUnits();
         // Get board edges
         int mostLeft = 99999999;
@@ -109,8 +111,6 @@ public class App {
     }
 
     public static void main(String[] args) {
-        App.colours.put(Hive.Colour.BLACK, colour_black);
-        App.colours.put(Hive.Colour.WHITE, colour_white);
         // Do something with args to assign players maybe
         App.play();
     }

@@ -57,8 +57,10 @@ public abstract class GameUnit {
 
     protected boolean canFloat(GameBoard gb) {
         if (!gb.isSwarmWithout(this)) {
+            System.out.println("NO");
             return false; // return empty, because moving would break the swarm
         } else {
+            System.out.println("YA");
             return true;
         }
     }

@@ -79,10 +79,10 @@ public class GameBoard {
 
     private Field getFirstFieldWithout(GameUnit without) {
         for (Field next : this.board.values()) {
-            int greater_than = 0;
-            if(without.equals(next.getUnits().peek()))
-                greater_than = 1;
-            if (next.getUnits().size() > greater_than) {
+            if (next.getUnits().size() > 0) {
+                if(without != null)
+                    if(next.getUnits().peek().equals(without))
+                        continue;
                 return next;
             }
         }
@@ -123,6 +123,9 @@ public class GameBoard {
         ArrayList<Field> visited = new ArrayList<>();
         visited.add(first_field);
         int size = this.sizeOfSubSwarm(first_field, visited, without);
+        size = (without == null) ? size : size + 1;
+        System.out.println(size);
+        System.out.println(real_size);
 
         return size == real_size;
     }
@@ -131,6 +134,11 @@ public class GameBoard {
         if (test.getUnits().size() == 0) {
             return 0;
         }
+        if(without != null) {
+            if (test.getUnits().peek() == without) {
+                return 0;
+            }
+        }
         int size = test.getUnits().size();
         for (Field n : this.getNeighboursForField(test.getQ(), test.getR()).values()) {
             if (visited.contains(n)) {
@@ -138,9 +146,6 @@ public class GameBoard {
             }
 
             if (n.getUnits().size() > 0) {
-                if(n.getUnits().peek().equals(without))
-                    if (n.getUnits().size() == 1)
-                        continue;
                 visited.add(n);
                 size = size + this.sizeOfSubSwarm(n, visited, without);
             }

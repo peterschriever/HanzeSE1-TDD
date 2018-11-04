@@ -68,9 +68,11 @@ public class GameUnitTest {
 
     @Test
     public void antShouldGenerateValidMoves() {
+        setupGame();
         allUnitsExceptQueenCanMove(); // sets up the board with specific units placed down
 
         GameUnit ant = game.getBoard().get(0, 1).getUnits().peek();
+        App.displayBoard(HiveGameFactory.getInstance());
         List<MoveAction> moves = ant.generateValidMoves(new Coord(0, 1));
         String str = moves.stream().map(Object::toString).collect(Collectors.joining(", "));
         System.out.println(moves.size());

@@ -21,7 +21,19 @@ public class ActionFactory {
     }
 
     public static List<Action> getMoveActions(Player player) {
-        return new LinkedList<>();
+        GameBoard gb = HiveGameFactory.getInstance().getBoard();
+        ArrayList<Field> fieldsWithUnits = gb.getFieldsWithUnits();
+        List<Action> moveActions = new LinkedList<>();
+        List<MoveAction> unitsMoves;
+        for (int i = 0; i < fieldsWithUnits.size(); i++) {
+            for (int j = 0; j < fieldsWithUnits.get(i).getUnits().size(); j++) {
+                GameUnit unit = fieldsWithUnits.get(i).getUnits().get(j);
+                unitsMoves = unit.generateValidMoves(new Coord(fieldsWithUnits.get(i)));
+                if (unitsMoves != null) moveActions.addAll(unitsMoves);
+            }
+        }
+
+        return moveActions;
     }
 
     public static List<Action> getSpawnActions(Player player) {

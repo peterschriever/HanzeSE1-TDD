@@ -56,17 +56,11 @@ public abstract class GameUnit {
     }
 
     protected boolean canFloat(GameBoard gb) {
-        try {
-            this.field.removeUnit(this); // unit is now floating (does not exist on board)
-            if (!gb.isSwarmWithout(this)) {
-                this.field.acceptUnit(this); // put unit back in its original field
-                return false; // return empty, because moving would break the swarm
-            }
-        } catch (Hive.IllegalMove illegalMove) {
-            // this unit is not the top-most unit of the Field, we cannot move
-            return false;
+        if (!gb.isSwarmWithout(this)) {
+            return false; // return empty, because moving would break the swarm
+        } else {
+            return true;
         }
-        return true;
     }
 
     @Override

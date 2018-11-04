@@ -106,6 +106,19 @@ public class GameUnitTest {
         assertEquals("moves should be size of X", 17, moves.size());
         assertEquals("moves should be as expected", str, "Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{1, 1}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{2, 1}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{3, 0}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{3, -1}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{3, -2}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{2, -2}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{1, -2}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{0, -2}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{0, -1}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{-1, -2}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{-2, -2}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{-3, -1}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{-4, 0}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{-4, 1}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{-3, 1}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{-2, 1}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{-1, 1}}");
     }
+    @Test
+    public void spiderShouldGenerateValidMoves() {
+        setupGame();
+        allUnitsExceptQueenCanMove(); // sets up the board with specific units placed down
+
+        GameUnit spider = game.getBoard().get(1, -1).getUnits().peek();
+        List<MoveAction> moves = spider.generateValidMoves(new Coord(1, -1));
+        String str = moves.stream().map(Object::toString).collect(Collectors.joining(", "));
+        System.out.println(str);
+        assertNotNull("moves should not be null", moves);
+        assertEquals("moves should be size of X", 2, moves.size());
+        assertEquals("moves should be as expected", str, "action{Spider(WHITE), Coord{1, -1}, Coord{3, -1}}, action{Spider(WHITE), Coord{1, -1}, Coord{-1, -2}}");
+    }
 
     @Test
     public void toStringShouldBeOfValidFormat() {

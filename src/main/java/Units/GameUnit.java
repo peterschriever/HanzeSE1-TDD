@@ -31,6 +31,15 @@ public abstract class GameUnit {
         List<Field> bNeighbours = new ArrayList<>(gb.getNeighboursForField(b).values());
         Field match_one = null;
         Field match_two = null;
+        if(!aNeighbours.contains(b))
+            return false;
+        boolean units = false;
+        for(Field testUnit: bNeighbours){
+            if(!testUnit.getUnits().isEmpty() && !testUnit.equals(a))
+                units = true;
+        }
+        if(!units)
+            return false;
         for (Field f : aNeighbours) {
             if (bNeighbours.contains(f)) {
                 if (match_one == null)

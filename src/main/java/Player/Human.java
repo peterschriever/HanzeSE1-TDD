@@ -5,10 +5,8 @@ import Actions.ActionFactory;
 import Actions.MoveAction;
 import Actions.SpawnAction;
 import Game.Hive;
-import Units.*;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,6 +37,7 @@ public class Human extends Player {
             else validActions = moveActions;
         }
 
+        // @TODO: actions by unit type
 //        if (validActions.size() > 5) { // 5 is some abritrary number at which to activate unit selection
 //            System.out.println("Choose a unit type! Enter 0 to exit.");
 //            Class[] units = {Beetle.class, GrassHopper.class, QueenBee.class, SoldierAnt.class, Spider.class};
@@ -52,8 +51,9 @@ public class Human extends Player {
 //                .collect(Collectors.toList());
 //        }
 
-        System.out.println("Select an action between 1 and " + validActions.size() + "! Enter 0 to exit.");
+        if(validActions.size() == 0) return null;
         i = 0;
+        System.out.println("Select an action between 1 and " + validActions.size() + "! Enter 0 to exit.");
         for (Action a : validActions) {
             i++;
             System.out.println(i + " " + a);
@@ -61,10 +61,6 @@ public class Human extends Player {
         }
         input = getInputNumber(validActions.size());
         return validActions.get(input - 1);
-    }
-
-    private void spawnActions() {
-
     }
 
     private int getInputNumber(int max) {

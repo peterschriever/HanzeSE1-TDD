@@ -124,8 +124,6 @@ public class GameBoard {
         visited.add(first_field);
         int size = this.sizeOfSubSwarm(first_field, visited, without);
         size = (without == null) ? size : size + 1;
-        System.out.println(size);
-        System.out.println(real_size);
 
         return size == real_size;
     }

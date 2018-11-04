@@ -40,7 +40,7 @@ public class GameUnitTest {
 
     @Before
     public void setupGame() {
-        this.game = HiveGameFactory.getInstance();
+        this.game = HiveGameFactory.getNew();
         game.setPlayerAI(Colour.WHITE, new CluelessAI(Colour.WHITE));
         game.setPlayerAI(Colour.BLACK, new CluelessAI(Colour.BLACK));
     }
@@ -54,13 +54,12 @@ public class GameUnitTest {
 
     @Test
     public void beetleShouldGenerateValidMoves() {
+        setupGame();
         allUnitsExceptQueenCanMove(); // sets up the board with specific units placed down
 
         GameUnit beetle = game.getBoard().get(1, 0).getUnits().peek();
         List<MoveAction> moves = beetle.generateValidMoves(new Coord(1, 0));
         String str = moves.stream().map(Object::toString).collect(Collectors.joining(", "));
-//        System.out.println(moves.size());
-//        System.out.println(str);
         assertNotNull("moves should not be null", moves);
         assertEquals("moves should be size of 5", 5, moves.size());
         assertEquals("moves should be as expected", str, "action{Beetle(WHITE), Coord{1, 0}, Coord{2, -1}}, action{Beetle(WHITE), Coord{1, 0}, Coord{1, -1}}, action{Beetle(WHITE), Coord{1, 0}, Coord{2, 0}}, action{Beetle(WHITE), Coord{1, 0}, Coord{0, 0}}, action{Beetle(WHITE), Coord{1, 0}, Coord{0, 1}}");
@@ -72,15 +71,11 @@ public class GameUnitTest {
         allUnitsExceptQueenCanMove(); // sets up the board with specific units placed down
 
         GameUnit ant = game.getBoard().get(0, 1).getUnits().peek();
-        App.displayBoard(HiveGameFactory.getInstance());
-        // TODO: FIX BROKEN SHIT 
-//        List<MoveAction> moves = ant.generateValidMoves(new Coord(0, 1));
-//        String str = moves.stream().map(Object::toString).collect(Collectors.joining(", "));
-//        System.out.println(moves.size());
-//        System.out.println(str);
-//        assertNotNull("moves should not be null", moves);
-//        assertEquals("moves should be size of X", 5, moves.size());
-//        assertEquals("moves should be as expected", str, "replaceString");
+        List<MoveAction> moves = ant.generateValidMoves(new Coord(0, 1));
+        String str = moves.stream().map(Object::toString).collect(Collectors.joining(", "));
+        assertNotNull("moves should not be null", moves);
+        assertEquals("moves should be size of X", 17, moves.size());
+        assertEquals("moves should be as expected", str, "action{SoldierAnt(WHITE), Coord{0, 1}, Coord{1, 1}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{2, 1}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{3, 0}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{3, -1}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{3, -2}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{2, -2}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{1, -2}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{0, -2}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{0, -1}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{-1, -2}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{-2, -2}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{-3, -1}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{-4, 0}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{-4, 1}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{-3, 1}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{-2, 1}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{-1, 1}}");
     }
 
     @Test

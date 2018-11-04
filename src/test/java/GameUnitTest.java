@@ -76,7 +76,7 @@ public class GameUnitTest {
         System.out.println(moves.size());
         System.out.println(str);
         assertNotNull("moves should not be null", moves);
-//        assertEquals("moves should be size of X", moves.size(), 5);
+        assertEquals("moves should be size of X", 5, moves.size());
 //        assertEquals("moves should be as expected", str, "replaceString");
     }
 

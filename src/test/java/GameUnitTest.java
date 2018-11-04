@@ -94,6 +94,18 @@ public class GameUnitTest {
         assertEquals("moves should be size of X", 17, moves.size());
         assertEquals("moves should be as expected", str, "action{SoldierAnt(WHITE), Coord{0, 1}, Coord{1, 1}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{2, 1}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{3, 0}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{3, -1}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{3, -2}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{2, -2}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{1, -2}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{0, -2}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{0, -1}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{-1, -2}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{-2, -2}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{-3, -1}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{-4, 0}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{-4, 1}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{-3, 1}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{-2, 1}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{-1, 1}}");
     }
+    @Test
+    public void spiderShouldGenerateValidMoves() {
+        setupGame();
+        allUnitsExceptQueenCanMove(); // sets up the board with specific units placed down
+
+        GameUnit spider = game.getBoard().get(1, -1).getUnits().peek();
+        List<MoveAction> moves = spider.generateValidMoves(new Coord(1, -1));
+        String str = moves.stream().map(Object::toString).collect(Collectors.joining(", "));
+        assertNotNull("moves should not be null", moves);
+        assertEquals("moves should be size of X", 2, moves.size());
+//        assertEquals("moves should be as expected", str, "action{SoldierAnt(WHITE), Coord{0, 1}, Coord{1, 1}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{2, 1}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{3, 0}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{3, -1}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{3, -2}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{2, -2}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{1, -2}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{0, -2}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{0, -1}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{-1, -2}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{-2, -2}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{-3, -1}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{-4, 0}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{-4, 1}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{-3, 1}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{-2, 1}}, action{SoldierAnt(WHITE), Coord{0, 1}, Coord{-1, 1}}");
+    }
 
     @Test
     public void toStringShouldBeOfValidFormat() {

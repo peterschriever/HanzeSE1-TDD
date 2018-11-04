@@ -18,6 +18,13 @@ import static org.junit.Assert.*;
 public class GameUnitTest {
     private HiveGame game;
 
+    @Before
+    public void setupGame() {
+        this.game = HiveGameFactory.getNew();
+        game.setPlayerAI(Colour.WHITE, new CluelessAI(Colour.WHITE));
+        game.setPlayerAI(Colour.BLACK, new CluelessAI(Colour.BLACK));
+    }
+
     private void setupUnit(GameUnit unit, Coord coord) {
         Action spawnUnit = new SpawnAction(unit, coord);
         game.applyAction(spawnUnit);
@@ -41,13 +48,6 @@ public class GameUnitTest {
         setupUnit(new GrassHopper(Colour.BLACK), new Coord(-3, 0));
         setupUnit(new SoldierAnt(Colour.BLACK), new Coord(-2, -1));
         setupUnit(new Spider(Colour.BLACK), new Coord(-1, -1));
-    }
-
-    @Before
-    public void setupGame() {
-        this.game = HiveGameFactory.getNew();
-        game.setPlayerAI(Colour.WHITE, new CluelessAI(Colour.WHITE));
-        game.setPlayerAI(Colour.BLACK, new CluelessAI(Colour.BLACK));
     }
 
     @Test
@@ -78,8 +78,8 @@ public class GameUnitTest {
         List<MoveAction> moves = grassHopper.generateValidMoves(new Coord(2, 0));
         String str = moves.stream().map(Object::toString).collect(Collectors.joining(", "));
         assertNotNull("moves should not be null", moves);
-        assertEquals("moves should be size of 1", 1, moves.size());
-        assertEquals("moves should be as expected", str, "TODO:replaceMe");
+        assertEquals("moves should be size of 2", 2, moves.size());
+        assertEquals("moves should be as expected", str, "action{GrassHopper(WHITE), Coord{2, 0}, Coord{2, -2}}, action{GrassHopper(WHITE), Coord{2, 0}, Coord{-4, 0}}");
     }
 
     @Test

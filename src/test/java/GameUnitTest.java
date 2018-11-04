@@ -20,7 +20,7 @@ public class GameUnitTest {
 
     private void setupUnit(GameUnit unit, Coord coord) {
         Action spawnUnit = new SpawnAction(unit, coord);
-        game.getBoard().applyAction(spawnUnit);
+        game.applyAction(spawnUnit);
     }
 
     private void allUnitsExceptQueenCanMove() {

@@ -1,5 +1,7 @@
 package Game;
 
+import Units.GameUnit;
+
 /**
  * Hive game.
  */
@@ -11,7 +13,7 @@ public interface Hive {
      * @param r R coordinate of hexagon to play to
      * @throws IllegalMove If the tile could not be played
      */
-    void play(Tile tile, int q, int r) throws IllegalMove;
+    void play(GameUnit unit, int q, int r) throws IllegalMove;
 
     /**
      * Move an existing tile.
@@ -49,11 +51,6 @@ public interface Hive {
         IllegalMove() { super(); }
         IllegalMove(String message) { super(message); }
     }
-
-    /**
-     * Types of tiles.
-     */
-    enum Tile { QUEEN_BEE, SPIDER, BEETLE, GRASSHOPPER, SOLDIER_ANT }
 
     /**
      * Players.

@@ -2,10 +2,7 @@
 import Actions.Action;
 import Actions.MoveAction;
 import Actions.SpawnAction;
-import Game.Coord;
-import Game.Hive;
-import Game.HiveGame;
-import Game.HiveGameFactory;
+import Game.*;
 import Player.CluelessAI;
 import Units.*;
 import org.junit.Before;
@@ -15,6 +12,7 @@ import Game.Hive.Colour;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
 public class GameUnitTest {
@@ -83,6 +81,18 @@ public class GameUnitTest {
         assertEquals("Spider should have correct toString format", new Spider(Colour.BLACK).toString(), correct);
         correct = "GrassHopper(BLACK)";
         assertEquals("GrassHopper should have correct toString format", new GrassHopper(Colour.BLACK).toString(), correct);
+    }
+
+    @Test
+    public void canMoveFromAtoBTest(){
+        GameBoard gb = HiveGameFactory.getNew().getBoard();
+        GameUnit a = new Beetle(Colour.BLACK);
+        gb.get(0,0).acceptUnit(a);
+        assertThat("Unit a can move one place", a.canMoveFromAToB(0,0,0,1), is(true));
+        gb.get(1,0).acceptUnit(new Beetle(Colour.WHITE));
+        assertThat("Unit a can move one place", a.canMoveFromAToB(0,0,0,1), is(true));
+        gb.get(-1,+1).acceptUnit(new Beetle(Colour.WHITE));
+        assertThat("Unit a can not move one place", a.canMoveFromAToB(0,0,0,1), is(false));
     }
 
 }

@@ -3,8 +3,11 @@ package Units;
 import Actions.MoveAction;
 import Game.Coord;
 import Game.Field;
+import Game.GameBoard;
 import Game.Hive.Colour;
+import Game.HiveGameFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class GameUnit {
@@ -14,6 +17,24 @@ public abstract class GameUnit {
 
     public abstract List<MoveAction> generateValidMoves(Coord fromCoord);
 
+    public boolean canMoveFromAToB(int fromQ, int fromR, int toQ, int toR) {
+        GameBoard gb = HiveGameFactory.getInstance().getBoard();
+        Field a = gb.get(fromQ, fromR);
+        Field b = gb.get(toQ, toR);
+        List<Field> aNeighbours = new ArrayList<>(gb.getNeighboursForField(a).values());
+        List<Field> bNeighbours = new ArrayList<>(gb.getNeighboursForField(b).values());
+        Field match_one = null;
+        Field match_two = null;
+        for(Field f : aNeighbours) {
+            if(bNeighbours.contains(f)) {
+                if(match_one == null)
+                    match_one = f;
+                else
+                    match_two = f;
+            }
+        }
+        return match_one.getUnits().size() == 0 || match_two.getUnits().size() == 0;
+    }
     @Override
     public boolean equals(Object obj) {
         if(!this.getClass().equals(obj.getClass()))

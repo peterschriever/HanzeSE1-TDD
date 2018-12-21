@@ -20,12 +20,19 @@ public class HiveWrapper {
     private final PlayLog playLog = new PlayLog();
     private Player turn = Hive.Player.WHITE;
 
+    private HashMap<Player, Boolean> queenPlayed = new HashMap<>();
+
     public HiveWrapper(Actor playerWhite, Actor playerBlack) {
         playerAIs.put(Hive.Player.WHITE, playerWhite);
         playerAIs.put(Hive.Player.BLACK, playerBlack);
+        queenPlayed.put(Hive.Player.WHITE, false);
+        queenPlayed.put(Hive.Player.BLACK, false);
     }
 
-    public HiveWrapper() {}
+    public HiveWrapper() {
+        queenPlayed.put(Hive.Player.WHITE, false);
+        queenPlayed.put(Hive.Player.BLACK, false);
+    }
 
     public void setPlayerAI(Player colour, Actor player) {
         playerAIs.put(colour, player);
@@ -138,5 +145,13 @@ public class HiveWrapper {
 
     public PlayLog getPlayLog() {
         return playLog;
+    }
+
+    public boolean isQueenPlayed(Player colour) {
+        return this.queenPlayed.get(colour);
+    }
+
+    public void setQueenPlayed(Player colour, boolean queenPlayed) {
+        this.queenPlayed.put(colour, queenPlayed);
     }
 }

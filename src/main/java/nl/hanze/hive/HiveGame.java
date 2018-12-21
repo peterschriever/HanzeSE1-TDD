@@ -50,6 +50,9 @@ public class HiveGame implements Hive {
 
         GameUnit unit = GameUnit.createUnitFromTile(tile, turn);
         wrapper.play(unit, q, r);
+        if(tile == Tile.QUEEN_BEE) {
+            wrapper.setQueenPlayed(turn, true);
+        }
     }
 
     /**
@@ -65,6 +68,10 @@ public class HiveGame implements Hive {
     public void move(int fromQ, int fromR, int toQ, int toR) throws IllegalMove {
         Player turn = wrapper.getTurn();
         Actor actor = wrapper.getPlayerAI(turn);
+
+        if(!wrapper.isQueenPlayed(turn)) {
+            throw new IllegalMove("You are not allowed to do that.");
+        }
 
         List<Action> validActions = ActionFactory.getMoveActions(actor);
         validActions = validActions.stream().parallel()

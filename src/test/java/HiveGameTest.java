@@ -53,15 +53,14 @@ public class HiveGameTest {
     public void moveShouldBePossible() throws Hive.IllegalMove {
         HiveGame game = new HiveGame();
         game.play(Hive.Tile.QUEEN_BEE, 0, 0); // white plays queen 0, 0
-        game.play(Hive.Tile.BEETLE, 1, 0); // black plays beetle 1, 0
+        game.play(Hive.Tile.QUEEN_BEE, 1, 0); // black plays queen 1, 0
         game.move(0, 0, 0, 1); // white moves queen 0, 0 -> 0, 1
-
         Hive.Tile actual = game.wrapper.getBoard().get(0, 1).getUnits().peek().getTile();
         assertEquals("Tiles should be the same", Hive.Tile.QUEEN_BEE, actual);
 
         game.move(1, 0, 1, 1);
         actual = game.wrapper.getBoard().get(1, 1).getUnits().peek().getTile();
-        assertEquals("Tiles should be the same", Hive.Tile.BEETLE, actual);
+        assertEquals("Tiles should be the same", Hive.Tile.QUEEN_BEE, actual);
     }
 
     // Requirement 5a

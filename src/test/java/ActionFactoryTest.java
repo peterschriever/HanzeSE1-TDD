@@ -79,6 +79,28 @@ public class ActionFactoryTest {
         }
     }
 
+//    @Test
+//    public void playerNeedsQueenBeforeMoving() {
+//        HiveWrapper game = HiveGameFactory.getNew();
+//        Actor white = new CluelessAI(Hive.Player.WHITE);
+//        Actor black = new CluelessAI(Hive.Player.BLACK);
+//        game.setPlayerAI(Hive.Player.WHITE, white);
+//        game.setPlayerAI(Hive.Player.BLACK, black);
+//
+//        List<Action> spawnActions = ActionFactory.getSpawnActions(white);
+//        game.applyAction(spawnActions.get(0)); // W Queen 0,0
+//        spawnActions = ActionFactory.getSpawnActions(black);
+//        game.applyAction(spawnActions.get(1)); // B Queen 0,-1
+//        spawnActions = ActionFactory.getSpawnActions(white);
+//        game.applyAction(spawnActions.get(4)); // W Ant 0,1
+//        spawnActions = ActionFactory.getSpawnActions(black);
+//        game.applyAction(spawnActions.get(1)); // B Ant -2,1
+//        List<Action> moveActions = ActionFactory.getMoveActions(black);
+//        System.out.println(moveActions);
+//    }
+
+
+
     // Requirement 6c
     @Test
     public void unitShouldStayWithHive() {

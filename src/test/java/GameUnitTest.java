@@ -4,6 +4,7 @@ import nl.hanze.hive.Actions.MoveAction;
 import nl.hanze.hive.Actions.SpawnAction;
 import nl.hanze.hive.Hive;
 import nl.hanze.hive.HiveWrapper;
+import nl.hanze.hive.Player.Actor;
 import nl.hanze.hive.Player.CluelessAI;
 import nl.hanze.hive.Game.*;
 import nl.hanze.hive.Hive.Player;
@@ -197,11 +198,13 @@ public class GameUnitTest {
     @Test
     public void onlyTopUnitCanMove() {
         GameBoard gb = HiveGameFactory.getNew().getBoard();
+        Actor black = new CluelessAI(Player.BLACK);
         gb.get(0, 0).acceptUnit(new QueenBee(Player.WHITE));
         gb.get(0, -1).acceptUnit(new QueenBee(Player.BLACK));
+        black.queenbee--;
         gb.get(0, -1).acceptUnit(new Beetle(Player.WHITE));
         gb.get(1, -2).acceptUnit(new Beetle(Player.BLACK));
-        List<Action> moves = ActionFactory.getMoveActions(new CluelessAI(Player.BLACK));
+        List<Action> moves = ActionFactory.getMoveActions(black);
         String valid = "[Move Beetle(BLACK), from: Coord{1, -2}, to: Coord{1, -1}}, Move Beetle(BLACK), from: Coord{1, -2}, to: Coord{0, -2}}, Move Beetle(BLACK), from: Coord{1, -2}, to: Coord{0, -1}}]";
         assertEquals("Black can only move its beetle to three tiles, 0|-2, 0|-1, 1|-1", valid, moves.toString());
     }

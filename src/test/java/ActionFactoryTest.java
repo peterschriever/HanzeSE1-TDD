@@ -7,6 +7,7 @@ import nl.hanze.hive.Game.Field;
 import nl.hanze.hive.Game.GameBoard;
 import nl.hanze.hive.Game.HiveGameFactory;
 import nl.hanze.hive.Hive;
+import nl.hanze.hive.HiveWrapper;
 import nl.hanze.hive.Player.Actor;
 import nl.hanze.hive.Player.CluelessAI;
 import nl.hanze.hive.Units.*;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class ActionFactoryTest {
     private Actor white;
@@ -40,6 +42,7 @@ public class ActionFactoryTest {
         assertEquals("Available fields should only contain 1,0 & 1,-1 & 0,1", available_fields, checked_fields);
     }
 
+    // Requirement 4b, 4c, 4d
     @Test
     public void testSpawnActions() {
         GameBoard board = HiveGameFactory.getNew().getBoard();
@@ -57,6 +60,25 @@ public class ActionFactoryTest {
         assertEquals("Available actions should equal test actions", test, checked_fields);
     }
 
+    // Requirement 4e
+    @Test
+    public void firstFourMovesShouldIncludeQueenBee() {
+        List<Action> spawns = ActionFactory.getSpawnActions(white);
+        HiveWrapper game = HiveGameFactory.getNew();
+        game.setPlayerAI(Hive.Player.WHITE, white);
+        game.setPlayerAI(Hive.Player.BLACK, black);
+        game.applyAction(spawns.get(1)); // Beetle
+        spawns = ActionFactory.getSpawnActions(white);
+        game.applyAction(spawns.get(2)); // Beetle 2
+        spawns = ActionFactory.getSpawnActions(white);
+        game.applyAction(spawns.get(1)); // SoldierAnt
+        spawns = ActionFactory.getSpawnActions(white);
+        // These should all be queen, since we played 3 tiles but no queen
+        for(Action a: spawns) {
+            assertEquals(a.getUnit().getTile(), new QueenBee(Hive.Player.WHITE).getTile());
+        }
+    }
+
     // Requirement 6c
     @Test
     public void unitShouldStayWithHive() {
@@ -65,8 +87,25 @@ public class ActionFactoryTest {
         board.get(0,-1).acceptUnit(new SoldierAnt(white.colour));
         board.get(1,-1).acceptUnit(new SoldierAnt(white.colour));
         board.get(1,0).acceptUnit(new SoldierAnt(white.colour));
-        board.get(-1,1).acceptUnit(new Spider(black.colour));
+        board.get(-1,1).acceptUnit(new Beetle(black.colour));
         List<Action> moves = ActionFactory.getMoveActions(black);
-        System.out.println(moves);
     }
+
+    // Requirement 4a
+    @Test
+    public void playerShouldHaveLimitedTiles() {
+        List<Action> spawns = ActionFactory.getSpawnActions(white);
+        // Move one is queenbee
+        HiveWrapper game = HiveGameFactory.getNew();
+        game.setPlayerAI(Hive.Player.WHITE, white);
+        game.setPlayerAI(Hive.Player.BLACK, black);
+
+        game.applyAction(spawns.get(0));
+        spawns = ActionFactory.getSpawnActions(white);
+        // Queenbee should be gone from our available moves
+        for(Action a: spawns) {
+            assertNotEquals(a.getUnit().getTile(), new QueenBee(Hive.Player.BLACK).getTile());
+        }
+    }
+
 }

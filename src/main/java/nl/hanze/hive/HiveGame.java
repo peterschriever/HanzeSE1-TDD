@@ -38,12 +38,14 @@ public class HiveGame implements Hive {
         List<Action> validActions = ActionFactory.getSpawnActions(actor);
         validActions = validActions.stream().parallel()
             .filter(a -> {
+                // only care about coords matching after the first turns
+                if (wrapper.getPlayLog().size() == 0) return a.getUnit().getTile().equals(tile);
+
                 return a.getUnit().getTile().equals(tile)
                     && ((SpawnAction) a).getSpawnCoord().q.equals(q)
                     && ((SpawnAction) a).getSpawnCoord().r.equals(r);
             })
             .collect(Collectors.toList());
-        System.out.println("filtered actions size: " + validActions.size());
         if (validActions.isEmpty()) throw new IllegalMove("You are not allowed to do that.");
 
         GameUnit unit = GameUnit.createUnitFromTile(tile, turn);
@@ -89,7 +91,7 @@ public class HiveGame implements Hive {
         Actor actor = wrapper.getPlayerAI(turn);
 
         List<Action> validActions = ActionFactory.generateValidActions(actor);
-        if (!validActions.isEmpty()) throw new IllegalMove("You are not allowed to do that.");
+        if (validActions.size() > 0) throw new IllegalMove("You are not allowed to do that.");
 
         wrapper.pass();
     }

@@ -9,7 +9,10 @@ import nl.hanze.hive.HiveWrapper;
 import nl.hanze.hive.Player.Actor;
 import nl.hanze.hive.Units.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 
 public class ActionFactory {
 
@@ -44,33 +47,49 @@ public class ActionFactory {
         return moveActions;
     }
 
+//    public static List<Action> getSpawnActions(Actor player) {
+//        HiveWrapper game = HiveGameFactory.getInstance();
+//        List<Action> actions = new LinkedList<>();
+//        Set<GameUnit> units = new HashSet<GameUnit>() {{
+//            add(new Beetle(player.colour));
+//            add(new GrassHopper(player.colour));
+//            add(new QueenBee(player.colour));
+//            add(new SoldierAnt(player.colour));
+//            add(new Spider(player.colour));
+//        }};
+//
+//        if (!player.hasSpawnablesLeft()) return actions;
+//        List<Field> unitFields = game.getBoard().getFieldsWithUnits();
+//        if (unitFields.isEmpty()) {
+//
+//        }
+//
+//    }
+
     public static List<Action> getSpawnActions(Actor player) {
         HiveWrapper game = HiveGameFactory.getInstance();
         ArrayList<Field> unit_fields = game.getBoard().getFieldsWithUnits();
         List<Action> actions = new LinkedList<>();
-        boolean are_we_represented = false;
+        boolean are_we_represented = false; // units of current player exist on board?
         for(Field f: unit_fields) {
-            if(f.getUnits().peek() != null) {
-                if(f.getUnits().peek().getColour() == player.colour) {
-                    are_we_represented = true;
-                }
+            if(f.getUnits().peek().getColour().equals(player.colour)) {
+                are_we_represented = true;
             }
         }
         if (unit_fields.isEmpty() || !are_we_represented) {
-            int[] coord = new int[2];
+            HashMap<Coord, Field> fields = new HashMap<>();
             if(unit_fields.isEmpty()) {
-                coord[0] = 0;
-                coord[1] = 0;
+                fields.put(new Coord(0,0), new Field(0, 0));
             } else {
-                coord[0] = 0;
-                coord[1] = -1;
+                fields = game.getBoard().getNeighboursForField(unit_fields.get(0));
             }
-            // Spawn action on 0,0
-            actions.add(new SpawnAction(new QueenBee(player.colour), new Coord(coord[0], coord[1])));
-            actions.add(new SpawnAction(new Beetle(player.colour), new Coord(coord[0], coord[1])));
-            actions.add(new SpawnAction(new GrassHopper(player.colour), new Coord(coord[0], coord[1])));
-            actions.add(new SpawnAction(new SoldierAnt(player.colour), new Coord(coord[0], coord[1])));
-            actions.add(new SpawnAction(new Spider(player.colour), new Coord(coord[0], coord[1])));
+            for(Field f: fields.values()) {
+                actions.add(new SpawnAction(new QueenBee(player.colour), new Coord(f.getQ(), f.getR())));
+                actions.add(new SpawnAction(new Beetle(player.colour), new Coord(f.getQ(), f.getR())));
+                actions.add(new SpawnAction(new GrassHopper(player.colour), new Coord(f.getQ(), f.getR())));
+                actions.add(new SpawnAction(new SoldierAnt(player.colour), new Coord(f.getQ(), f.getR())));
+                actions.add(new SpawnAction(new Spider(player.colour), new Coord(f.getQ(), f.getR())));
+            }
         } else {
             ArrayList<Field> available_fields = ActionFactory.getSpawnFields(player);
             if (ActionFactory.shouldPlayQueen(player)) {

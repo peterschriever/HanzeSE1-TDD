@@ -73,7 +73,7 @@ public class GameUnitTest {
         assertEquals("QueenBee colour should be black", qb.getColour(), Player.BLACK);
     }
 
-    // Requirement 2e, 7a
+    // Requirement 2e, 5e, 7a
     @Test
     public void beetleShouldGenerateValidMoves() {
         setupGame();
@@ -87,7 +87,8 @@ public class GameUnitTest {
         assertEquals("moves should be as expected", str, "Move Beetle(WHITE), from: Coord{1, 0}, to: Coord{2, -1}}, Move Beetle(WHITE), from: Coord{1, 0}, to: Coord{1, -1}}, Move Beetle(WHITE), from: Coord{1, 0}, to: Coord{2, 0}}, Move Beetle(WHITE), from: Coord{1, 0}, to: Coord{0, 0}}, Move Beetle(WHITE), from: Coord{1, 0}, to: Coord{0, 1}}");
     }
 
-    // Requirement 2e
+    // Requirement 2e, 5e, 11a, 11b, 11c, 11d, 11e
+    // All requirements are met in generateValidMoves()
     @Test
     public void grassHopperShouldGenerateValidMoves() {
         allUnitsExceptQueenCanMove(); // sets up the board with specific units placed down
@@ -100,7 +101,8 @@ public class GameUnitTest {
         assertEquals("moves should be as expected", str, "Move GrassHopper(WHITE), from: Coord{2, 0}, to: Coord{2, -2}}, Move GrassHopper(WHITE), from: Coord{2, 0}, to: Coord{-4, 0}}");
     }
 
-    // Requirement 2e
+    // Requirement 2e, 5e, 8a, 8b
+    // All requirements are met in generateValidMoves()
     @Test
     public void queenShouldGenerateValidMoves() {
         queenCanMove(); // sets up the board with specific units placed down
@@ -113,7 +115,8 @@ public class GameUnitTest {
         assertEquals("moves should be as expected", str, "Move QueenBee(WHITE), from: Coord{1, 0}, to: Coord{1, -1}}, Move QueenBee(WHITE), from: Coord{1, 0}, to: Coord{0, 1}}");
     }
 
-    // Requirement 2e
+    // Requirement 2e, 5e, 9a, 9b, 9c
+    // All requirements are met in generateValidMoves()
     @Test
     public void antShouldGenerateValidMoves() {
         setupGame();
@@ -127,7 +130,8 @@ public class GameUnitTest {
         assertEquals("moves should be as expected", str, "Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{1, 1}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{2, 1}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{3, 0}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{3, -1}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{3, -2}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{2, -2}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{1, -2}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{0, -2}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{0, -1}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{-1, -2}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{-2, -2}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{-3, -1}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{-4, 0}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{-4, 1}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{-3, 1}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{-2, 1}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{-1, 1}}");
     }
 
-    // Requirement 2e
+    // Requirement 2e, 5e, 10a, 10b, 10c, 10d
+    // All requirements are met in generateValidMoves()
     @Test
     public void spiderShouldGenerateValidMoves() {
         setupGame();
@@ -136,7 +140,6 @@ public class GameUnitTest {
         GameUnit spider = game.getBoard().get(1, -1).getUnits().peek();
         List<MoveAction> moves = spider.generateValidMoves(new Coord(1, -1));
         String str = moves.stream().map(Object::toString).collect(Collectors.joining(", "));
-        System.out.println(str);
         assertNotNull("moves should not be null", moves);
         assertEquals("moves should be size of X", 2, moves.size());
         assertEquals("moves should be as expected", "Move Spider(WHITE), from: Coord{1, -1}, to: Coord{3, -1}}, Move Spider(WHITE), from: Coord{1, -1}, to: Coord{-1, -2}}", str);
@@ -177,6 +180,17 @@ public class GameUnitTest {
         assertThat("Unit a can move one place", a.canMoveFromAToB(0, 0, 0, 1), is(true));
         gb.get(-1, +1).acceptUnit(new Beetle(Player.WHITE));
         assertThat("Unit a can not move one place", a.canMoveFromAToB(0, 0, 0, 1), is(false));
+    }
+
+    // Requirement 6b
+    @Test
+    public void unitCanGetBlocked() {
+        GameBoard gb = HiveGameFactory.getNew().getBoard();
+        GameUnit movable = new QueenBee(Player.WHITE);
+        gb.get(0, 0).acceptUnit(movable);
+        gb.get(0, -1).acceptUnit(new QueenBee(Player.BLACK));
+        gb.get(1, 0).acceptUnit(new Beetle(Player.BLACK));
+        assertFalse("Queen should not be able to move between Queen and Beetle", movable.canMoveFromAToB(0,0,1,-1));
     }
 
     // Requirement 2f, 7a

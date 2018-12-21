@@ -2,6 +2,7 @@ package nl.hanze.hive;
 
 import nl.hanze.hive.Actions.MoveAction;
 import nl.hanze.hive.Actions.SpawnAction;
+import nl.hanze.hive.Game.Coord;
 import nl.hanze.hive.Hive.Player;
 import nl.hanze.hive.Player.Actor;
 import nl.hanze.hive.Actions.Action;
@@ -54,15 +55,25 @@ public class HiveWrapper {
     public void play(GameUnit unit, int q, int r) {
         Field field = this.board.get(q, r);
         field.acceptUnit(unit);
+        playLog.writeLog(new SpawnAction(unit, new Coord(q, r)));
+        turn = turn == Player.WHITE ? Player.BLACK : Player.WHITE;
     }
 
     public void move(int fromQ, int fromR, int toQ, int toR) {
         GameUnit u = board.get(fromQ, fromR).getUnits().pop();
-        board.get(toQ, toR).getUnits().push(u);
+        board.get(toQ, toR).acceptUnit(u);
+        playLog.writeLog(new MoveAction(u, new Coord(fromQ, fromR), new Coord(toQ, toR)));
+        turn = turn == Player.WHITE ? Player.BLACK : Player.WHITE;
     }
 
     public void pass() {
-        System.out.println("Actor had to pass!");
+        playLog.writeLog(new Action() {
+            @Override
+            public GameUnit getUnit() {
+                return null;
+            }
+        });
+        turn = turn == Player.WHITE ? Player.BLACK : Player.WHITE;
     }
 
     public boolean isWinner(Hive.Player colour) {
@@ -106,17 +117,17 @@ public class HiveWrapper {
     public void playTurn() {
         Actor player;
         if (turn == Hive.Player.WHITE) {
-            turn = Player.BLACK; // turn changes prematurely
+//            turn = Player.BLACK; // turn changes prematurely
             player = playerAIs.get(Hive.Player.WHITE);
         } else {
-            turn = Player.WHITE; // turn changes prematurely
+//            turn = Player.WHITE; // turn changes prematurely
             player = playerAIs.get(Hive.Player.BLACK);
         }
         Action action = player.chooseAction();
         if(action == null){
             pass();
         } else {
-            playLog.writeLog(action);
+//            playLog.writeLog(action);
             applyAction(action);
         }
     }

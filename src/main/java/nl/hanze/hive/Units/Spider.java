@@ -41,7 +41,6 @@ public class Spider extends GameUnit {
                     starting_points.add(test);
             }
         }
-        System.out.println(starting_points.size());
         for(Field start_point: starting_points) {
             List<Field> path = new ArrayList<>();
             ArrayList<Field> visited = new ArrayList<>();

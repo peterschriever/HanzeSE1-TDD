@@ -12,9 +12,6 @@ import java.util.HashMap;
 
 import static java.lang.Thread.sleep;
 
-/**
- * @deprecated
- */
 public class App {
     public final static Actor white = new Human(Hive.Player.WHITE);
     public final static Actor black = new CluelessAI(Hive.Player.BLACK);

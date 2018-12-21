@@ -10,6 +10,8 @@ import nl.hanze.hive.Units.QueenBee;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
@@ -35,7 +37,7 @@ public class HiveWrapperTest {
         assertThat("Player AI for black should be playerBlack", game.getPlayerAI(Hive.Player.BLACK), is(playerBlack));
     }
 
-    // Requirement 3a
+    // Requirement 3a, 3b
     @Test
     public void gameShouldKeepTrackOfTurn() {
         assertThat("White should start", game.getTurn(), is(Hive.Player.WHITE));
@@ -65,9 +67,7 @@ public class HiveWrapperTest {
 
         assertThat("Black should be next", game.getTurn(), is(Player.BLACK));
         assertThat("playLog should have 1 entry", game.getPlayLog().size(), is(1));
-        Field fieldWithUnit = new Field(0,0);
-        fieldWithUnit.acceptUnit(new QueenBee(Hive.Player.WHITE)); // Random move
-        assertEquals("Board root field should be the same", game.getBoard().get(0,0).getUnits().size(), fieldWithUnit.getUnits().size());
+        assertEquals("Size of fields with tiles should be 1", 1, game.getBoard().getFieldsWithUnits().size());
     }
 
     @Test
@@ -80,6 +80,7 @@ public class HiveWrapperTest {
         assertThat("Surrounding unit count of 0,0 should be 3", g.getCountOfSurroundingUnits(0, 0), is(3));
     }
 
+    // Requirement 3c, 3d
     @Test
     public void gameShouldDetermineWinners() {
         HiveWrapper g = HiveGameFactory.getShadow();

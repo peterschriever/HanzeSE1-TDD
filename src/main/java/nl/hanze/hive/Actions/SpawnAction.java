@@ -1,7 +1,7 @@
-package Actions;
+package nl.hanze.hive.Actions;
 
-import Game.Coord;
-import Units.GameUnit;
+import nl.hanze.hive.Game.Coord;
+import nl.hanze.hive.Units.GameUnit;
 
 public class SpawnAction extends Action {
     private Coord spawnCoord;

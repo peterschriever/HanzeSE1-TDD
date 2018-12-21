@@ -1,6 +1,6 @@
-package Actions;
+package nl.hanze.hive.Actions;
 
-import Units.GameUnit;
+import nl.hanze.hive.Units.GameUnit;
 
 public abstract class Action {
     protected GameUnit unit;

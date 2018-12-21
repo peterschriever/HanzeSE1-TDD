@@ -1,7 +1,7 @@
-package Player;
+package nl.hanze.hive.Player;
 
-import Actions.Action;
-import Game.Hive;
+import nl.hanze.hive.Actions.Action;
+import nl.hanze.hive.Hive;
 
 public abstract class Actor {
     public int queenbee = 1;

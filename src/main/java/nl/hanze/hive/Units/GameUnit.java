@@ -1,13 +1,26 @@
-package Units;
+package nl.hanze.hive.Units;
 
-import Actions.MoveAction;
-import Game.*;
+import nl.hanze.hive.Actions.MoveAction;
+import nl.hanze.hive.Game.Coord;
+import nl.hanze.hive.Game.Field;
+import nl.hanze.hive.Game.GameBoard;
+import nl.hanze.hive.Game.HiveGameFactory;
+import nl.hanze.hive.Hive;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class GameUnit {
     protected Field field;
+
+    public static GameUnit createUnitFromTile(Hive.Tile tile, Hive.Player colour) {
+        if(tile == Hive.Tile.BEETLE) return new Beetle(colour);
+        if(tile == Hive.Tile.GRASSHOPPER) return new GrassHopper(colour);
+        if(tile == Hive.Tile.QUEEN_BEE) return new QueenBee(colour);
+        if(tile == Hive.Tile.SOLDIER_ANT) return new SoldierAnt(colour);
+        if(tile == Hive.Tile.SPIDER) return new Spider(colour);
+        return null;
+    }
 
     public abstract Hive.Player getColour();
 
@@ -60,12 +73,10 @@ public abstract class GameUnit {
     }
 
     protected boolean canFloat(GameBoard gb) {
-        if (!gb.isSwarmWithout(this)) {
-            return false; // return empty, because moving would break the swarm
-        } else {
-            return true;
-        }
+        return gb.isSwarmWithout(this);
     }
+
+    public abstract Hive.Tile getTile();
 
     @Override
     public abstract String toString();

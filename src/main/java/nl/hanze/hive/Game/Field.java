@@ -1,6 +1,7 @@
-package Game;
+package nl.hanze.hive.Game;
 
-import Units.GameUnit;
+import nl.hanze.hive.Hive;
+import nl.hanze.hive.Units.GameUnit;
 
 import java.util.Stack;
 import java.util.stream.Collectors;

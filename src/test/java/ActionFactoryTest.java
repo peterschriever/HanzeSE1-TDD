@@ -1,11 +1,15 @@
-import Actions.Action;
-import Actions.ActionFactory;
-import Actions.SpawnAction;
-import Game.*;
-import Player.Actor;
-import Player.CluelessAI;
 
-import Units.*;
+import nl.hanze.hive.Actions.Action;
+import nl.hanze.hive.Actions.ActionFactory;
+import nl.hanze.hive.Actions.SpawnAction;
+import nl.hanze.hive.Game.Coord;
+import nl.hanze.hive.Game.Field;
+import nl.hanze.hive.Game.GameBoard;
+import nl.hanze.hive.Game.HiveGameFactory;
+import nl.hanze.hive.Hive;
+import nl.hanze.hive.Player.Actor;
+import nl.hanze.hive.Player.CluelessAI;
+import nl.hanze.hive.Units.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -51,5 +55,18 @@ public class ActionFactoryTest {
         test.add(new SpawnAction(new Spider(white.colour), new Coord(0, 1)));
         test.add(new SpawnAction(new GrassHopper(white.colour), new Coord(0, 1)));
         assertEquals("Available actions should equal test actions", test, checked_fields);
+    }
+
+    // Requirement 6c
+    @Test
+    public void unitShouldStayWithHive() {
+        GameBoard board = HiveGameFactory.getNew().getBoard();
+        board.get(-1,0).acceptUnit(new SoldierAnt(white.colour));
+        board.get(0,-1).acceptUnit(new SoldierAnt(white.colour));
+        board.get(1,-1).acceptUnit(new SoldierAnt(white.colour));
+        board.get(1,0).acceptUnit(new SoldierAnt(white.colour));
+        board.get(-1,1).acceptUnit(new Spider(black.colour));
+        List<Action> moves = ActionFactory.getMoveActions(black);
+        System.out.println(moves);
     }
 }

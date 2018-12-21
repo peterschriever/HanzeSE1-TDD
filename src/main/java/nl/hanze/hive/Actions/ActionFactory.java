@@ -1,8 +1,13 @@
-package Actions;
+package nl.hanze.hive.Actions;
 
-import Game.*;
-import Player.Actor;
-import Units.*;
+import nl.hanze.hive.Game.Coord;
+import nl.hanze.hive.Game.Field;
+import nl.hanze.hive.Game.GameBoard;
+import nl.hanze.hive.Game.HiveGameFactory;
+import nl.hanze.hive.Hive;
+import nl.hanze.hive.HiveWrapper;
+import nl.hanze.hive.Player.Actor;
+import nl.hanze.hive.Units.*;
 
 import java.util.*;
 
@@ -126,9 +131,7 @@ public class ActionFactory {
 
     private static boolean shouldPlayQueen(Actor player) {
         if (player.queenbee + player.ant + player.beetle + player.grasshopper + player.spider <= 11 - 3) {
-            if (player.queenbee > 0) {
-                return true;
-            }
+            return player.queenbee > 0;
         }
         return false;
     }

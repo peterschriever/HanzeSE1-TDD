@@ -1,17 +1,20 @@
-import Game.Field;
-import Game.Hive;
-import Game.HiveWrapper;
-import Game.HiveGameFactory;
-import Player.CluelessAI;
-import Player.Human;
-import Player.Actor;
-import Units.GameUnit;
+package nl.hanze.hive;
+
+import nl.hanze.hive.Game.Field;
+import nl.hanze.hive.Game.HiveGameFactory;
+import nl.hanze.hive.Player.Actor;
+import nl.hanze.hive.Player.CluelessAI;
+import nl.hanze.hive.Player.Human;
+import nl.hanze.hive.Units.GameUnit;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import static java.lang.Thread.sleep;
 
+/**
+ * @deprecated
+ */
 public class App {
     public final static Actor white = new Human(Hive.Player.WHITE);
     public final static Actor black = new CluelessAI(Hive.Player.BLACK);
@@ -103,7 +106,7 @@ public class App {
         System.out.println(output);
     }
 
-    String getGreeting() {
+    public String getGreeting() {
         return "Hello world.";
     }
 

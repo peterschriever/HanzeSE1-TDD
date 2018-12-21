@@ -1,12 +1,17 @@
-package Units;
+package nl.hanze.hive.Units;
 
-import Actions.MoveAction;
-import Game.*;
+import nl.hanze.hive.Actions.MoveAction;
+import nl.hanze.hive.Game.Coord;
+import nl.hanze.hive.Game.Field;
+import nl.hanze.hive.Game.GameBoard;
+import nl.hanze.hive.Game.HiveGameFactory;
+import nl.hanze.hive.Hive;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Spider extends GameUnit {
+    private final static Hive.Tile tile = Hive.Tile.SPIDER;
     private Hive.Player colour;
 
     public Spider(Hive.Player colour) {
@@ -47,6 +52,11 @@ public class Spider extends GameUnit {
             }
         }
         return moves;
+    }
+
+    @Override
+    public Hive.Tile getTile() {
+        return tile;
     }
 
     private MoveAction checkNeighboursForValidMoves(Field fromField, ArrayList<Field> visited, List<Field> path, Coord original) {

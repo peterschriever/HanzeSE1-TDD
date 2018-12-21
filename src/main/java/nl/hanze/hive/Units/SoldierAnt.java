@@ -1,11 +1,13 @@
-package Units;
+package nl.hanze.hive.Units;
 
-import Actions.MoveAction;
-import Game.*;
+import nl.hanze.hive.Actions.MoveAction;
+import nl.hanze.hive.Game.*;
+import nl.hanze.hive.Hive;
 
 import java.util.*;
 
 public class SoldierAnt extends GameUnit {
+    private final static Hive.Tile tile = Hive.Tile.SOLDIER_ANT;
     private Hive.Player colour;
 
     public SoldierAnt(Hive.Player colour) {
@@ -29,6 +31,11 @@ public class SoldierAnt extends GameUnit {
         ArrayList<Field> visited = new ArrayList<>();
         Field fromField = gb.get(fromCoord.q, fromCoord.r);
         return checkNeighboursForValidMoves(fromField, fromField, visited, moves);
+    }
+
+    @Override
+    public Hive.Tile getTile() {
+        return tile;
     }
 
     private ArrayList<MoveAction> checkNeighboursForValidMoves(Field fromField, Field check, ArrayList<Field> visited, ArrayList<MoveAction> moves) {

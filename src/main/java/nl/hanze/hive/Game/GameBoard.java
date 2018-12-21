@@ -1,8 +1,6 @@
-package Game;
+package nl.hanze.hive.Game;
 
-import Actions.Action;
-import Actions.SpawnAction;
-import Units.GameUnit;
+import nl.hanze.hive.Units.GameUnit;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,6 +1,6 @@
-package Game;
+package nl.hanze.hive.Game;
 
-import Actions.Action;
+import nl.hanze.hive.Actions.Action;
 
 import java.util.Stack;
 

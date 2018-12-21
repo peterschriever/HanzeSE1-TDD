@@ -1,10 +1,10 @@
-import Game.Coord;
-import Game.Field;
-import Game.GameBoard;
-import Game.Hive;
-import Units.Beetle;
-import Units.GrassHopper;
-import Units.QueenBee;
+import nl.hanze.hive.Game.Coord;
+import nl.hanze.hive.Game.Field;
+import nl.hanze.hive.Game.GameBoard;
+import nl.hanze.hive.Hive;
+import nl.hanze.hive.Units.Beetle;
+import nl.hanze.hive.Units.GrassHopper;
+import nl.hanze.hive.Units.QueenBee;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -12,6 +12,8 @@ import java.util.HashMap;
 import static org.junit.Assert.*;
 
 public class GameBoardTest {
+
+    // Requirement 2a
     @Test
     public void boardShouldAddFields() {
         GameBoard gb = new GameBoard();
@@ -36,6 +38,14 @@ public class GameBoardTest {
         assertEquals("Neighbour2 should equal neighbours.get(0, 1)", neighbour2, neighbours.get(new Coord(0, 1)));
     }
 
+    // Requirement 2b
+    @Test
+    public void fieldHasSixNeighbours() {
+        GameBoard gb = new GameBoard();
+        HashMap<Coord, Field> neighbours = gb.getNeighboursForField(0, 0);
+        assertEquals("Any field should have 6 neighbours", neighbours.size(), 6);
+    }
+
     @Test
     public void playerShouldMakeFirstMove() {
         GameBoard gb = new GameBoard();
@@ -47,6 +57,8 @@ public class GameBoardTest {
         gb.get(1,1).acceptUnit(new GrassHopper(Hive.Player.WHITE));
         assertTrue("Hive should be a swarm", gb.isSwarm());
     }
+
+    // Requirement 2c
     @Test
     public void boardShouldReturnOccupiedFields() {
         GameBoard gb = new GameBoard();

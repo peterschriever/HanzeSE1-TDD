@@ -1,8 +1,8 @@
-import Game.Field;
-import Units.GameUnit;
-import Game.Hive;
-import Units.GrassHopper;
-import Units.QueenBee;
+import nl.hanze.hive.Game.Field;
+import nl.hanze.hive.Units.GameUnit;
+import nl.hanze.hive.Hive;
+import nl.hanze.hive.Units.GrassHopper;
+import nl.hanze.hive.Units.QueenBee;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.*;

@@ -1,11 +1,14 @@
-package Game;
+package nl.hanze.hive;
 
-import Actions.MoveAction;
-import Actions.SpawnAction;
-import Game.Hive.Player;
-import Player.Actor;
-import Actions.Action;
-import Units.*;
+import nl.hanze.hive.Actions.MoveAction;
+import nl.hanze.hive.Actions.SpawnAction;
+import nl.hanze.hive.Hive.Player;
+import nl.hanze.hive.Player.Actor;
+import nl.hanze.hive.Actions.Action;
+import nl.hanze.hive.Units.*;
+import nl.hanze.hive.Game.Field;
+import nl.hanze.hive.Game.GameBoard;
+import nl.hanze.hive.Game.PlayLog;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,8 +1,8 @@
-package Player;
+package nl.hanze.hive.Player;
 
-import Actions.Action;
-import Actions.ActionFactory;
-import Game.Hive;
+import nl.hanze.hive.Actions.Action;
+import nl.hanze.hive.Actions.ActionFactory;
+import nl.hanze.hive.Hive;
 
 import java.util.List;
 import java.util.Random;

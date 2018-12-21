@@ -1,13 +1,16 @@
+import nl.hanze.hive.Actions.Action;
+import nl.hanze.hive.Actions.ActionFactory;
+import nl.hanze.hive.Actions.MoveAction;
+import nl.hanze.hive.Actions.SpawnAction;
+import nl.hanze.hive.Hive;
+import nl.hanze.hive.HiveWrapper;
+import nl.hanze.hive.Player.CluelessAI;
+import nl.hanze.hive.Game.*;
+import nl.hanze.hive.Hive.Player;
+import nl.hanze.hive.Units.*;
 
-import Actions.Action;
-import Actions.MoveAction;
-import Actions.SpawnAction;
-import Game.*;
-import Player.CluelessAI;
-import Units.*;
 import org.junit.Before;
 import org.junit.Test;
-import Game.Hive.Player;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,6 +28,19 @@ public class GameUnitTest {
         game.setPlayerAI(Hive.Player.BLACK, new CluelessAI(Player.BLACK));
     }
 
+    // Requirement 1b
+    private void unitsHaveAnImage() {
+        GameUnit qb = new QueenBee(Player.WHITE);
+        GameUnit sa = new SoldierAnt(Player.WHITE);
+        GameUnit gh = new GrassHopper(Player.WHITE);
+        GameUnit sp = new Spider(Player.WHITE);
+        GameUnit be = new Beetle(Player.WHITE);
+        assertEquals(qb.getCharacter(), 'Q');
+        assertEquals(sa.getCharacter(), 'A');
+        assertEquals(gh.getCharacter(), 'G');
+        assertEquals(sp.getCharacter(), 'S');
+        assertEquals(be.getCharacter(), 'B');
+    }
     private void setupUnit(GameUnit unit, Coord coord) {
         Action spawnUnit = new SpawnAction(unit, coord);
         game.applyAction(spawnUnit);
@@ -57,6 +73,7 @@ public class GameUnitTest {
         assertEquals("QueenBee colour should be black", qb.getColour(), Player.BLACK);
     }
 
+    // Requirement 2e, 7a
     @Test
     public void beetleShouldGenerateValidMoves() {
         setupGame();
@@ -70,6 +87,7 @@ public class GameUnitTest {
         assertEquals("moves should be as expected", str, "Move Beetle(WHITE), from: Coord{1, 0}, to: Coord{2, -1}}, Move Beetle(WHITE), from: Coord{1, 0}, to: Coord{1, -1}}, Move Beetle(WHITE), from: Coord{1, 0}, to: Coord{2, 0}}, Move Beetle(WHITE), from: Coord{1, 0}, to: Coord{0, 0}}, Move Beetle(WHITE), from: Coord{1, 0}, to: Coord{0, 1}}");
     }
 
+    // Requirement 2e
     @Test
     public void grassHopperShouldGenerateValidMoves() {
         allUnitsExceptQueenCanMove(); // sets up the board with specific units placed down
@@ -82,6 +100,7 @@ public class GameUnitTest {
         assertEquals("moves should be as expected", str, "Move GrassHopper(WHITE), from: Coord{2, 0}, to: Coord{2, -2}}, Move GrassHopper(WHITE), from: Coord{2, 0}, to: Coord{-4, 0}}");
     }
 
+    // Requirement 2e
     @Test
     public void queenShouldGenerateValidMoves() {
         queenCanMove(); // sets up the board with specific units placed down
@@ -94,6 +113,7 @@ public class GameUnitTest {
         assertEquals("moves should be as expected", str, "Move QueenBee(WHITE), from: Coord{1, 0}, to: Coord{1, -1}}, Move QueenBee(WHITE), from: Coord{1, 0}, to: Coord{0, 1}}");
     }
 
+    // Requirement 2e
     @Test
     public void antShouldGenerateValidMoves() {
         setupGame();
@@ -106,6 +126,8 @@ public class GameUnitTest {
         assertEquals("moves should be size of X", 17, moves.size());
         assertEquals("moves should be as expected", str, "Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{1, 1}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{2, 1}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{3, 0}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{3, -1}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{3, -2}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{2, -2}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{1, -2}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{0, -2}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{0, -1}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{-1, -2}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{-2, -2}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{-3, -1}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{-4, 0}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{-4, 1}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{-3, 1}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{-2, 1}}, Move SoldierAnt(WHITE), from: Coord{0, 1}, to: Coord{-1, 1}}");
     }
+
+    // Requirement 2e
     @Test
     public void spiderShouldGenerateValidMoves() {
         setupGame();
@@ -155,6 +177,19 @@ public class GameUnitTest {
         assertThat("Unit a can move one place", a.canMoveFromAToB(0, 0, 0, 1), is(true));
         gb.get(-1, +1).acceptUnit(new Beetle(Player.WHITE));
         assertThat("Unit a can not move one place", a.canMoveFromAToB(0, 0, 0, 1), is(false));
+    }
+
+    // Requirement 2f, 7a
+    @Test
+    public void onlyTopUnitCanMove() {
+        GameBoard gb = HiveGameFactory.getNew().getBoard();
+        gb.get(0, 0).acceptUnit(new QueenBee(Player.WHITE));
+        gb.get(0, -1).acceptUnit(new QueenBee(Player.BLACK));
+        gb.get(0, -1).acceptUnit(new Beetle(Player.WHITE));
+        gb.get(1, -2).acceptUnit(new Beetle(Player.BLACK));
+        List<Action> moves = ActionFactory.getMoveActions(new CluelessAI(Player.BLACK));
+        String valid = "[Move Beetle(BLACK), from: Coord{1, -2}, to: Coord{1, -1}}, Move Beetle(BLACK), from: Coord{1, -2}, to: Coord{0, -2}}, Move Beetle(BLACK), from: Coord{1, -2}, to: Coord{0, -1}}]";
+        assertEquals("Black can only move its beetle to three tiles, 0|-2, 0|-1, 1|-1", valid, moves.toString());
     }
 
 }

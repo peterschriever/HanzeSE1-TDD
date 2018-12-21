@@ -1,13 +1,15 @@
-package Units;
+package nl.hanze.hive.Units;
 
-import Actions.MoveAction;
-import Game.*;
+import nl.hanze.hive.Actions.MoveAction;
+import nl.hanze.hive.Game.*;
+import nl.hanze.hive.Hive;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 public class QueenBee extends GameUnit {
+    private final static Hive.Tile tile = Hive.Tile.QUEEN_BEE;
     private Hive.Player colour;
 
     public QueenBee(Hive.Player colour) {
@@ -17,6 +19,11 @@ public class QueenBee extends GameUnit {
     @Override
     public boolean equals(Object o) {
         return o.getClass() == this.getClass();
+    }
+
+    @Override
+    public Hive.Tile getTile() {
+        return tile;
     }
 
     @Override

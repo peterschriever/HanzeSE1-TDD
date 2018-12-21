@@ -1,13 +1,18 @@
-package Units;
+package nl.hanze.hive.Units;
 
-import Actions.MoveAction;
-import Game.*;
+import nl.hanze.hive.Actions.MoveAction;
+import nl.hanze.hive.Game.Coord;
+import nl.hanze.hive.Game.Field;
+import nl.hanze.hive.Game.GameBoard;
+import nl.hanze.hive.Game.HiveGameFactory;
+import nl.hanze.hive.Hive;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 public class Beetle extends GameUnit {
+    private final static Hive.Tile tile = Hive.Tile.BEETLE;
     private Hive.Player colour;
 
     public Beetle(Hive.Player colour) {
@@ -30,6 +35,11 @@ public class Beetle extends GameUnit {
         if (!this.canFloat(gb)) return null;
         // find valid fields to move to
         return checkNeighboursForValidMoves(fromCoord, gb);
+    }
+
+    @Override
+    public Hive.Tile getTile() {
+        return tile;
     }
 
     private List<MoveAction> checkNeighboursForValidMoves(Coord fromCoord, GameBoard gb) {

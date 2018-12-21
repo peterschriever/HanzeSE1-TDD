@@ -1,9 +1,9 @@
-import Actions.Action;
-import Actions.MoveAction;
-import Actions.SpawnAction;
-import Game.Hive;
-import Game.Coord;
-import Units.*;
+import nl.hanze.hive.Actions.Action;
+import nl.hanze.hive.Actions.MoveAction;
+import nl.hanze.hive.Actions.SpawnAction;
+import nl.hanze.hive.Hive;
+import nl.hanze.hive.Game.Coord;
+import nl.hanze.hive.Units.*;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

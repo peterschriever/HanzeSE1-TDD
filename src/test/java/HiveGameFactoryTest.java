@@ -1,5 +1,5 @@
-import Game.HiveWrapper;
-import Game.HiveGameFactory;
+import nl.hanze.hive.HiveWrapper;
+import nl.hanze.hive.Game.HiveGameFactory;
 import org.junit.Test;
 
 import static org.junit.Assert.assertNotSame;

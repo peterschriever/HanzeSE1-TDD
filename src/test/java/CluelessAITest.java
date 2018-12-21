@@ -1,9 +1,9 @@
-import Player.Actor;
-import Player.CluelessAI;
-import Actions.Action;
-import Actions.ActionFactory;
-import Game.Hive;
-import Game.HiveWrapper;
+import nl.hanze.hive.Player.Actor;
+import nl.hanze.hive.Player.CluelessAI;
+import nl.hanze.hive.Actions.Action;
+import nl.hanze.hive.Actions.ActionFactory;
+import nl.hanze.hive.Hive;
+import nl.hanze.hive.HiveWrapper;
 import org.junit.Before;
 import org.junit.Test;
 

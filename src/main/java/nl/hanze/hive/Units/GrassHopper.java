@@ -1,13 +1,18 @@
-package Units;
+package nl.hanze.hive.Units;
 
-import Actions.MoveAction;
-import Game.*;
+import nl.hanze.hive.Actions.MoveAction;
+import nl.hanze.hive.Game.Coord;
+import nl.hanze.hive.Game.Field;
+import nl.hanze.hive.Game.GameBoard;
+import nl.hanze.hive.Game.HiveGameFactory;
+import nl.hanze.hive.Hive;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 public class GrassHopper extends GameUnit {
+    private final static Hive.Tile tile = Hive.Tile.GRASSHOPPER;
     private Hive.Player colour;
 
     public GrassHopper(Hive.Player colour) {
@@ -17,6 +22,11 @@ public class GrassHopper extends GameUnit {
     @Override
     public boolean equals(Object o) {
         return o.getClass() == this.getClass();
+    }
+
+    @Override
+    public Hive.Tile getTile() {
+        return tile;
     }
 
     @Override

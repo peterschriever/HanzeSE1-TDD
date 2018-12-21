@@ -1,5 +1,6 @@
-import Game.Hive;
-import Player.Human;
+import nl.hanze.hive.Hive;
+import nl.hanze.hive.Player.Human;
+
 import org.junit.Test;
 
 public class HumanTest {

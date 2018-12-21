@@ -2,6 +2,7 @@ import Actions.Action;
 import Actions.ActionFactory;
 import Actions.SpawnAction;
 import Game.*;
+import Player.Actor;
 import Player.CluelessAI;
 
 import Units.*;
@@ -14,13 +15,13 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 public class ActionFactoryTest {
-    private Player.Player white;
-    private Player.Player black;
+    private Actor white;
+    private Actor black;
 
     @Before
     public void before() {
-        white = new CluelessAI(Hive.Colour.WHITE);
-        black = new CluelessAI(Hive.Colour.BLACK);
+        white = new CluelessAI(Hive.Player.WHITE);
+        black = new CluelessAI(Hive.Player.BLACK);
     }
     @Test
     public void testAvailableFields() {

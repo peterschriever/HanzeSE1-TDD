@@ -1,11 +1,7 @@
 package Units;
 
 import Actions.MoveAction;
-import Game.Coord;
-import Game.Field;
-import Game.GameBoard;
-import Game.Hive.Colour;
-import Game.HiveGameFactory;
+import Game.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +9,7 @@ import java.util.List;
 public abstract class GameUnit {
     protected Field field;
 
-    public abstract Colour getColour();
+    public abstract Hive.Player getColour();
 
     public abstract char getCharacter();
 

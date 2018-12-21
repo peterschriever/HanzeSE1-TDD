@@ -8,14 +8,14 @@ import java.util.Collection;
 import java.util.List;
 
 public class Beetle extends GameUnit {
-    private Hive.Colour colour;
+    private Hive.Player colour;
 
-    public Beetle(Hive.Colour colour) {
+    public Beetle(Hive.Player colour) {
         this.colour = colour;
     }
 
     @Override
-    public Hive.Colour getColour() {
+    public Hive.Player getColour() {
         return this.colour;
     }
 

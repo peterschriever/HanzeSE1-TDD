@@ -8,9 +8,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class GrassHopper extends GameUnit {
-    private Hive.Colour colour;
+    private Hive.Player colour;
 
-    public GrassHopper(Hive.Colour colour) {
+    public GrassHopper(Hive.Player colour) {
         this.colour = colour;
     }
 
@@ -20,7 +20,7 @@ public class GrassHopper extends GameUnit {
     }
 
     @Override
-    public Hive.Colour getColour() {
+    public Hive.Player getColour() {
         return this.colour;
     }
 

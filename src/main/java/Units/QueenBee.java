@@ -8,9 +8,9 @@ import java.util.Collection;
 import java.util.List;
 
 public class QueenBee extends GameUnit {
-    private Hive.Colour colour;
+    private Hive.Player colour;
 
-    public QueenBee(Hive.Colour colour) {
+    public QueenBee(Hive.Player colour) {
         this.colour = colour;
     }
 
@@ -20,7 +20,7 @@ public class QueenBee extends GameUnit {
     }
 
     @Override
-    public Hive.Colour getColour() {
+    public Hive.Player getColour() {
         return this.colour;
     }
 

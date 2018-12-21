@@ -1,10 +1,10 @@
 import Game.Field;
 import Game.Hive;
-import Game.HiveGame;
+import Game.HiveWrapper;
 import Game.HiveGameFactory;
 import Player.CluelessAI;
 import Player.Human;
-import Player.Player;
+import Player.Actor;
 import Units.GameUnit;
 
 import java.util.ArrayList;
@@ -13,9 +13,9 @@ import java.util.HashMap;
 import static java.lang.Thread.sleep;
 
 public class App {
-    public final static Player white = new Human(Hive.Colour.WHITE);
-    public final static Player black = new CluelessAI(Hive.Colour.BLACK);
-    private final static HashMap<Hive.Colour, String> colours = new HashMap<>();
+    public final static Actor white = new Human(Hive.Player.WHITE);
+    public final static Actor black = new CluelessAI(Hive.Player.BLACK);
+    private final static HashMap<Hive.Player, String> colours = new HashMap<>();
     private final static String colour_black = "\u001B[31m";
     private final static String colour_white = "\u001B[37m";
     private final static String colour_reset = "\u001B[0m";
@@ -24,14 +24,14 @@ public class App {
 //    private static String colour_reset = "";
 
     private static void play() {
-        HiveGame game = HiveGameFactory.getInstance();
-        game.setPlayerAI(Hive.Colour.WHITE, white);
-        game.setPlayerAI(Hive.Colour.BLACK, black);
+        HiveWrapper game = HiveGameFactory.getInstance();
+        game.setPlayerAI(Hive.Player.WHITE, white);
+        game.setPlayerAI(Hive.Player.BLACK, black);
 
         while (true) {
             boolean draw = game.isDraw();
-            boolean black_wins = game.isWinner(Hive.Colour.BLACK);
-            boolean white_wins = game.isWinner(Hive.Colour.WHITE);
+            boolean black_wins = game.isWinner(Hive.Player.BLACK);
+            boolean white_wins = game.isWinner(Hive.Player.WHITE);
             if (draw | black_wins | white_wins) {
                 if (draw) {
                     System.out.println("Game ended in a draw!");
@@ -55,9 +55,9 @@ public class App {
         }
     }
 
-    public static void displayBoard(HiveGame game) {
-        App.colours.put(Hive.Colour.BLACK, colour_black);
-        App.colours.put(Hive.Colour.WHITE, colour_white);
+    public static void displayBoard(HiveWrapper game) {
+        App.colours.put(Hive.Player.BLACK, colour_black);
+        App.colours.put(Hive.Player.WHITE, colour_white);
         ArrayList<Field> fieldsWithUnits = game.getBoard().getFieldsWithUnits();
         // Get board edges
         int mostLeft = 99999999;

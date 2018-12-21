@@ -39,21 +39,21 @@ public class GameBoardTest {
     @Test
     public void playerShouldMakeFirstMove() {
         GameBoard gb = new GameBoard();
-        gb.get(0,0).acceptUnit(new QueenBee(Hive.Colour.BLACK));
-        gb.get(0,1).acceptUnit(new QueenBee(Hive.Colour.WHITE));
+        gb.get(0,0).acceptUnit(new QueenBee(Hive.Player.BLACK));
+        gb.get(0,1).acceptUnit(new QueenBee(Hive.Player.WHITE));
         assertTrue("Hive should be a swarm", gb.isSwarm());
-        gb.get(2,1).acceptUnit(new GrassHopper(Hive.Colour.BLACK));
+        gb.get(2,1).acceptUnit(new GrassHopper(Hive.Player.BLACK));
         assertFalse("Hive isn't a swarm", gb.isSwarm());
-        gb.get(1,1).acceptUnit(new GrassHopper(Hive.Colour.WHITE));
+        gb.get(1,1).acceptUnit(new GrassHopper(Hive.Player.WHITE));
         assertTrue("Hive should be a swarm", gb.isSwarm());
     }
     @Test
     public void boardShouldReturnOccupiedFields() {
         GameBoard gb = new GameBoard();
         assertEquals("Size of board units should be zero", 0, gb.getFieldsWithUnits().size());
-        gb.get(0,0).acceptUnit(new QueenBee(Hive.Colour.BLACK));
+        gb.get(0,0).acceptUnit(new QueenBee(Hive.Player.BLACK));
         assertEquals("Size of board units should be one", 1, gb.getFieldsWithUnits().size());
-        gb.get(0,0).acceptUnit(new Beetle(Hive.Colour.WHITE));
+        gb.get(0,0).acceptUnit(new Beetle(Hive.Player.WHITE));
         assertEquals("Size of board units should be one", 1, gb.getFieldsWithUnits().size());
     }
 }

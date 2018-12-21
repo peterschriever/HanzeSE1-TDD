@@ -1,10 +1,5 @@
 package Game;
 
-import Units.GameUnit;
-
-/**
- * Hive game.
- */
 public interface Hive {
     /**
      * Play a new tile.
@@ -13,7 +8,7 @@ public interface Hive {
      * @param r R coordinate of hexagon to play to
      * @throws IllegalMove If the tile could not be played
      */
-    void play(GameUnit unit, int q, int r) throws IllegalMove;
+    void play(Tile tile, int q, int r) throws IllegalMove;
 
     /**
      * Move an existing tile.
@@ -32,11 +27,11 @@ public interface Hive {
     void pass() throws IllegalMove;
 
     /**
-     * Check whether the given colour is the winner.
-     * @param colour Colour to check
+     * Check whether the given player is the winner.
+     * @param player Player to check
      * @return Boolean
      */
-    boolean isWinner(Colour colour);
+    boolean isWinner(Player player);
 
     /**
      * Check whether the game is a draw.
@@ -48,12 +43,17 @@ public interface Hive {
      * Illegal move exception.
      */
     class IllegalMove extends Exception {
-        IllegalMove() { super(); }
-        IllegalMove(String message) { super(message); }
+        public IllegalMove() { super(); }
+        public IllegalMove(String message) { super(message); }
     }
+
+    /**
+     * Types of tiles.
+     */
+    enum Tile { QUEEN_BEE, SPIDER, BEETLE, GRASSHOPPER, SOLDIER_ANT }
 
     /**
      * Players.
      */
-    enum Colour { WHITE, BLACK }
+    enum Player { WHITE, BLACK }
 }

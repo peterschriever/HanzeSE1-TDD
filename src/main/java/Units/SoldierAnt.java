@@ -6,14 +6,14 @@ import Game.*;
 import java.util.*;
 
 public class SoldierAnt extends GameUnit {
-    private Hive.Colour colour;
+    private Hive.Player colour;
 
-    public SoldierAnt(Hive.Colour colour) {
+    public SoldierAnt(Hive.Player colour) {
         this.colour = colour;
     }
 
     @Override
-    public Hive.Colour getColour() {
+    public Hive.Player getColour() {
         return this.colour;
     }
 

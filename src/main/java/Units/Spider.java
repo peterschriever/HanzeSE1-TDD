@@ -7,16 +7,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Spider extends GameUnit {
-    private Hive.Colour colour;
+    private Hive.Player colour;
 
-    public Spider(Hive.Colour colour) {
+    public Spider(Hive.Player colour) {
         this.colour = colour;
     }
 
     public char getCharacter() { return 'S'; }
 
     @Override
-    public Hive.Colour getColour() {
+    public Hive.Player getColour() {
         return this.colour;
     }
 

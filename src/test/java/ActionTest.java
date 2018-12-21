@@ -12,7 +12,7 @@ public class ActionTest {
 
     @Test
     public void spawnActionShouldHaveUnit() {
-        Hive.Colour colour = Hive.Colour.WHITE;
+        Hive.Player colour = Hive.Player.WHITE;
         Coord rootCoords = new Coord(0, 0);
         GameUnit grassHopper = new GrassHopper(colour);
         GameUnit queenBee = new QueenBee(colour);
@@ -34,7 +34,7 @@ public class ActionTest {
 
     @Test
     public void spawnActionShouldHaveCoordCoord() {
-        GameUnit grassHopper = new GrassHopper(Hive.Colour.WHITE);
+        GameUnit grassHopper = new GrassHopper(Hive.Player.WHITE);
 
         Coord coords = new Coord(0, 0);
         SpawnAction action = new SpawnAction(grassHopper, coords);
@@ -43,7 +43,7 @@ public class ActionTest {
 
     @Test
     public void moveActionShouldHaveFromAndTo() {
-        GameUnit soldierAnt = new SoldierAnt(Hive.Colour.WHITE);
+        GameUnit soldierAnt = new SoldierAnt(Hive.Player.WHITE);
         Coord from = new Coord(0, 0);
         Coord to = new Coord(1, 0);
 

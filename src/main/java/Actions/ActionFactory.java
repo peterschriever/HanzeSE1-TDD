@@ -1,7 +1,7 @@
 package Actions;
 
 import Game.*;
-import Player.Player;
+import Player.Actor;
 import Units.*;
 
 import java.util.*;
@@ -11,7 +11,7 @@ public class ActionFactory {
     private ActionFactory() {
     }
 
-    public static List<Action> generateValidActions(Player player) {
+    public static List<Action> generateValidActions(Actor player) {
         // Get board, look at fields
         List<Action> actions = new LinkedList<>();
         actions.addAll(ActionFactory.getSpawnActions(player));
@@ -21,7 +21,7 @@ public class ActionFactory {
         return actions;
     }
 
-    public static List<Action> getMoveActions(Player player) {
+    public static List<Action> getMoveActions(Actor player) {
         GameBoard gb = HiveGameFactory.getInstance().getBoard();
         ArrayList<Field> fieldsWithUnits = gb.getFieldsWithUnits();
         List<Action> moveActions = new LinkedList<>();
@@ -39,8 +39,8 @@ public class ActionFactory {
         return moveActions;
     }
 
-    public static List<Action> getSpawnActions(Player player) {
-        HiveGame game = HiveGameFactory.getInstance();
+    public static List<Action> getSpawnActions(Actor player) {
+        HiveWrapper game = HiveGameFactory.getInstance();
         ArrayList<Field> unit_fields = game.getBoard().getFieldsWithUnits();
         List<Action> actions = new LinkedList<>();
         boolean are_we_represented = false;
@@ -95,12 +95,12 @@ public class ActionFactory {
         return actions;
     }
 
-    public static ArrayList<Field> getSpawnFields(Player player) {
-        HiveGame game = HiveGameFactory.getInstance();
+    public static ArrayList<Field> getSpawnFields(Actor player) {
+        HiveWrapper game = HiveGameFactory.getInstance();
         ArrayList<Field> unit_fields = game.getBoard().getFieldsWithUnits();
         ArrayList<Field> available_fields = new ArrayList<>();
-        Hive.Colour us = player.colour;
-        Hive.Colour them = (player.colour == Hive.Colour.BLACK) ? Hive.Colour.WHITE : Hive.Colour.BLACK;
+        Hive.Player us = player.colour;
+        Hive.Player them = (player.colour == Hive.Player.BLACK) ? Hive.Player.WHITE : Hive.Player.BLACK;
         for (Field f : unit_fields) {
             if (f.getUnits().peek().getColour() != us) continue; // cannot place next to enemy
 
@@ -124,7 +124,7 @@ public class ActionFactory {
         return available_fields;
     }
 
-    private static boolean shouldPlayQueen(Player player) {
+    private static boolean shouldPlayQueen(Actor player) {
         if (player.queenbee + player.ant + player.beetle + player.grasshopper + player.spider <= 11 - 3) {
             if (player.queenbee > 0) {
                 return true;
@@ -133,7 +133,7 @@ public class ActionFactory {
         return false;
     }
 
-    private static boolean canMoveUnits(Player player) {
+    private static boolean canMoveUnits(Actor player) {
         return player.queenbee == 0;
     }
 

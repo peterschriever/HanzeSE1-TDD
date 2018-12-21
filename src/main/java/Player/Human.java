@@ -11,8 +11,8 @@ import java.io.InputStreamReader;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Human extends Player {
-    public Human(Hive.Colour c) {
+public class Human extends Actor {
+    public Human(Hive.Player c) {
         super(c);
     }
 

@@ -7,9 +7,9 @@ import Game.Hive;
 import java.util.List;
 import java.util.Random;
 
-public class CluelessAI extends Player {
+public class CluelessAI extends Actor {
 
-    public CluelessAI(Hive.Colour c) {
+    public CluelessAI(Hive.Player c) {
         super(c);
     }
 
@@ -22,7 +22,7 @@ public class CluelessAI extends Player {
         Random rand = new Random();
         int randomInt = rand.nextInt(validActions.size());
         Action a = validActions.get(randomInt);
-        System.out.println("Player decided to play " + a);
+        System.out.println("Actor decided to play " + a);
         return a;
     }
 }

@@ -30,7 +30,8 @@ public class GameUnitTest {
     }
 
     // Requirement 1b
-    private void unitsHaveAnImage() {
+    @Test
+    public void unitsHaveAnImage() {
         GameUnit qb = new QueenBee(Player.WHITE);
         GameUnit sa = new SoldierAnt(Player.WHITE);
         GameUnit gh = new GrassHopper(Player.WHITE);
